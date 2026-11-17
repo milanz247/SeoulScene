@@ -8,6 +8,8 @@ import { SceneMotion } from "@/components/scene-motion";
 import "./globals.css";
 import "./motion.css";
 import "./editorial.css";
+import "./korean-design.css";
+import { KoreanOrnaments } from "@/components/korean-ornaments";
 
 const sans = localFont({
   src: [
@@ -72,7 +74,7 @@ export default function RootLayout({
             Skip to content
           </a>
           <Nav />
-          {children}
+          <div className="illustrated-pages"><KoreanOrnaments />{children}</div>
           <Footer />
           <SceneMotion />
           <StructuredData

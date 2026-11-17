@@ -12,6 +12,7 @@ export const metadata = pageMetadata(
 import { getDramas } from "@/lib/database";
 const dramas = getDramas();
 import { Cloud } from "@/components/art";
+import { KoreanOrnaments } from "@/components/korean-ornaments";
 import { DramaCard, Icon, Photo } from "@/components/ui";
 const moods = [
   ["Romance", "설레는 순간", "For the butterflies", "215720"],
@@ -20,7 +21,7 @@ const moods = [
   ["Comedy", "웃음이 필요할 때", "Something to smile about", "154825"],
   ["Slice of Life", "우리의 일상", "Find beauty in the everyday", "129888"],
 ];
-export function SectionTitle({
+function SectionTitle({
   korean,
   title,
   link,
@@ -57,26 +58,23 @@ export default async function Home() {
   const upcoming = dramas.filter(
     (d) => d.status === "In Production" || d.status === "Planned",
   );
-  const queen = dramas.find((d) => d.id === 215720)!;
   const picks = [215720, 129888, 94796, 67915, 154825].map((id) =>
     dramas.find((d) => d.id === id)!,
   );
   return (
     <main id="main">
       <section className="hero">
-        <div className="hero-illustration" aria-hidden="true">
-          <Photo src="/images/korean-landscape.webp" alt="" sizes="100vw" />
-        </div>
+        <KoreanOrnaments variant="hero" />
         <div className="hero-grid wrap">
           <div className="hero-copy">
             <p className="eyebrow">✳ &nbsp; A LITTLE SEOUL. A LOT OF FEELING.</p>
             <h1>
-              Some stories
+              Every story
               <br />
-              stay <em>with you.</em>
+              begins <em>in Seoul.</em>
             </h1>
             <p className="hero-korean" lang="ko">
-              당신의 마음에 머무는 이야기
+              당신의 다음 이야기를 만나보세요
             </p>
             <p className="hero-description">
               Your beautiful little corner of the K-Drama universe. Find the
@@ -91,33 +89,24 @@ export default async function Home() {
               </Link>
             </div>
           </div>
-          <Link className="hero-feature" href={`/dramas/${queen.id}`}>
+          <Link className="hero-feature" href="/culture">
             <span className="hero-feature-image">
               <Photo
-                src={queen.backdrop}
-                alt="Kim Soo-hyun and Kim Ji-won in Queen of Tears"
+                src="/images/culture-hanok.webp"
+                alt="A peaceful Korean hanok courtyard framed by traditional tiled rooftops"
                 priority
                 sizes="(max-width: 760px) calc(100vw - 48px), 400px"
               />
             </span>
             <span className="hero-feature-copy">
-              <span className="eyebrow">THE STORY IN THE SPOTLIGHT · 01</span>
-              <strong>Queen of Tears</strong>
-              <span>눈물의 여왕 &nbsp;·&nbsp; 2024 &nbsp;·&nbsp; Romance</span>
+              <span className="eyebrow">BEYOND THE SCREEN · 한국의 아름다움</span>
+              <strong>A little closer to Korea.</strong>
+              <span>Places, people, and the stories between.</span>
               <span className="hero-feature-arrow" aria-hidden="true">↗</span>
             </span>
           </Link>
         </div>
-        <div className="hero-bottom wrap">
-          <span>SEOULSCENE &nbsp; / &nbsp; STORIES THAT STAY</span>
-          <span>SCROLL TO EXPLORE ↓</span>
-        </div>
       </section>
-      <div className="editorial-strip wrap">
-        <span>좋은 이야기는 오래 남으니까</span>
-        <p>Good stories linger. Let’s find one that feels like you.</p>
-        <span className="strip-flower">✳</span>
-      </div>
       <section className="section wrap editorial-edition">
         <SectionHeader
           title="The stories around the stories."
@@ -384,7 +373,8 @@ export default async function Home() {
         )}
       </section>
       <Newsletter />
-      <section className="closing">
+      <section className="closing closing-editorial wrap">
+        <div className="closing-copy">
         <p className="eyebrow">EVERY DRAMA HAS A STORY. FIND YOURS.</p>
         <h2>
           Your next favorite story
@@ -394,6 +384,11 @@ export default async function Home() {
         <Link href="/explore" className="button">
           Let’s find it <Icon name="arrow" />
         </Link>
+        </div>
+        <div className="closing-scene">
+          <Photo src="/images/seoul-evening.webp" alt="An illustrated Seoul street at twilight, with warm lantern light and distant mountains" sizes="(max-width: 760px) 100vw, 50vw" />
+          <span lang="ko">이야기가 시작되는 곳, 서울</span>
+        </div>
       </section>
     </main>
   );

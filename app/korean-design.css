@@ -1,0 +1,106 @@
+/* SeoulScene's original Korean scroll composition. */
+.illustrated-pages{position:relative;isolation:isolate;overflow:clip}
+.korean-ornaments{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.korean-ornaments svg{position:absolute}
+.ornament-branch{width:160px;height:350px;left:-80px;top:24%;opacity:.65}
+.ornament-cloud{width:190px;right:-70px;top:45%;color:#9a957a;opacity:.65}
+.ornament-moon{position:absolute;right:8%;top:15%;width:90px;height:90px;border-radius:50%;background:#d6a99a;opacity:.25}
+.ornaments-edges .ornament-branch{top:1000px}.ornaments-edges .ornament-cloud{top:1700px}.ornaments-edges .ornament-moon{display:none}
+.hero{isolation:isolate;background:var(--paper);padding:80px 0 24px;min-height:750px}
+.hero-grid{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:65px;min-height:570px}
+.hero-copy{padding:0 0 65px 20px}
+.hero h1{font-size:clamp(3.5rem,5.5vw,5.8rem);line-height:1.08;letter-spacing:-.055em}
+.hero h1 em{display:block}.hero h1 em:after{display:none}
+.hero-korean{font-size:17px;letter-spacing:.12em}
+.hero-feature{width:100%;max-width:490px;transform:none;padding:10px 10px 0;border:1px solid var(--line);border-radius:48% 48% 6px 6px;overflow:hidden;box-shadow:0 20px 50px #45352c22;align-self:start}
+.hero-feature-image{height:350px;border-radius:48% 48% 0 0}
+.hero-feature-copy{padding:22px 20px 25px}.hero-feature-copy strong{padding-right:30px}
+.hero-feature:hover,.hero-feature:focus-visible{transform:translateY(-4px)}
+.hero-illustration{height:210px;z-index:0}.hero-illustration:after{display:none}
+.hero-illustration img{object-fit:fill}
+.hero-bottom{color:#253d33;border-color:#45665355}
+.ornaments-hero .ornament-branch{top:8%;left:-60px;width:165px;opacity:.8}
+.ornaments-hero .ornament-cloud{top:30px;right:36%;width:160px;opacity:.65}
+.ornaments-hero .ornament-moon{top:65px;right:9%;width:140px;height:140px}
+.korean-footer{isolation:isolate;background:var(--paper);color:var(--ink);padding:110px 0 150px;border-top:0}
+.korean-footer:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(var(--paper) 0%,transparent 55%),url("/images/korean-landscape.webp") center bottom/cover no-repeat;opacity:.48}
+.korean-footer>.roof{display:none}
+.footer-intro{position:relative;z-index:1;padding:0 0 55px;border-bottom:1px solid #d9dec044;margin-bottom:50px}
+.footer-intro>p{font-family:var(--korean);letter-spacing:.2em;color:#d9c9a8}
+.footer-intro h2{font:clamp(2.7rem,4.3vw,4.5rem)/1.13 var(--serif);margin:18px 0}.footer-intro h2 em{color:#e9b7b4}
+.footer-intro>span{color:#c5d3c7}
+.korean-footer .footer-content,.korean-footer .footer-bottom{position:relative;z-index:1}
+.korean-footer .brand,.korean-footer .footer-content h3{color:var(--ink)}
+.korean-footer .footer-content p,.korean-footer .footer-content a,.korean-footer .footer-bottom{color:var(--muted)}
+.korean-footer .eyebrow{color:var(--wine)}
+.korean-footer .footer-bottom{border-color:var(--line);margin-top:45px}
+.korean-footer>.landscape{opacity:.3}.korean-footer>.footer-cloud,.korean-footer>.footer-blossom{display:none}
+.ornaments-footer .ornament-moon{width:120px;height:120px;right:15%;top:120px;background:#f4dcaa;opacity:.85;box-shadow:0 0 70px #ead6a522}
+.ornaments-footer .ornament-cloud{right:7%;top:190px;width:230px;color:#c7cba9;opacity:.55}
+.ornaments-footer .ornament-branch{left:auto;right:-40px;top:10px;transform:scaleX(-1);opacity:.45}
+/* Lucian #373 slide-through underline, preserving its curve and duration. */
+.footer-underline{position:relative;width:fit-content;padding-bottom:8px}
+.footer-underline:after{content:"";position:absolute;left:0;right:0;bottom:2px;height:3px;border-radius:2px;background:#e8a6b0;pointer-events:none;transform:scaleX(0);transform-origin:100% 50%;transition:transform .35s cubic-bezier(.6,0,.2,1)}
+.footer-underline:hover:after,.footer-underline:focus-visible:after{transform:scaleX(1);transform-origin:0 50%}
+.korean-footer a:focus-visible,.hero a:focus-visible{outline:2px solid #b95c79;outline-offset:5px}
+html[data-theme=dark] .hero{background:var(--paper)}
+html[data-theme=dark] .hero h1 em,html[data-theme=dark] .hero-secondary,html[data-theme=dark] .hero-copy>.eyebrow{color:#efb2c0}
+html[data-theme=dark] .hero-illustration{opacity:.4}html[data-theme=dark] .hero-bottom{color:#f6ecdf}
+@media(min-width:1300px){.ornaments-edges .ornament-branch{left:-45px}.ornaments-edges .ornament-cloud{right:-40px}}
+@media(max-width:1050px){.hero-grid{gap:35px}.hero-copy{padding-left:0}.hero-feature-image{height:300px}.hero h1{font-size:clamp(3.5rem,6vw,5rem)}.ornaments-hero .ornament-branch{left:-100px}.hero-feature-copy strong{font-size:28px}}
+@media(max-width:760px){.hero{padding-top:38px;min-height:0}.hero-grid{grid-template-columns:1fr;gap:32px;min-height:0}.hero-copy{padding:0;text-align:center}.hero-copy>.eyebrow,.hero-buttons{justify-content:center}.hero-description{margin-inline:auto}.hero h1{font-size:clamp(3rem,10.5vw,4.5rem)}.hero-feature{max-width:430px;align-self:auto}.hero-feature-image{height:280px}.hero-illustration{height:160px}.hero-bottom{margin-top:35px}.ornaments-hero .ornament-cloud{right:-55px;top:20px;width:120px}.ornaments-hero .ornament-branch{width:115px;left:-75px;top:0}.ornaments-edges{display:none}.korean-footer{padding-top:105px}.footer-intro{padding-bottom:35px}.ornaments-footer .ornament-moon{right:-30px;top:135px;width:90px;height:90px;opacity:.4}.ornaments-footer .ornament-cloud{right:-100px;top:220px}.hero-buttons{align-items:center}.hero-feature-copy strong{font-size:30px}}
+@media(prefers-reduced-motion:no-preference){.hero-copy{animation:ink-arrive .8s ease-out both}.hero-feature{animation:ink-arrive 1s ease-out both}.korean-ornaments .ornament-cloud{animation:ink-cloud 18s ease-in-out infinite alternate}.ornaments-hero .ornament-branch{transform-origin:bottom left;animation:ink-branch 16s ease-in-out infinite alternate}}
+@keyframes ink-arrive{from{opacity:0;translate:0 18px}to{opacity:1;translate:0 0}}
+@keyframes ink-cloud{to{translate:14px 0}}@keyframes ink-branch{to{rotate:3deg}}
+@media(prefers-reduced-motion:reduce){.hero *,.korean-footer *,.korean-ornaments *{animation:none!important;transition:none!important;translate:none!important}.footer-underline:after{transition:none}}
+/* A compact cultural cover and footer, without a featured drama promotion. */
+.hero{min-height:650px;padding-top:58px}
+.hero-grid{min-height:490px;gap:70px}
+.hero-feature{max-width:500px;border-radius:4px;padding:0;border:0;background:transparent;box-shadow:none;position:relative;margin:15px 0 45px}
+.hero-feature-image{height:330px;border-radius:130px 8px 8px 8px;box-shadow:0 22px 50px #45352c25;border:7px solid var(--paper)}
+.hero-feature-copy{background:var(--paper);margin:-25px 22px 0 40px;padding:23px 24px;box-shadow:0 12px 32px #45352c16;border:1px solid var(--line)}
+.hero-feature-copy strong{font-size:27px;color:var(--ink)}
+.hero-feature-copy>span:nth-last-child(2){color:var(--muted)}
+.hero-feature-copy .eyebrow{font-size:9px;letter-spacing:.11em;color:var(--wine)}
+.hero-feature-arrow{top:44px;right:14px}
+.korean-footer{padding:78px 0 30px}
+
+.korean-footer>.landscape{display:none}
+.korean-footer .footer-content{gap:35px;grid-template-columns:1.4fr 1fr 1fr 1fr}
+.korean-footer .footer-content h3{margin-bottom:14px}
+.korean-footer .footer-content a:not(.brand){min-height:36px;margin-bottom:0;font-size:15px;padding-bottom:5px}
+.korean-footer .footer-brand p{max-width:230px;margin:16px 0;font-size:16px;line-height:1.7}
+.korean-footer .footer-bottom{margin-top:28px;padding-top:18px;font-size:13px}
+.ornaments-footer .ornament-moon{width:65px;height:65px;right:2%;top:65px;opacity:.15}
+.ornaments-footer .ornament-cloud{width:140px;right:-60px;top:120px;opacity:.2}
+.ornaments-footer .ornament-branch{width:120px;right:-85px;opacity:.2}
+@media(max-width:760px){.hero{padding-top:36px}.hero-grid{gap:22px;min-height:0}.hero-feature{margin:0;max-width:430px}.hero-feature-image{height:270px;border-radius:95px 6px 6px 6px}.hero-feature-copy{margin:-22px 12px 0 24px;padding:20px 17px}.hero-feature-copy strong{font-size:24px}.hero-feature-copy .eyebrow{font-size:8px}.hero-feature-arrow{right:10px}.hero-bottom{margin-top:25px}.korean-footer{padding:65px 0 25px}.korean-footer .footer-content{grid-template-columns:repeat(2,minmax(0,1fr));gap:25px 20px}.korean-footer .footer-brand{grid-column:1/-1}.korean-footer .footer-content>div:last-child{grid-column:auto;display:block}.korean-footer .footer-bottom{margin-top:22px;gap:10px}}
+
+/* Final spacing: open editorial cover and a softly illustrated footer. */
+.hero{min-height:600px;padding-bottom:28px}
+.hero-grid{min-height:460px;align-items:center}
+.hero-copy{padding-bottom:25px}
+.hero-feature{margin:0 0 25px}
+.hero-feature-image{height:350px;border-radius:110px 8px 8px 8px}
+.hero-bottom{margin-top:22px;color:var(--muted);border-color:var(--line)}
+.korean-footer{border-top:1px solid var(--line);padding-top:48px;padding-bottom:28px}
+.korean-footer .footer-content{padding:12px 0;background:transparent;border:0;border-radius:0}
+.korean-footer .footer-bottom{background:transparent;padding:14px 0;border-radius:0;margin-top:18px}
+html[data-theme=dark] .korean-footer:before{opacity:.18}
+@media(max-width:760px){.hero{min-height:0;padding-bottom:22px}.hero-grid{min-height:0;gap:28px}.hero-copy{padding-bottom:0}.hero-feature{margin:0}.hero-feature-image{height:260px}.korean-footer{padding-top:28px}.korean-footer .footer-content{padding:10px 0;gap:22px 16px}.korean-footer:before{background-position:70% bottom}.korean-footer .footer-bottom{padding:14px 0}}
+
+.hero{min-height:0;padding-bottom:30px}
+.hero-grid{min-height:440px}
+.hero+.editorial-edition{padding-top:30px}
+.korean-footer .footer-content h3{font-size:17px}
+.korean-footer .footer-content a:not(.brand){color:var(--ink)}
+.closing.closing-editorial{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;padding:0;margin:36px auto 54px;min-height:0;background:var(--paper-deep);color:var(--ink);border:1px solid var(--line);border-radius:8px;text-align:left;overflow:hidden}
+.closing-editorial .closing-copy{padding:clamp(28px,4vw,58px);align-self:center}
+.closing-editorial .eyebrow{color:var(--wine);font-size:11px;letter-spacing:.12em}
+.closing.closing-editorial h2{font-size:clamp(1.9rem,3vw,2.8rem);line-height:1.2;color:var(--ink);text-shadow:none;margin:17px 0 25px}
+.closing.closing-editorial h2 em{color:var(--wine)}
+.closing-scene{position:relative;min-height:330px;overflow:hidden}
+.closing-scene img{object-fit:cover;object-position:65% center}
+.closing-scene:after{content:"";position:absolute;inset:55% 0 0;background:linear-gradient(transparent,#211b3099);pointer-events:none}
+.closing-scene>span{position:absolute;z-index:1;bottom:24px;left:28px;color:#fff3e2;font-family:var(--korean);letter-spacing:.14em;font-size:14px}
+@media(max-width:760px){.hero-grid{min-height:0}.hero{padding-bottom:12px}.hero+.editorial-edition{padding-top:30px}.closing.closing-editorial{grid-template-columns:1fr;margin-top:25px;margin-bottom:32px}.closing-editorial .closing-copy{padding:30px 25px}.closing-scene{min-height:235px}.korean-footer .footer-content a:not(.brand){min-height:40px}.korean-footer .footer-bottom{font-size:12px}}

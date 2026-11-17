@@ -1,9 +1,8 @@
+// Lucian UX/UI Prompt #373 · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#373
 import Link from "next/link";
-import { Blossom, Cloud, Landscape, Roof } from "./art";
 export function Footer() {
   return (
-    <footer>
-      <Roof />
+    <footer className="korean-footer">
       <div className="footer-content wrap">
         <div className="footer-brand">
           <Link className="brand" href="/">
@@ -51,7 +50,7 @@ export function Footer() {
           <div key={col.title}>
             <h3>{col.title}</h3>
             {col.links.map(([t, h]) => (
-              <Link key={t} href={h}>
+              <Link className="footer-underline" key={t} href={h}>
                 {t}
               </Link>
             ))}
@@ -62,9 +61,6 @@ export function Footer() {
         <span>© 2026 SeoulScene. A little closer to Korea.</span>
         <span>서울에서 시작되는 이야기 · Stories begin in Seoul</span>
       </div>
-      <Cloud className="footer-cloud" />
-      <Blossom className="footer-blossom" />
-      <Landscape />
     </footer>
   );
 }
