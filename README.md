@@ -52,3 +52,30 @@ See `/credits` for TMDB attribution and Google Fonts. The approved TMDB logo is 
 Original decorative SVGs live in `components/art.tsx`. The AI-generated panorama is `public/images/korean-landscape.png` (original) and `public/images/korean-landscape.webp` (web version), produced with the built-in OpenAI image generation tool. Prompt: “Premium Korean minhwa-inspired panoramic landscape on warm ivory hanji paper; layered sage/jade mountains, fine ink lines, burgundy plum blossom branch at left, traditional hanok pavilion at right, pink sun and outlined Korean clouds; spacious center; no text or watermark.”
 
 Fonts are hosted locally with their open font licenses. A compact Korean subset covers the included copy, with the complete Korean font as a fallback for future metadata. No analytics, contact backend, newsletter service, authentication, or separate backend framework is included.
+
+## Editorial platform extension
+
+The app now includes `/dramas`, readable drama slugs (numeric URLs still work), `/reviews`, `/news`, `/journal`, `/actors/[slug]`, `/upcoming` and `/recommendations`. The existing discovery, calendar, culture and browser-local watchlist features remain available.
+
+`lib/editorial.ts` contains the first six original pieces: two clearly labeled, unscored premise previews, two source-linked archive news briefs, and two journal features. No complete-series screening, live trending feed, current breaking-news coverage or human critic score is claimed. Draft, archived and future-dated content is excluded from public rendering and sitemap. The cached content reader revalidates hourly; exact scheduled publishing needs an external rebuild/revalidation job.
+
+Use `lib/manual-dramas.ts` for manually verified dramas with unique negative IDs. These records merge into page reads and stay outside the existing seven-title TMDB sync. Provide a verified source URL and an explicit rating source for local records. Network/director/broadcast fields are optional; missing values are not guessed.
+
+### Configuration
+
+Copy `.env.example` to a local `.env` and configure only the services you use:
+
+- `SITE_URL`: actual public HTTPS origin for canonical links, structured data, sitemap and social metadata. Local default is `http://localhost:3000`.
+- `TMDB_READ_ACCESS_TOKEN`: server-only token for existing sync or explicit provider lookups.
+- `NEWSLETTER_SIGNUP_URL`: optional HTTPS signup page from your real email provider. Without it, the homepage clearly says subscriptions are not open and collects no email addresses.
+
+TMDB and TVmaze provider adapters are server-only and return separately namespaced metadata. Page requests continue to read SQLite; the adapters do not silently import data or alter the schema. No admin/CMS authentication or email delivery service is installed. Existing TMDB artwork requires a rights/licensing review before commercial launch; provenance alone is not permission.
+
+### Documentation
+
+- [Project audit](docs/PROJECT-AUDIT.md)
+- [Design system](docs/DESIGN-SYSTEM.md)
+- [Image and design resources](docs/IMAGE-AND-DESIGN-RESOURCES.md)
+- [Content architecture](docs/CONTENT-ARCHITECTURE.md)
+- [API integration](docs/API-INTEGRATION.md)
+- [Roadmap and verification](docs/DEVELOPMENT-ROADMAP.md)

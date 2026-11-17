@@ -1,4 +1,5 @@
-export const metadata = { title: "Privacy" };
+import { pageMetadata } from "@/lib/seo";
+export const metadata = pageMetadata('Privacy', 'How SeoulScene uses browser-local watchlists, theme preferences and external links.', "/privacy");
 export default function Page() {
   return (
     <main id="main" className="wrap inner-page prose">

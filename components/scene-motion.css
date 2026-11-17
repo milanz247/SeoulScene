@@ -1,0 +1,32 @@
+/* Lucian UX/UI Prompt #216 · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#216 */
+/* Lucian UX/UI Prompt #251 · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#251 */
+.u216 { --ux-ease: cubic-bezier(.2,.8,.2,1); }
+.u216.motion-ready [data-s] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .55s var(--ux-ease), transform .7s cubic-bezier(.2,.8,.2,1);
+  transition-delay: calc(var(--d) * 1ms);
+}
+.u216-w { display: inline-block; }
+.u216-w > span { display: inline-block; }
+.u216.motion-ready .u216-w > span {
+  opacity: 0;
+  transform: translateY(105%);
+  transition: transform .75s cubic-bezier(.2,.8,.2,1), opacity .55s var(--ux-ease);
+  transition-delay: calc(var(--d) * 1ms);
+}
+.u216.is-in [data-s], .u216.is-in .u216-w > span { opacity: 1; transform: none; }
+.u251-cd {
+  opacity: 0;
+  transform: translateY(26px) scale(.97);
+  transition: opacity .5s, transform .7s cubic-bezier(.2,.8,.2,1);
+  transition-delay: var(--d);
+}
+.u251-cd.is-in, .u251-cd:focus-within { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .u216.motion-ready [data-s], .u216.motion-ready .u216-w > span, .u251-cd {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

@@ -1,7 +1,8 @@
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { getDramas } from "@/lib/database";
 import { DramaCard, Icon } from "@/components/ui";
-export const metadata = { title: "Airing calendar" };
+export const metadata = pageMetadata('Airing calendar', 'Verified schedules from the SeoulScene collection, with unannounced dates clearly labeled.', "/calendar");
 export default function Page() {
   const dramas = getDramas();
   const airing = dramas.filter((d) => d.status === "Returning Series");

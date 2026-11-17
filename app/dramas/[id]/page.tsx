@@ -1,10 +1,21 @@
 import { notFound } from "next/navigation";
+import { dramaSlug, dramaSource, findDrama } from "@/lib/dramas";
+import { getArticles } from "@/lib/content";
+import { slugify } from "@/lib/slug";
+import {
+  ArticleCard,
+  Breadcrumbs,
+  SectionHeader,
+} from "@/components/editorial";
+import { pageMetadata, siteUrl } from "@/lib/seo";
+import { StructuredData } from "@/components/structured-data";
 import Link from "next/link";
 import { getDramas } from "@/lib/database";
 const dramas = getDramas();
 import { DramaCard, Icon, Photo, SaveButton } from "@/components/ui";
+import { Blossom } from "@/components/art";
 export function generateStaticParams() {
-  return dramas.map((d) => ({ id: String(d.id) }));
+  return dramas.flatMap((d) => [{ id: String(d.id) }, { id: dramaSlug(d) }]);
 }
 export async function generateMetadata({
   params,
@@ -12,9 +23,13 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  return {
-    title: dramas.find((d) => String(d.id) === id)?.title || "Drama not found",
-  };
+  const drama = findDrama(dramas, id);
+  if (!drama) notFound();
+  return pageMetadata(
+    drama.title,
+    drama.overview,
+    `/dramas/${dramaSlug(drama)}`,
+  );
 }
 export default async function Page({
   params,
@@ -22,8 +37,13 @@ export default async function Page({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const d = dramas.find((d) => String(d.id) === id);
+  const d = findDrama(dramas, id);
   if (!d) notFound();
+  const source = dramaSource(d);
+  const isTmdb = d.id > 0;
+  const relatedArticles = (await getArticles()).filter(
+    (a) => a.dramaId === d.id,
+  );
   return (
     <main id="main">
       <section className="detail-hero">
@@ -48,7 +68,9 @@ export default async function Page({
             <h1>{d.title}</h1>
             <p>
               {d.year} · {d.episodes} episodes · {d.status}
-              {d.rating && ` · ★ ${d.rating.toFixed(1)}`}
+              {typeof d.rating === "number" &&
+                (isTmdb || d.ratingSource) &&
+                ` · ${d.ratingSource || "TMDB"} ${d.rating.toFixed(1)}/10`}
             </p>
             <div className="tags">
               {d.genres.map((g) => (
@@ -59,31 +81,63 @@ export default async function Page({
             </div>
             <div className="detail-buttons">
               <SaveButton id={d.id} full />
-              <a
-                className="button secondary"
-                href={`https://www.themoviedb.org/tv/${d.id}/videos`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                ▷ Watch trailers
-              </a>
+              {isTmdb && (
+                <a
+                  className="button secondary"
+                  href={`https://www.themoviedb.org/tv/${d.id}/videos`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  ▷ Watch trailers
+                </a>
+              )}
             </div>
           </div>
         </div>
       </section>
       <div className="wrap detail-body">
+        <Breadcrumbs
+          items={[
+            { label: "Dramas", href: "/dramas" },
+            { label: d.title, href: `/dramas/${dramaSlug(d)}` },
+          ]}
+        />
+        <dl className="drama-facts">
+          <div>
+            <dt>Source</dt>
+            <dd>{isTmdb ? "TMDB catalog" : "Manually curated record"}</dd>
+          </div>
+          <div>
+            <dt>Editorial score</dt>
+            <dd>Not assigned</dd>
+          </div>
+          <div>
+            <dt>Network & broadcast</dt>
+            <dd>{d.broadcast || d.network || "Not verified in this record"}</dd>
+          </div>
+          <div>
+            <dt>Director</dt>
+            <dd>{d.director || "Not verified in this record"}</dd>
+          </div>
+        </dl>
         <section className="overview">
+          <Blossom className="story-blossom" />
           <p className="eyebrow">THE STORY · 줄거리</p>
           <h2>A story worth your time.</h2>
           <p>{d.overview}</p>
-          <a
-            href={`https://www.themoviedb.org/tv/${d.id}`}
-            target="_blank"
-            rel="noreferrer"
-            className="text-link"
-          >
-            Cast, trailers & episode guide on TMDB <Icon name="arrow" />
-          </a>
+          {source && (
+            <a
+              href={source}
+              target="_blank"
+              rel="noreferrer"
+              className="text-link"
+            >
+              {isTmdb
+                ? "Cast, trailers & episode guide on TMDB"
+                : "Verified record source"}{" "}
+              <Icon name="arrow" />
+            </a>
+          )}
         </section>
         <section className="cast-section">
           <div className="section-heading">
@@ -94,47 +148,71 @@ export default async function Page({
           </div>
           <div className="actor-grid">
             {d.cast.map((p) => (
-              <article className="actor-card" key={p.name}>
+              <Link
+                className="actor-card"
+                href={`/actors/${slugify(p.name)}`}
+                key={p.name}
+              >
                 <div className="actor-image">
                   <Photo src={p.portrait} alt={p.name} />
                 </div>
                 <h3>{p.name}</h3>
                 <p>{p.character}</p>
-              </article>
+              </Link>
             ))}
           </div>
         </section>
-        <section className="episode-section">
-          <p className="eyebrow">에피소드 · THE CHAPTERS</p>
-          <h2>{d.episodes} episodes. A world to fall into.</h2>
-          <details>
-            <summary>
-              Explore the episode guide <span>＋</span>
-            </summary>
-            <p>
-              Episode titles, season breakdowns, and availability can vary by
-              region. Browse the source guide for the full verified listing.
-            </p>
-            <a
-              className="text-link"
-              href={`https://www.themoviedb.org/tv/${d.id}/seasons`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Open the episode guide on TMDB ↗
-            </a>
-          </details>
-        </section>
+        {isTmdb && (
+          <section className="episode-section">
+            <p className="eyebrow">에피소드 · THE CHAPTERS</p>
+            <h2>{d.episodes} episodes. A world to fall into.</h2>
+            <details>
+              <summary>
+                Explore the episode guide <span>＋</span>
+              </summary>
+              <p>
+                Episode titles, season breakdowns, and availability can vary by
+                region. Browse the source guide for the full verified listing.
+              </p>
+              <a
+                className="text-link"
+                href={`https://www.themoviedb.org/tv/${d.id}/seasons`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Open the episode guide on TMDB ↗
+              </a>
+            </details>
+          </section>
+        )}
         <section>
           <p className="eyebrow">A FRAME TO REMEMBER · 장면</p>
-          <div className="gallery-image">
-            <Photo
-              src={d.backdrop}
-              alt={`A scene from ${d.title}`}
-              sizes="(max-width: 760px) 100vw, 80vw"
-            />
-          </div>
+          <figure className="story-frame">
+            <div className="gallery-image">
+              <Photo
+                src={d.backdrop}
+                alt={`A scene from ${d.title}`}
+                sizes="(max-width: 760px) 100vw, 80vw"
+              />
+            </div>
+            <figcaption>
+              {d.title} <span lang="ko">장면 속에 머물다</span>
+            </figcaption>
+          </figure>
         </section>
+        {relatedArticles.length > 0 && (
+          <section className="section">
+            <SectionHeader
+              title="Read between the scenes."
+              kicker="RELATED EDITORIAL"
+            />
+            <div className="article-grid">
+              {relatedArticles.map((a) => (
+                <ArticleCard key={a.slug} article={a} />
+              ))}
+            </div>
+          </section>
+        )}
         <section className="section">
           <div className="section-heading">
             <div>
@@ -155,6 +233,19 @@ export default async function Page({
           </div>
         </section>
       </div>
+      <StructuredData
+        data={{
+          "@context": "https://schema.org",
+          "@type": "TVSeries",
+          name: d.title,
+          alternateName: d.korean,
+          description: d.overview,
+          url: siteUrl + `/dramas/${dramaSlug(d)}`,
+          genre: d.genres,
+          numberOfEpisodes: d.episodes,
+          sameAs: source,
+        }}
+      />
     </main>
   );
 }

@@ -3,19 +3,20 @@ import { Explore } from "@/components/explore";
 import { Cloud } from "@/components/art";
 import { getDramas } from "@/lib/database";
 const dramas = getDramas();
-export const metadata = { title: "Explore dramas" };
+import { pageMetadata } from "@/lib/seo";
+export const metadata = pageMetadata("Explore dramas", "Search the SeoulScene drama collection by title, genre, year and status.", "/dramas");
 async function Results({
   searchParams,
 }: {
-  searchParams: Promise<{ genre?: string }>;
+  searchParams: Promise<{ genre?: string; sort?: string }>;
 }) {
   const params = await searchParams;
-  return <Explore items={dramas} initialGenre={params.genre} />;
+  return <Explore key={`${params.genre}-${params.sort}`} items={dramas} initialGenre={typeof params.genre === "string" ? params.genre : ""} initialSort={["title", "year"].includes(params.sort || "") ? params.sort : "curated"} />;
 }
 export default function Page({
   searchParams,
 }: {
-  searchParams: Promise<{ genre?: string }>;
+  searchParams: Promise<{ genre?: string; sort?: string }>;
 }) {
   return (
     <main id="main" className="wrap inner-page">

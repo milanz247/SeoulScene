@@ -1,6 +1,9 @@
 "use client";
 import Image from "next/image";
+import { ArrowRight, Heart, Menu, Moon, Search, X } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { EditorialLink } from "./editorial-link";
 import {
   createContext,
   useContext,
@@ -65,38 +68,24 @@ export function Icon({
   name: string;
   className?: string;
 }) {
+  const icons = {
+    heart: Heart,
+    search: Search,
+    moon: Moon,
+    menu: Menu,
+    close: X,
+  };
+  const Glyph = icons[name as keyof typeof icons] || ArrowRight;
   return (
-    <svg
+    <Glyph
       className={className}
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+      size={20}
+      strokeWidth={1.5}
       aria-hidden="true"
-    >
-      {name === "heart" ? (
-        <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z" />
-      ) : name === "search" ? (
-        <>
-          <circle cx="10.5" cy="10.5" r="7" />
-          <path d="m16 16 5 5" />
-        </>
-      ) : name === "moon" ? (
-        <path d="M21 13A9 9 0 0 1 11 3a9 9 0 1 0 10 10Z" />
-      ) : name === "menu" ? (
-        <path d="M4 6h16M4 12h16M4 18h16" />
-      ) : name === "close" ? (
-        <path d="m5 5 14 14M5 19 19 5" />
-      ) : (
-        <path d="M4 12h16m-6-6 6 6-6 6" />
-      )}
-    </svg>
+    />
   );
 }
+
 export function SaveButton({
   id,
   full = false,
@@ -120,11 +109,12 @@ export function SaveButton({
 }
 export function Nav() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
   const { ids } = useContext(Saved);
   return (
     <header className="site-header">
       <div className="nav-wrap">
-        <Link className="brand" href="/" aria-label="SeoulScene home">
+        <Link className="brand" href="/">
           <span className="brand-stamp">
             서<br />울
           </span>
@@ -134,19 +124,33 @@ export function Nav() {
           </span>
         </Link>
         <nav
+          id="main-navigation"
           className={open ? "main-nav open" : "main-nav"}
           aria-label="Main navigation"
+          onKeyDown={(event) => {
+            if (event.key === "Escape") {
+              setOpen(false);
+              document.getElementById("menu-toggle")?.focus();
+            }
+          }}
         >
           {[
             ["Home", "/"],
-            ["Explore Dramas", "/explore"],
+            ["Dramas", "/dramas"],
+            ["Reviews", "/reviews"],
+            ["News", "/news"],
             ["Actors", "/actors"],
             ["Airing Calendar", "/calendar"],
             ["K-Culture", "/culture"],
           ].map(([t, h]) => (
-            <Link key={h} href={h} onClick={() => setOpen(false)}>
+            <EditorialLink
+              key={h}
+              href={h}
+              aria-current={pathname === h ? "page" : undefined}
+              onClick={() => setOpen(false)}
+            >
               {t}
-            </Link>
+            </EditorialLink>
           ))}
         </nav>
         <div className="nav-actions">
@@ -173,14 +177,20 @@ export function Nav() {
           >
             <Icon name="moon" />
           </button>
-          <Link href="/watchlist" className="nav-watch">
+          <Link
+            href="/watchlist"
+            className="nav-watch"
+            aria-label={`My watchlist${ids.length ? ` (${ids.length})` : ""}`}
+          >
             <Icon name="heart" />
             <span>My watchlist{ids.length ? ` (${ids.length})` : ""}</span>
           </Link>
           <button
+            id="menu-toggle"
             className="icon-button mobile-toggle"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
+            aria-controls="main-navigation"
             onClick={() => setOpen(!open)}
           >
             <Icon name={open ? "close" : "menu"} />
@@ -214,7 +224,8 @@ export function Photo({
       width={fill ? undefined : 800}
       height={fill ? undefined : 500}
       sizes={sizes}
-      priority={priority}
+      loading={priority ? "eager" : undefined}
+      fetchPriority={priority ? "high" : undefined}
       onError={() => setFailed(true)}
       className={className}
     />
@@ -238,7 +249,12 @@ export function DramaCard({ drama, index }: { drama: Drama; index?: number }) {
         <span>
           {drama.year} <b>·</b> {drama.genres[0]}
         </span>
-        {drama.rating && <span>★ {drama.rating.toFixed(1)}</span>}
+        {typeof drama.rating === "number" &&
+          (drama.id > 0 || drama.ratingSource) && (
+            <span title={drama.ratingSource || "TMDB community rating"}>
+              {drama.ratingSource || "TMDB"} {drama.rating.toFixed(1)}
+            </span>
+          )}
       </div>
       <h3>
         <Link href={`/dramas/${drama.id}`}>{drama.title}</Link>

@@ -3,7 +3,8 @@ import Database from "better-sqlite3";
 import { mkdirSync } from "node:fs";
 import { join } from "node:path";
 import catalog from "./catalog.json";
-import type { Drama } from "./dramas";
+import { mergeManualDramas, type Drama } from "./dramas";
+import { manualDramas } from "./manual-dramas";
 let database: Database.Database | undefined;
 function getDatabase() {
   if (database) return database;
@@ -23,9 +24,10 @@ function getDatabase() {
   return database;
 }
 export function getDramas(): Drama[] {
-  return (
+  const stored = (
     getDatabase().prepare("SELECT data FROM dramas").all() as { data: string }[]
   )
     .map((row) => JSON.parse(row.data) as Drama)
     .sort((a, b) => b.year - a.year);
+  return mergeManualDramas(stored, manualDramas);
 }

@@ -1,16 +1,27 @@
 @import "tailwindcss";
 @import "../public/fonts/fonts.css";
 :root {
+  --text-caption: 0.75rem;
+  --text-meta: clamp(0.75rem, 0.7rem + 0.2vw, 0.875rem);
+  --text-body: clamp(0.9375rem, 0.9rem + 0.15vw, 1rem);
+  --text-control: 0.875rem;
+  --text-card: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
+  --text-section: clamp(1.625rem, 1.3rem + 1vw, 2.25rem);
+  --text-page: clamp(2.125rem, 1.65rem + 2vw, 3.5rem);
+  --text-hero: clamp(2.75rem, 1.5rem + 3.5vw, 5rem);
+  --space-section: clamp(3rem, 2rem + 2.5vw, 4rem);
+  --space-grid: clamp(1rem, 0.75rem + 1vw, 1.5rem);
+  --radius-card: 4px;
   --paper: #faf7f2;
   --paper-deep: #f0e9df;
   --ink: #29282a;
-  --muted: #79736d;
+  --muted: #6d665f;
   --wine: #842b47;
   --line: #dfd8ce;
   --jade: #5e8579;
-  --serif: "Playfair Display", "Gowun Batang", "Gowun Full", Georgia, serif;
-  --sans: "DM Sans", "Gowun Batang", "Gowun Full", Arial, sans-serif;
-  --korean: "Gowun Batang", "Gowun Full", serif;
+  --serif: var(--font-serif), var(--font-korean), "Gowun Full", Georgia, serif;
+  --sans: var(--font-sans), var(--font-korean), "Gowun Full", Arial, sans-serif;
+  --korean: var(--font-korean), "Gowun Full", serif;
 }
 * {
   box-sizing: border-box;
@@ -24,7 +35,7 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--sans);
-  font-size: 14px;
+  font-size: var(--text-meta);
   -webkit-font-smoothing: antialiased;
 }
 body:before {
@@ -139,7 +150,7 @@ select:focus-visible {
   color: var(--wine);
   border: 1.3px solid var(--wine);
   font-family: var(--korean);
-  font-size: 15px;
+  font-size: var(--text-body);
   line-height: 1.1;
   letter-spacing: 0;
   padding: 4px 3px;
@@ -156,25 +167,11 @@ select:focus-visible {
 .main-nav {
   display: flex;
   gap: 25px;
-  font-size: 11px;
-  font-weight: 550;
+  font-weight: 500;
 }
 .main-nav a {
   position: relative;
   padding: 12px 0;
-}
-.main-nav a:after {
-  content: "";
-  position: absolute;
-  bottom: 4px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--wine);
-  transition: width 0.2s;
-}
-.main-nav a:hover:after {
-  width: 100%;
 }
 .nav-actions {
   display: flex;
@@ -192,7 +189,7 @@ select:focus-visible {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 11px;
+  font-size: var(--text-caption);
   border-left: 1px solid var(--line);
   padding-left: 20px;
 }
@@ -203,7 +200,7 @@ select:focus-visible {
   display: none;
 }
 .eyebrow {
-  font-size: 9px;
+  font-size: var(--text-caption);
   font-weight: 600;
   letter-spacing: 2.1px;
   line-height: 1.6;
@@ -218,7 +215,7 @@ select:focus-visible {
   background: var(--wine);
   border: 1px solid var(--wine);
   color: #fffaf6;
-  font-size: 11px;
+  font-size: var(--text-caption);
   font-weight: 500;
   border-radius: 3px;
 }
@@ -241,7 +238,7 @@ select:focus-visible {
   display: inline-flex;
   align-items: center;
   gap: 16px;
-  font-size: 11px;
+  font-size: var(--text-caption);
   border-bottom: 1px solid var(--line);
   padding-bottom: 7px;
 }
@@ -272,7 +269,7 @@ select:focus-visible {
 .hero-copy > .eyebrow {
   color: var(--wine);
   letter-spacing: 2px;
-  font-size: 9px;
+  font-size: var(--text-caption);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -282,7 +279,7 @@ select:focus-visible {
   font-weight: 400;
 }
 .hero h1 {
-  font-size: clamp(45px, 4.8vw, 74px);
+  font-size: var(--text-hero);
   line-height: 1.17;
   letter-spacing: -2.7px;
   margin: 24px 0 16px;
@@ -310,7 +307,7 @@ select:focus-visible {
 }
 .hero-description {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--text-caption);
   line-height: 1.9;
   margin-top: 22px;
 }
@@ -321,7 +318,7 @@ select:focus-visible {
   margin-top: 28px;
 }
 .soft-link {
-  font-size: 11px;
+  font-size: var(--text-caption);
   display: flex;
   align-items: center;
   gap: 9px;
@@ -334,7 +331,7 @@ select:focus-visible {
   border: 1px solid #c6b9aa;
   border-radius: 50%;
   color: var(--wine);
-  font-size: 14px;
+  font-size: var(--text-meta);
 }
 .hero-note {
   display: flex;
@@ -342,7 +339,6 @@ select:focus-visible {
   gap: 12px;
   margin-top: 35px;
   color: var(--muted);
-  font-size: 9px;
   line-height: 1.7;
 }
 .drawn-heart {
@@ -378,7 +374,7 @@ select:focus-visible {
   writing-mode: vertical-rl;
   color: #fff6e4;
   font-family: var(--korean);
-  font-size: 12px;
+  font-size: var(--text-caption);
   letter-spacing: 5px;
 }
 .hero-film-caption {
@@ -389,7 +385,6 @@ select:focus-visible {
   color: white;
 }
 .hero-film-caption .eyebrow {
-  font-size: 8px;
   letter-spacing: 2px;
   color: #edddd0;
 }
@@ -398,12 +393,12 @@ select:focus-visible {
   margin: 7px 0;
 }
 .hero-film-caption p {
-  font-size: 11px;
+  font-size: var(--text-caption);
   color: #f0e6dc;
 }
 .hero-film-caption p span {
   margin-left: 15px;
-  font-size: 9px;
+  font-size: var(--text-caption);
 }
 .round-link {
   position: absolute;
@@ -436,7 +431,7 @@ select:focus-visible {
   align-items: center;
   justify-content: center;
   transform: rotate(13deg);
-  font-size: 8px;
+  font-size: var(--text-caption);
   letter-spacing: 2px;
   line-height: 1.8;
 }
@@ -447,29 +442,9 @@ select:focus-visible {
 }
 .hero-image-foot {
   display: block;
-  font-size: 7px;
   letter-spacing: 1.8px;
   margin-top: 17px;
   color: #655f55;
-}
-.hero-pagination {
-  position: absolute;
-  right: 15px;
-  bottom: 70px;
-  display: flex;
-  gap: 6px;
-}
-.hero-pagination b,
-.hero-pagination span {
-  width: 5px;
-  height: 5px;
-  background: #bcb7a9;
-  border-radius: 50%;
-}
-.hero-pagination b {
-  background: var(--wine);
-  width: 20px;
-  border-radius: 4px;
 }
 .landscape {
   width: 100%;
@@ -509,7 +484,7 @@ select:focus-visible {
   bottom: 17px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 7px;
+  font-size: var(--text-caption);
   letter-spacing: 2.3px;
   color: #4e6c5c;
 }
@@ -526,7 +501,7 @@ select:focus-visible {
   color: var(--wine);
 }
 .editorial-strip p {
-  font-size: 11px;
+  font-size: var(--text-caption);
   color: var(--muted);
 }
 .strip-flower {
@@ -534,7 +509,7 @@ select:focus-visible {
   color: #a08b6d;
 }
 .section {
-  padding-block: 65px;
+  padding-block: var(--space-section);
 }
 .section-heading {
   display: flex;
@@ -546,12 +521,12 @@ select:focus-visible {
 .section-heading .eyebrow {
   color: var(--wine);
   font-family: var(--korean);
-  font-size: 10px;
+  font-size: var(--text-caption);
   letter-spacing: 2px;
   margin-bottom: 10px;
 }
 .section-heading h2 {
-  font-size: 31px;
+  font-size: var(--text-section);
   letter-spacing: -0.7px;
   line-height: 1.25;
 }
@@ -563,7 +538,7 @@ select:focus-visible {
 .poster {
   position: relative;
   aspect-ratio: 2/3;
-  border-radius: 5px;
+  border-radius: var(--radius-card);
   overflow: hidden;
   background: var(--paper-deep);
 }
@@ -615,7 +590,6 @@ select:focus-visible {
 .card-meta {
   display: flex;
   justify-content: space-between;
-  font-size: 9px;
   color: var(--muted);
   margin-top: 14px;
 }
@@ -625,8 +599,7 @@ select:focus-visible {
 }
 .drama-card h3 {
   font-family: var(--sans);
-  font-size: 13px;
-  font-weight: 550;
+  font-weight: 500;
   line-height: 1.5;
   margin-top: 6px;
 }
@@ -635,12 +608,11 @@ select:focus-visible {
 }
 .korean-title {
   font-family: var(--korean);
-  font-size: 10px;
   color: var(--muted);
   margin-top: 4px;
 }
 .curation-note {
-  font-size: 7px;
+  font-size: var(--text-caption);
   letter-spacing: 1.5px;
   color: var(--wine);
   margin-top: 27px;
@@ -648,7 +620,7 @@ select:focus-visible {
 }
 .curation-note span {
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--text-caption);
   letter-spacing: 0;
   margin-left: 13px;
 }
@@ -657,7 +629,7 @@ select:focus-visible {
   grid-template-columns: 1.1fr 1fr;
   min-height: 440px;
   background: var(--paper-deep);
-  border-radius: 5px;
+  border-radius: var(--radius-card);
   overflow: hidden;
 }
 .featured-photo {
@@ -672,7 +644,7 @@ select:focus-visible {
   bottom: 22px;
   left: 25px;
   color: white;
-  font-size: 8px;
+  font-size: var(--text-caption);
   letter-spacing: 2px;
   text-shadow: 0 1px 5px #000;
 }
@@ -689,7 +661,7 @@ select:focus-visible {
   width: 110px;
 }
 .featured-copy > .eyebrow {
-  font-size: 8px;
+  font-size: var(--text-caption);
   color: var(--wine);
   letter-spacing: 1.5px;
 }
@@ -705,7 +677,7 @@ select:focus-visible {
   margin-top: 10px;
 }
 .featured-copy > p:not(.eyebrow):not(.featured-ko) {
-  font-size: 11px;
+  font-size: var(--text-caption);
   color: var(--muted);
   margin-top: 17px;
   max-width: 380px;
@@ -718,7 +690,7 @@ select:focus-visible {
 }
 .tags span,
 .tags a {
-  font-size: 9px;
+  font-size: var(--text-caption);
   padding: 5px 10px;
   border: 1px solid #b7a99970;
   border-radius: 2px;
@@ -727,7 +699,7 @@ select:focus-visible {
   margin-top: 3px;
 }
 .moods {
-  padding-block: 70px;
+  padding-block: var(--space-section);
 }
 .mood-grid {
   display: grid;
@@ -738,7 +710,7 @@ select:focus-visible {
   position: relative;
   height: 190px;
   overflow: hidden;
-  border-radius: 5px;
+  border-radius: var(--radius-card);
   color: white;
   background: #5e8579;
 }
@@ -763,7 +735,7 @@ select:focus-visible {
 }
 .mood span {
   font-family: var(--korean);
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: #f3e5d8;
 }
 .mood h3 {
@@ -771,7 +743,6 @@ select:focus-visible {
   margin: 6px 0;
 }
 .mood p {
-  font-size: 8px;
   color: #f2e6de;
 }
 .mood > svg {
@@ -807,12 +778,12 @@ select:focus-visible {
   margin: 10px 0;
 }
 .culture-grid p {
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--muted);
 }
 .culture-grid .eyebrow {
   color: var(--wine);
-  font-size: 8px;
+  font-size: var(--text-caption);
 }
 .culture-landscape {
   height: 210px;
@@ -892,7 +863,7 @@ select:focus-visible {
   margin: 15px 0 3px;
 }
 .culture-letter > span:not(.eyebrow) {
-  font-size: 9px;
+  font-size: var(--text-caption);
   letter-spacing: 2px;
   color: var(--muted);
 }
@@ -982,7 +953,7 @@ select:focus-visible {
   margin-bottom: 6px;
 }
 .schedule-note p {
-  font-size: 11px;
+  font-size: var(--text-caption);
   color: var(--muted);
   max-width: 550px;
 }
@@ -999,7 +970,7 @@ select:focus-visible {
   padding: 55px 20px 80px;
 }
 .closing > .eyebrow {
-  font-size: 8px;
+  font-size: var(--text-caption);
   color: #526659;
   position: relative;
   z-index: 2;
@@ -1072,24 +1043,22 @@ footer {
 }
 .footer-brand p {
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--text-caption);
   margin: 16px 0;
 }
 .footer-brand > .eyebrow {
-  font-size: 7px;
   letter-spacing: 1.4px;
   color: var(--wine);
 }
 .footer-content h3 {
-  font-size: 11px;
+  font-size: var(--text-caption);
   font-weight: 600;
   margin: 5px 0 20px;
 }
 .footer-content > div:not(.footer-brand) > a {
   display: block;
-  font-size: 10px;
   color: var(--muted);
-  margin-bottom: 13px;
+  margin-bottom: 0;
 }
 .footer-content a:hover {
   color: var(--wine);
@@ -1100,7 +1069,6 @@ footer {
   padding-top: 20px;
   display: flex;
   justify-content: space-between;
-  font-size: 8px;
   color: var(--muted);
   position: relative;
   z-index: 2;
@@ -1137,16 +1105,16 @@ footer > .landscape {
 }
 .page-heading .eyebrow {
   color: var(--wine);
-  font-size: 9px;
+  font-size: var(--text-caption);
 }
 .page-heading h1 {
-  font-size: 53px;
+  font-size: var(--text-page);
   line-height: 1.2;
   margin: 18px 0;
   letter-spacing: -1.6px;
 }
 .page-heading > p:last-child {
-  font-size: 13px;
+  font-size: var(--text-meta);
   color: var(--muted);
   max-width: 650px;
 }
@@ -1172,7 +1140,7 @@ footer > .landscape {
   color: var(--ink);
   width: 100%;
   padding: 12px 0;
-  font-size: 16px;
+  font-size: var(--text-body);
   outline-offset: 2px;
 }
 .search-field svg {
@@ -1185,7 +1153,7 @@ footer > .landscape {
   margin-top: 25px;
 }
 .filter-row label {
-  font-size: 9px;
+  font-size: var(--text-caption);
   letter-spacing: 1px;
   color: var(--muted);
 }
@@ -1197,23 +1165,23 @@ footer > .landscape {
   padding: 12px;
   margin-top: 8px;
   border-radius: 3px;
-  font-size: 12px;
+  font-size: var(--text-caption);
 }
 .results-count {
   display: flex;
   justify-content: space-between;
   margin: 25px 0;
-  font-size: 11px;
+  font-size: var(--text-caption);
   color: var(--muted);
 }
 .results-count button {
-  font-size: 10px;
+  font-size: var(--text-caption);
   text-decoration: underline;
 }
 .drama-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 35px 25px;
+  gap: 32px var(--space-grid);
 }
 .empty {
   padding: 70px 25px;
@@ -1233,7 +1201,7 @@ footer > .landscape {
   color: var(--muted);
   max-width: 500px;
   margin: 0 auto 25px;
-  font-size: 13px;
+  font-size: var(--text-meta);
 }
 .load-more {
   display: flex;
@@ -1270,7 +1238,7 @@ footer > .landscape {
   box-shadow: 0 10px 40px #0005;
 }
 .detail-content h1 {
-  font-size: 51px;
+  font-size: var(--text-page);
   line-height: 1.15;
   max-width: 800px;
   margin: 12px 0 18px;
@@ -1281,7 +1249,7 @@ footer > .landscape {
   margin-top: 25px;
 }
 .detail-content > div > p:not(.detail-korean) {
-  font-size: 12px;
+  font-size: var(--text-caption);
 }
 .detail-content .tags {
   margin: 18px 0;
@@ -1304,7 +1272,7 @@ footer > .landscape {
   margin: 15px 0;
 }
 .overview > p:not(.eyebrow) {
-  font-size: 16px;
+  font-size: var(--text-body);
   line-height: 1.9;
   color: var(--muted);
 }
@@ -1315,7 +1283,7 @@ footer > .landscape {
   position: relative;
   aspect-ratio: 16/7;
   margin-top: 20px;
-  border-radius: 5px;
+  border-radius: var(--radius-card);
   overflow: hidden;
 }
 .related {
@@ -1330,7 +1298,7 @@ footer > .landscape {
 }
 .prose p {
   color: var(--muted);
-  font-size: 14px;
+  font-size: var(--text-meta);
   margin-bottom: 20px;
 }
 .prose a {
@@ -1371,9 +1339,6 @@ footer > .landscape {
 }
 .skip-link:focus {
   top: 10px;
-}
-.reveal {
-  animation: reveal 0.7s ease both;
 }
 .not-found {
   text-align: center;
@@ -1447,9 +1412,6 @@ html[data-theme="dark"] .hero {
   .hero-copy {
     padding-top: 40px;
   }
-  .hero h1 {
-    font-size: 76px;
-  }
 }
 @media (max-width: 1150px) {
   .wrap {
@@ -1461,7 +1423,6 @@ html[data-theme="dark"] .hero {
   }
   .main-nav {
     gap: 17px;
-    font-size: 10px;
   }
   .nav-watch span {
     display: none;
@@ -1471,9 +1432,6 @@ html[data-theme="dark"] .hero {
   }
   .brand {
     font-size: 26px;
-  }
-  .hero h1 {
-    font-size: 57px;
   }
   .hero-image {
     height: 430px;
@@ -1509,18 +1467,12 @@ html[data-theme="dark"] .hero {
   .mood h3 {
     font-size: 22px;
   }
-  .mood p {
-    font-size: 7px;
-  }
   .poster-row {
     gap: 18px;
   }
   .schedule-note .text-link {
     white-space: normal;
     max-width: 160px;
-  }
-  .hero-pagination {
-    bottom: 85px;
   }
 }
 @media (max-width: 900px) {
@@ -1532,20 +1484,16 @@ html[data-theme="dark"] .hero {
     display: none;
   }
   .hero h1 {
-    font-size: 48px;
     letter-spacing: -2px;
   }
   .hero-image {
     height: 400px;
   }
-  .hero-copy > .eyebrow {
-    font-size: 7px;
-  }
   .hero-description {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   .hero-korean {
-    font-size: 14px;
+    font-size: var(--text-meta);
   }
   .hero-buttons {
     align-items: flex-start;
@@ -1568,10 +1516,9 @@ html[data-theme="dark"] .hero {
     right: -10px;
     width: 70px;
     height: 70px;
-    font-size: 6px;
   }
   .editor-stamp em {
-    font-size: 15px;
+    font-size: var(--text-body);
   }
   .hero-film-caption {
     left: 20px;
@@ -1583,12 +1530,6 @@ html[data-theme="dark"] .hero {
   .hero-film-caption p span {
     display: block;
     margin: 4px 0 0;
-  }
-  .hero-pagination {
-    bottom: 130px;
-  }
-  .section-heading h2 {
-    font-size: 27px;
   }
   .featured {
     grid-template-columns: 1fr 1fr;
@@ -1621,9 +1562,6 @@ html[data-theme="dark"] .hero {
   .mood {
     height: 150px;
   }
-  .mood p {
-    font-size: 10px;
-  }
   .mood h3 {
     font-size: 25px;
   }
@@ -1636,9 +1574,6 @@ html[data-theme="dark"] .hero {
   }
   .stamp {
     display: none;
-  }
-  .detail-content h1 {
-    font-size: 40px;
   }
 }
 @media (max-width: 650px) {
@@ -1655,11 +1590,11 @@ html[data-theme="dark"] .hero {
     gap: 8px;
   }
   .brand-sub {
-    font-size: 6px;
+    font-size: var(--text-caption);
     letter-spacing: 1.8px;
   }
   .brand-stamp {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .nav-actions {
     gap: 6px;
@@ -1692,7 +1627,6 @@ html[data-theme="dark"] .hero {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    animation: reveal 0.2s;
   }
   .main-nav a {
     font-family: var(--serif);
@@ -1718,23 +1652,21 @@ html[data-theme="dark"] .hero {
   }
   .hero-copy > .eyebrow {
     justify-content: center;
-    font-size: 7px;
     letter-spacing: 1.8px;
   }
   .hero h1 {
-    font-size: 52px;
     line-height: 1.13;
     margin-top: 20px;
     letter-spacing: -2.2px;
   }
   .hero-korean {
-    font-size: 14px;
+    font-size: var(--text-meta);
     margin-top: 20px;
     letter-spacing: 2px;
   }
   .hero-description {
     margin-top: 17px;
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .hero-buttons {
     flex-direction: row;
@@ -1744,13 +1676,12 @@ html[data-theme="dark"] .hero {
     margin-top: 24px;
   }
   .hero-buttons .button {
-    font-size: 10px;
+    font-size: var(--text-caption);
     min-height: 43px;
     padding: 11px 15px;
     gap: 12px;
   }
   .soft-link {
-    font-size: 9px;
     gap: 6px;
   }
   .play-small {
@@ -1779,13 +1710,8 @@ html[data-theme="dark"] .hero {
     height: 64px;
   }
   .hero-image-foot {
-    font-size: 6px;
     margin-top: 12px;
     letter-spacing: 1.3px;
-  }
-  .hero-pagination {
-    bottom: 4px;
-    right: 16px;
   }
   .hero-film-caption {
     bottom: 23px;
@@ -1797,7 +1723,6 @@ html[data-theme="dark"] .hero {
   .hero-film-caption p span {
     display: inline;
     margin-left: 10px;
-    font-size: 8px;
   }
   .hero-blossom {
     width: 105px;
@@ -1817,7 +1742,6 @@ html[data-theme="dark"] .hero {
   }
   .hero-bottom-label {
     bottom: 13px;
-    font-size: 6px;
     white-space: nowrap;
   }
   .editorial-strip {
@@ -1828,10 +1752,9 @@ html[data-theme="dark"] .hero {
     gap: 5px;
   }
   .editorial-strip > span:first-child {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .editorial-strip p {
-    font-size: 10px;
     text-align: center;
   }
   .strip-flower {
@@ -1846,18 +1769,16 @@ html[data-theme="dark"] .hero {
     gap: 15px;
   }
   .section-heading h2 {
-    font-size: 27px;
     line-height: 1.3;
     letter-spacing: -0.8px;
     max-width: 260px;
   }
   .section-heading .eyebrow {
-    font-size: 8px;
     margin-bottom: 8px;
     letter-spacing: 1.3px;
   }
   .section-heading > .text-link {
-    font-size: 9px;
+    font-size: var(--text-caption);
     gap: 5px;
     white-space: nowrap;
     align-self: flex-end;
@@ -1870,32 +1791,25 @@ html[data-theme="dark"] .hero {
     gap: 25px 16px;
   }
   .poster-row > .drama-card:nth-child(5) {
-    display: none;
+    grid-column: 1 / -1;
+    width: calc(50% - 8px);
+    justify-self: center;
   }
   .poster-row > .drama-card:nth-child(3),
   .poster-row > .drama-card:nth-child(4) {
     margin-top: 0;
   }
-  .drama-card h3 {
-    font-size: 12px;
-  }
   .card-meta {
-    font-size: 9px;
     margin-top: 10px;
-  }
-  .korean-title {
-    font-size: 9px;
   }
   .card-number {
     font-size: 28px;
   }
   .curation-note {
-    font-size: 6px;
     line-height: 2.3;
     letter-spacing: 1px;
   }
   .curation-note span {
-    font-size: 9px;
     margin-left: 8px;
   }
   .featured {
@@ -1914,7 +1828,7 @@ html[data-theme="dark"] .hero {
     margin-top: 15px;
   }
   .featured-copy > p:not(.eyebrow):not(.featured-ko) {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .moods {
     padding-block: 43px;
@@ -1933,9 +1847,6 @@ html[data-theme="dark"] .hero {
   .mood h3 {
     font-size: 25px;
   }
-  .mood p {
-    font-size: 9px;
-  }
   .mood > div {
     left: 16px;
     bottom: 18px;
@@ -1952,9 +1863,6 @@ html[data-theme="dark"] .hero {
   }
   .culture-art h3 {
     font-size: 25px;
-  }
-  .culture-grid p {
-    font-size: 12px;
   }
   .culture-letter {
     border: 1px solid #d8cfc1;
@@ -1986,7 +1894,7 @@ html[data-theme="dark"] .hero {
   }
   .culture-food p {
     max-width: 170px;
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .culture-food .tea-leaf {
     display: none;
@@ -2013,13 +1921,10 @@ html[data-theme="dark"] .hero {
   .schedule-note h3 {
     font-size: 21px;
   }
-  .schedule-note p {
-    font-size: 11px;
-  }
   .schedule-note .text-link {
     margin: 0 0 0 50px;
     max-width: none;
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .closing {
     min-height: 330px;
@@ -2029,7 +1934,6 @@ html[data-theme="dark"] .hero {
     font-size: 36px;
   }
   .closing > .eyebrow {
-    font-size: 6px;
     letter-spacing: 1.7px;
   }
   .closing .moon-disc {
@@ -2064,21 +1968,16 @@ html[data-theme="dark"] .hero {
     font-size: 35px;
   }
   .footer-brand p {
-    font-size: 12px;
     margin: 12px 0;
   }
   .footer-content h3 {
-    font-size: 11px;
+    font-size: var(--text-caption);
     margin-bottom: 16px;
-  }
-  .footer-content > div:not(.footer-brand) > a {
-    font-size: 10px;
   }
   .footer-bottom {
     margin-top: 25px;
     gap: 12px;
     flex-direction: column;
-    font-size: 8px;
     line-height: 1.7;
   }
   .footer-blossom {
@@ -2096,27 +1995,25 @@ html[data-theme="dark"] .hero {
     margin-bottom: 25px;
   }
   .page-heading h1 {
-    font-size: 42px;
     letter-spacing: -1.3px;
   }
   .page-heading > p:last-child {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .page-heading > .cloud {
     display: none;
   }
   .page-heading > .eyebrow {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .search-field input {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .filter-row {
     grid-template-columns: 1fr 1fr;
     gap: 15px;
   }
   .filter-row select {
-    font-size: 11px;
     padding: 10px;
   }
   .drama-grid {
@@ -2130,7 +2027,7 @@ html[data-theme="dark"] .hero {
     font-size: 27px;
   }
   .empty p {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .detail-hero {
     height: 650px;
@@ -2146,15 +2043,11 @@ html[data-theme="dark"] .hero {
     width: 115px;
   }
   .detail-content h1 {
-    font-size: 36px;
     margin: 10px 0;
   }
   .detail-korean {
     margin-top: 15px;
     font-size: 19px;
-  }
-  .detail-content > div > p:not(.detail-korean) {
-    font-size: 10px;
   }
   .detail-content .tags {
     margin: 12px 0;
@@ -2166,7 +2059,7 @@ html[data-theme="dark"] .hero {
     font-size: 29px;
   }
   .overview > p:not(.eyebrow) {
-    font-size: 14px;
+    font-size: var(--text-meta);
   }
   .gallery-image {
     aspect-ratio: 16/10;
@@ -2180,9 +2073,6 @@ html[data-theme="dark"] .hero {
   }
   .culture-article .culture-landscape {
     height: 230px;
-  }
-  .prose p {
-    font-size: 13px;
   }
   html[data-theme="dark"] .culture-letter {
     background: #312c2c;
@@ -2223,13 +2113,13 @@ html[data-theme="dark"] .hero {
   margin-top: 14px;
 }
 .actor-card p {
-  font-size: 11px;
+  font-size: var(--text-caption);
   color: var(--muted);
   margin-top: 6px;
 }
 .actor-card > span {
   display: block;
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--wine);
   margin-top: 9px;
 }
@@ -2251,7 +2141,7 @@ html[data-theme="dark"] .hero {
   cursor: pointer;
   display: flex;
   justify-content: space-between;
-  font-size: 13px;
+  font-size: var(--text-meta);
   list-style: none;
 }
 .episode-section summary::-webkit-details-marker {
@@ -2261,7 +2151,7 @@ html[data-theme="dark"] .hero {
   transform: rotate(45deg);
 }
 .episode-section details p {
-  font-size: 12px;
+  font-size: var(--text-caption);
   color: var(--muted);
   margin: 20px 0;
 }
@@ -2315,23 +2205,23 @@ html[data-theme="dark"] .closing em {
   }
   .actor-card h2,
   .actor-card h3 {
-    font-size: 12px;
+    font-size: var(--text-caption);
   }
   .cast-section .actor-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 15px 10px;
   }
   .cast-section .actor-card h3 {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .cast-section .actor-card p {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .episode-section h2 {
     font-size: 26px;
   }
   .detail-buttons .button {
-    font-size: 10px;
+    font-size: var(--text-caption);
     padding: 11px 15px;
   }
   .closing {
@@ -2342,15 +2232,6 @@ html[data-theme="dark"] .closing em {
   }
   .closing .button {
     margin-top: 10px;
-  }
-}
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .reveal {
-      animation: reveal linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 16%;
-    }
   }
 }
 .airing-section {
@@ -2368,18 +2249,18 @@ html[data-theme="dark"] .closing em {
   color: var(--jade);
 }
 .airing-empty p {
-  font-size: 12px;
+  font-size: var(--text-caption);
   color: var(--muted);
 }
 .airing-empty strong {
   font-weight: 400;
-  font-size: 10px;
+  font-size: var(--text-caption);
 }
 .airing-empty .text-link {
   margin-left: auto;
 }
 .air-date {
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--muted);
   margin-top: 8px;
 }
@@ -2393,14 +2274,10 @@ html[data-theme="dark"] .closing em {
   }
   .airing-empty p {
     flex: 1;
-    font-size: 11px;
-  }
-  .airing-empty strong {
-    font-size: 10px;
   }
   .airing-empty .text-link {
     margin-left: 44px;
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
 }
 @media (max-width: 650px) {
@@ -2425,5 +2302,483 @@ html[data-theme="dark"] .closing em {
   .tea-steam {
     font-size: 35px;
     top: 0;
+  }
+}
+
+/* Editorial refinements keep the original paper, ink, and illustrated composition. */
+.main-nav {
+  font-size: var(--text-caption);
+}
+.main-nav a[aria-current="page"] {
+  color: var(--wine);
+}
+.icon-button {
+  min-width: 44px;
+  min-height: 44px;
+}
+.save {
+  width: 44px;
+  height: 44px;
+}
+.hero-description {
+  font-size: var(--text-meta);
+}
+.hero-note {
+  font-size: var(--text-caption);
+}
+.hero-issue {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: var(--text-caption);
+  letter-spacing: 1.6px;
+  color: var(--wine);
+}
+.hero-image-foot {
+  font-size: var(--text-caption);
+}
+.hero-film-caption .eyebrow {
+  font-size: var(--text-caption);
+}
+.hero-film-caption p,
+.hero-film-caption p span {
+  font-size: var(--text-caption);
+}
+.card-meta {
+  font-size: var(--text-caption);
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.drama-card h3 {
+  font-size: var(--text-card);
+}
+.korean-title {
+  font-size: var(--text-caption);
+}
+.poster {
+  box-shadow: 0 5px 18px #29282a0a;
+}
+.poster:focus-within {
+  outline: 2px solid var(--wine);
+  outline-offset: 4px;
+}
+.actor-image img {
+  object-position: center 24%;
+}
+.actor-card h2,
+.actor-card h3 {
+  line-height: 1.5;
+}
+.actor-card p,
+.actor-card > span {
+  font-size: var(--text-caption);
+}
+.featured-copy > p:not(.eyebrow):not(.featured-ko) {
+  font-size: var(--text-meta);
+  line-height: 1.9;
+}
+.mood p {
+  font-size: var(--text-caption);
+}
+.footer-content > div:not(.footer-brand) > a {
+  font-size: var(--text-caption);
+  padding-block: 5px;
+}
+.footer-content h3 {
+  font-size: var(--text-meta);
+}
+.footer-bottom {
+  font-size: var(--text-caption);
+  gap: 20px;
+}
+.footer-brand > .eyebrow {
+  font-size: var(--text-caption);
+}
+.overview {
+  position: relative;
+}
+.story-blossom {
+  position: absolute;
+  right: -250px;
+  top: 5px;
+  width: 170px;
+  height: 240px;
+  opacity: 0.55;
+  pointer-events: none;
+}
+.story-frame {
+  margin: 0;
+}
+.story-frame figcaption {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: 14px;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: var(--text-caption);
+}
+.story-frame figcaption span {
+  font-family: var(--korean);
+}
+.detail-hero .button.secondary {
+  color: #fffaf6;
+  border-color: #fffaf680;
+}
+.detail-hero .button.secondary:hover {
+  background: #fffaf61a;
+}
+.episode-section summary:focus-visible {
+  outline: 2px solid var(--wine);
+  outline-offset: 5px;
+}
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+html[data-theme="dark"] .editor-stamp,
+html[data-theme="dark"] .culture-letter {
+  background: var(--paper-deep);
+  border-color: var(--line);
+}
+html[data-theme="dark"] .save {
+  color: #842b47;
+}
+html[data-theme="dark"] .hero-korean,
+html[data-theme="dark"] .hero-image-foot {
+  color: var(--muted);
+}
+html[data-theme="dark"] .closing > .eyebrow {
+  color: #eff4e9;
+}
+@media (min-width: 901px) {
+  .page-heading {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 35px;
+  }
+}
+@media (min-width: 651px) and (max-width: 900px) {
+  .hero-blossom {
+    left: -90px;
+    width: 100px;
+    height: 220px;
+    opacity: 0.45;
+  }
+  .footer-cloud {
+    top: 60px;
+  }
+  .nav-wrap {
+    flex-wrap: wrap;
+    height: auto;
+    padding-block: 16px 8px;
+    gap: 12px;
+  }
+  .main-nav {
+    order: 3;
+    flex-basis: 100%;
+    justify-content: space-between;
+  }
+  .main-nav a:nth-child(3),
+  .main-nav a:nth-child(4) {
+    display: inline-block;
+  }
+  html {
+    scroll-padding-top: 150px;
+  }
+}
+@media (max-width: 1100px) {
+  .story-blossom {
+    display: none;
+  }
+}
+@media (max-width: 650px) {
+  .nav-actions {
+    gap: 0;
+  }
+  .nav-actions .icon-button {
+    min-width: 36px;
+  }
+  .nav-watch {
+    min-width: 36px;
+    min-height: 44px;
+    justify-content: center;
+  }
+  .main-nav {
+    max-height: calc(100dvh - 76px);
+    overflow-y: auto;
+  }
+  .main-nav .u373-a {
+    align-self: flex-start;
+  }
+  .hero-image-foot {
+    letter-spacing: 1px;
+  }
+  .hero-film-caption p span {
+    display: block;
+    margin: 3px 0 0;
+  }
+  .hero-film-caption .round-link {
+    right: 0;
+    width: 44px;
+    height: 44px;
+  }
+  .actor-card h2,
+  .actor-card h3,
+  .cast-section .actor-card h3 {
+    font-size: var(--text-caption);
+  }
+  .cast-section .actor-card p {
+    font-size: var(--text-caption);
+  }
+  .culture-food {
+    display: block;
+  }
+  .detail-content h1 {
+    overflow-wrap: anywhere;
+  }
+  .footer-bottom {
+    line-height: 1.8;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-blossom {
+    transform-origin: bottom left;
+    animation: blossom-sway 18s ease-in-out infinite;
+  }
+  .footer-cloud {
+    animation: drift 20s ease-in-out infinite;
+  }
+  @supports (animation-timeline: view()) {
+    .hero > .landscape {
+      animation: mountain-rise linear both;
+      animation-timeline: view();
+      animation-range: exit 0% exit 100%;
+    }
+  }
+}
+@keyframes blossom-sway {
+  50% {
+    transform: rotate(-9deg);
+  }
+}
+@keyframes mountain-rise {
+  to {
+    transform: translateY(24px);
+  }
+}
+
+/* Shared reading and control scale; decorative seals retain their own proportions. */
+body {
+  font-size: var(--text-body);
+}
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+.hero h1 {
+  letter-spacing: -0.045em;
+}
+.hero-description,
+.page-heading > p:last-child,
+.featured-copy > p:not(.eyebrow):not(.featured-ko),
+.culture-grid p:not(.eyebrow):not(.korean-word),
+.empty p,
+.prose p,
+.episode-section details p {
+  font-size: var(--text-body);
+}
+.button,
+.soft-link,
+.text-link,
+.nav-watch,
+.episode-section summary {
+  font-size: var(--text-control);
+}
+.button {
+  min-height: 48px;
+  gap: 16px;
+}
+.text-link,
+.soft-link {
+  min-height: 44px;
+}
+.eyebrow {
+  letter-spacing: 0.12em;
+}
+.brand-sub {
+  font-size: 9px;
+  letter-spacing: 1.5px;
+}
+.hero-copy > .eyebrow {
+  letter-spacing: 0.12em;
+}
+.hero-buttons {
+  flex-wrap: wrap;
+}
+.hero-film-caption {
+  padding-right: 40px;
+}
+.hero-film-caption .round-link {
+  width: 44px;
+  height: 44px;
+}
+.hero-image-foot {
+  letter-spacing: 0.08em;
+}
+.hero-korean {
+  color: var(--muted);
+}
+.card-meta,
+.korean-title,
+.actor-card p {
+  line-height: 1.7;
+}
+.actor-card h2,
+.actor-card h3 {
+  font-size: var(--text-card);
+}
+.tags a {
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+}
+.search-field input,
+.filter-row select {
+  font-size: 16px;
+  min-height: 48px;
+}
+.filter-row label {
+  letter-spacing: 0.04em;
+}
+.results-count {
+  align-items: center;
+  gap: 16px;
+}
+.results-count button {
+  min-height: 44px;
+}
+.footer-content > div:not(.footer-brand) > a {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+.footer-content h3 {
+  font-size: var(--text-control);
+}
+.footer-bottom {
+  padding-left: 16px;
+}
+.footer-blossom {
+  opacity: 0.25;
+}
+.detail-hero {
+  height: auto;
+  min-height: 560px;
+}
+.detail-content {
+  min-height: 560px;
+  padding-top: 48px;
+}
+.page-heading > .cloud {
+  max-width: 16%;
+  pointer-events: none;
+}
+:where(.poster-row, .drama-grid, .actor-grid) {
+  gap: 32px var(--space-grid);
+}
+@media (min-width: 651px) and (max-width: 900px) {
+  .poster-row,
+  .actor-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .drama-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .featured {
+    grid-template-columns: 1fr;
+  }
+  .featured-photo {
+    min-height: 340px;
+  }
+  .featured-photo img {
+    object-position: center 38%;
+  }
+  .featured-copy > p:not(.eyebrow):not(.featured-ko) {
+    max-width: 54ch;
+  }
+}
+@media (max-width: 650px) {
+  .brand {
+    font-size: 22px;
+    gap: 6px;
+  }
+  .brand-sub {
+    font-size: 8px;
+    letter-spacing: 0.6px;
+  }
+  .nav-wrap {
+    width: calc(100% - 24px);
+    gap: 4px;
+  }
+  .nav-actions .icon-button,
+  .nav-watch {
+    min-width: 44px;
+  }
+  .hero h1 {
+    font-size: clamp(2.625rem, 11.5vw, 3rem);
+  }
+  .hero-buttons .button,
+  .detail-buttons .button {
+    font-size: var(--text-control);
+  }
+  .hero-copy > .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+  .hero-film-caption h2 {
+    font-size: 28px;
+  }
+  .hero-bottom-label {
+    letter-spacing: 0.08em;
+  }
+  .section-heading > .text-link {
+    margin-left: 0;
+  }
+  .cast-section .actor-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 16px;
+  }
+  .cast-section .actor-card h3 {
+    font-size: var(--text-card);
+  }
+  .detail-content {
+    min-height: 650px;
+  }
+  .footer-content {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 24px;
+  }
+  .footer-brand {
+    grid-column: 1/-1;
+  }
+  .footer-bottom {
+    padding-left: 0;
+  }
+}
+
+html[data-theme="dark"] .culture-food {
+  background: var(--paper-deep);
+}
+html[data-theme="dark"] .hero-bottom-label {
+  color: #29282a;
+}
+@media (max-width: 650px) {
+  .footer-content > div:last-child {
+    grid-column: 1/-1;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 24px;
+  }
+  .footer-content > div:last-child h3 {
+    grid-column: 1/-1;
   }
 }

@@ -1,5 +1,6 @@
+import { pageMetadata } from "@/lib/seo";
 import { Blossom, Cloud, Landscape } from "@/components/art";
-export const metadata = { title: "A little piece of Korea" };
+export const metadata = pageMetadata('A little piece of Korea', 'Explore Korean words, traditional architecture and everyday cultural rituals.', "/culture");
 export default function Page() {
   return (
     <main id="main" className="wrap inner-page">

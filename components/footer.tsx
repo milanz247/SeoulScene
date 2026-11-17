@@ -20,9 +20,10 @@ export function Footer() {
           {
             title: "Explore",
             links: [
-              ["All dramas", "/explore"],
+              ["All dramas", "/dramas"],
+              ["Recommendations", "/recommendations"],
               ["Editor’s picks", "/explore?sort=curated"],
-              ["Upcoming", "/calendar#upcoming"],
+              ["Upcoming", "/upcoming"],
               ["Actors", "/actors"],
             ],
           },
@@ -30,6 +31,9 @@ export function Footer() {
             title: "Discover",
             links: [
               ["K-Culture", "/culture"],
+              ["The journal", "/journal"],
+              ["Reviews", "/reviews"],
+              ["Industry news", "/news"],
               ["Airing calendar", "/calendar"],
               ["My watchlist", "/watchlist"],
             ],

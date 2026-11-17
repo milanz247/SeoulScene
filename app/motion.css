@@ -1,0 +1,91 @@
+:root {
+  --motion-ease: cubic-bezier(.2,.8,.2,1);
+  --motion-hover: 200ms;
+  --motion-card: 300ms;
+  --motion-reveal: 650ms;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .site-header { animation: nav-settle 350ms var(--motion-ease) both; }
+  .button, .save, .round-link { transition-timing-function: var(--motion-ease); }
+  .button svg, .text-link svg, .round-link svg, .mood > svg {
+    transition: transform var(--motion-hover) var(--motion-ease);
+  }
+  :is(.button, .text-link, .round-link, .mood):is(:hover, :focus-visible) > svg { transform: translateX(3px); }
+  .button:active, .round-link:active, .save:active { transform: scale(.97); }
+  .poster {
+    transition: transform var(--motion-card) var(--motion-ease), box-shadow var(--motion-card) var(--motion-ease);
+  }
+  .poster img, .actor-image img, .mood img {
+    transition: transform var(--motion-card) var(--motion-ease);
+  }
+  .drama-card:focus-within .poster img, .actor-card:focus-visible img, .mood:focus-visible img { transform: scale(1.045); }
+  .drama-card:focus-within .poster { transform: translateY(-3px); box-shadow: 0 10px 24px #29282a18; }
+  .save svg, .detail-buttons .button svg { transition: transform var(--motion-hover) var(--motion-ease); }
+  .save:active svg, .detail-buttons .button:active svg { transform: scale(1.18); }
+  .save.saved svg, .detail-buttons .button.saved svg { animation: heart-settle 300ms var(--motion-ease); }
+  .icon-button[aria-label="Toggle color theme"] svg {
+    transition: transform 350ms var(--motion-ease);
+  }
+  html[data-theme="dark"] .icon-button[aria-label="Toggle color theme"] svg { transform: rotate(-25deg); }
+  .detail-hero > img { animation: backdrop-arrive 800ms var(--motion-ease) both; }
+  .detail-poster { animation: quiet-arrive var(--motion-reveal) var(--motion-ease) 100ms both; }
+  .detail-content > div:last-child > * {
+    animation: quiet-arrive var(--motion-reveal) var(--motion-ease) both;
+    animation-delay: 140ms;
+  }
+  .detail-content > div:last-child > :nth-child(2) { animation-delay: 200ms; }
+  .detail-content > div:last-child > :nth-child(3) { animation-delay: 260ms; }
+  .detail-content > div:last-child > :nth-child(4) { animation-delay: 320ms; }
+  .detail-content > div:last-child > :nth-child(n+5) { animation-delay: 380ms; }
+  .episode-section summary span { transition: transform var(--motion-hover) var(--motion-ease); }
+  .episode-section details[open] > :not(summary) { animation: quiet-arrive 300ms var(--motion-ease) both; }
+  @supports (interpolate-size: allow-keywords) {
+    .episode-section details { interpolate-size: allow-keywords; }
+    .episode-section details::details-content {
+      block-size: 0;
+      opacity: 0;
+      overflow: clip;
+      transition: block-size 300ms var(--motion-ease), opacity 200ms var(--motion-ease), content-visibility 300ms allow-discrete;
+    }
+    .episode-section details[open]::details-content { block-size: auto; opacity: 1; }
+  }
+  .filter-panel { animation: quiet-arrive 350ms var(--motion-ease) both; }
+  .search-field svg { transition: transform var(--motion-hover) var(--motion-ease); }
+  .search-field:focus-within svg { transform: translateX(3px); }
+  .footer-content > div:not(.footer-brand) > a { transition: transform var(--motion-hover) var(--motion-ease), color var(--motion-hover); }
+  .footer-content > div:not(.footer-brand) > a:is(:hover, :focus-visible) { transform: translateX(3px); }
+  .footer-blossom, .story-blossom { transform-origin: bottom left; animation: branch-breathe 20s ease-in-out infinite; }
+  .moon-disc { animation: moon-breathe 14s ease-in-out infinite; }
+  .featured-copy > .cloud, .culture-landscape > .cloud { animation: drift 20s ease-in-out infinite; }
+  .blossom g { animation: petal-breathe 12s ease-in-out infinite; }
+  .blossom g:nth-of-type(2n) { animation-delay: -6s; }
+  .motion-ambient:not([data-motion-active]),
+  .motion-ambient:not([data-motion-active]) g { animation-play-state: paused !important; }
+  @supports (animation-timeline: view()) {
+    footer > .landscape {
+      animation: evening-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 100%;
+    }
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .drama-card:hover .poster { transform: translateY(-3px); box-shadow: 0 10px 24px #29282a18; }
+  }
+  @media (max-width: 650px) {
+    .main-nav {
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: opacity 250ms var(--motion-ease), transform 250ms var(--motion-ease), display 250ms allow-discrete;
+    }
+    .main-nav.open { opacity: 1; transform: none; }
+    @starting-style { .main-nav.open { opacity: 0; transform: translateY(-8px); } }
+  }
+}
+@keyframes quiet-arrive { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes backdrop-arrive { from { opacity: .5; } to { opacity: 1; } }
+@keyframes nav-settle { from { opacity: 0; } to { opacity: 1; } }
+@keyframes heart-settle { 50% { transform: scale(1.12); } }
+@keyframes branch-breathe { 50% { transform: rotate(1.5deg); } }
+@keyframes petal-breathe { 50% { opacity: .78; } }
+@keyframes moon-breathe { 50% { opacity: .72; } }
+@keyframes evening-rise { from { transform: translateY(12px); } to { transform: none; } }

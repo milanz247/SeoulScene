@@ -1,4 +1,5 @@
-export const metadata = { title: "About SeoulScene" };
+import { pageMetadata } from "@/lib/seo";
+export const metadata = pageMetadata('About SeoulScene', 'An independent Korean drama and culture journal with sourced metadata and transparent editorial notes.', "/about");
 export default function Page() {
   return (
     <main id="main" className="wrap inner-page prose">

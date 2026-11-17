@@ -1,5 +1,6 @@
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
-export const metadata = { title: "Credits & sources" };
+export const metadata = pageMetadata('Credits & sources', 'Image provenance, metadata sources, licenses and credits for SeoulScene.', "/credits");
 export default function Page() {
   return (
     <main id="main" className="wrap inner-page prose">
@@ -39,6 +40,21 @@ export default function Page() {
         historical art.
       </p>
       <h2>Typography & inspiration</h2>
+      <p>
+        Navigation underline motion is adapted from{" "}
+        <a href="https://lucianlabs.dev/uxui-prompt/#373">
+          Lucian UX/UI Prompt #373 · Five underline hovers
+        </a>{" "}
+        by Seokwoooo, used under the MIT License.
+      </p>
+      <p>
+        Hero and viewport entrances adapt{" "}
+        <a href="https://lucianlabs.dev/uxui-prompt/#216">#216 Staggered hero entrance</a>{" "}
+        and{" "}
+        <a href="https://lucianlabs.dev/uxui-prompt/#251">#251 Staggered scroll-in feature cards</a>{" "}
+        by Seokwoooo under the MIT License. Existing layouts are retained;
+        viewport entrances play once and respect reduced motion.
+      </p>
       <p>
         Playfair Display, DM Sans, and Gowun Batang are sourced from{" "}
         <a href="https://fonts.google.com/">Google Fonts</a> under their open

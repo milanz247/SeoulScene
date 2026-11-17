@@ -1,4 +1,14 @@
 import Link from "next/link";
+import { getArticles } from "@/lib/content";
+import { ArticleCard, Newsletter, SectionHeader } from "@/components/editorial";
+import { articlePath, slugify } from "@/lib/editorial";
+import { ActorPortrait } from "@/components/editorial-image";
+import { pageMetadata } from "@/lib/seo";
+export const metadata = pageMetadata(
+  "Stories that stay with you",
+  "Korean dramas, thoughtful editorial previews, source-linked entertainment news and culture. Find your next story.",
+  "/",
+);
 import { getDramas } from "@/lib/database";
 const dramas = getDramas();
 import { Blossom, Cloud, Landscape } from "@/components/art";
@@ -37,7 +47,12 @@ export function SectionTitle({
     </div>
   );
 }
-export default function Home() {
+export default async function Home() {
+  const editorial = await getArticles();
+  const news = editorial.filter((a) => a.kind === "news");
+  const reviews = editorial.filter((a) => a.kind === "review");
+  const journal = editorial.find((a) => a.kind === "feature");
+  const spotlight = dramas.find((d) => d.id === 129888)!.cast[0];
   const airing = dramas.filter((d) => d.status === "Returning Series");
   const upcoming = dramas.filter(
     (d) => d.status === "In Production" || d.status === "Planned",
@@ -48,29 +63,60 @@ export default function Home() {
   );
   return (
     <main id="main">
-      <section className="hero">
+      <section className="hero u216">
         <Blossom className="hero-blossom" />
         <Cloud className="hero-cloud" />
         <div className="hero-grid wrap">
           <div className="hero-copy">
-            <p className="eyebrow">
+            <p
+              className="eyebrow"
+              data-s
+              style={{ "--d": 180 } as React.CSSProperties}
+            >
               <span className="tiny-flower">✳</span> A LITTLE SEOUL. A LOT OF
               FEELING.
             </p>
             <h1>
-              Some stories
+              <span className="u216-w">
+                <span style={{ "--d": 300 } as React.CSSProperties}>Some</span>
+              </span>{" "}
+              <span className="u216-w">
+                <span style={{ "--d": 370 } as React.CSSProperties}>
+                  stories
+                </span>
+              </span>
               <br />
-              stay <em>with you.</em>
+              <span className="u216-w">
+                <span style={{ "--d": 440 } as React.CSSProperties}>stay</span>
+              </span>{" "}
+              <em className="u216-w">
+                <span style={{ "--d": 510 } as React.CSSProperties}>
+                  with you.
+                </span>
+              </em>
             </h1>
-            <p className="hero-korean" lang="ko">
+            <p
+              className="hero-korean"
+              lang="ko"
+              data-s
+              style={{ "--d": 550 } as React.CSSProperties}
+            >
               당신의 마음에 머무는 이야기
             </p>
-            <p className="hero-description">
+            <p
+              className="hero-description"
+              data-s
+              style={{ "--d": 620 } as React.CSSProperties}
+            >
               Fall in love with stories from Seoul.
               <br />
               Your beautiful little corner of the K-Drama universe.
             </p>
-            <div className="hero-buttons">
+            <div
+              className="hero-buttons"
+              data-s
+              style={{ "--d": 760 } as React.CSSProperties}
+            >
               <Link className="button" href="/explore">
                 Find your next drama <Icon name="arrow" />
               </Link>
@@ -78,7 +124,11 @@ export default function Home() {
                 <span className="play-small">▷</span> The editor’s pick
               </Link>
             </div>
-            <div className="hero-note">
+            <div
+              className="hero-note"
+              data-s
+              style={{ "--d": 900 } as React.CSSProperties}
+            >
               <span className="drawn-heart">♡</span>
               <span>
                 For the late-night watchers.
@@ -93,7 +143,7 @@ export default function Home() {
                 src={queen.backdrop}
                 alt="Kim Soo-hyun and Kim Ji-won in Queen of Tears"
                 priority
-                sizes="(max-width: 760px) 100vw, 55vw"
+                sizes="(max-width: 650px) calc(100vw - 70px), (max-width: 1150px) calc(52.4vw - 60px), (max-width: 1340px) calc(52.4vw - 90px), 612px"
               />
               <div className="hero-image-shade" />
               <span className="vertical-note">오늘도, 드라마처럼</span>
@@ -122,11 +172,9 @@ export default function Home() {
             <span className="hero-image-foot">
               01 — A LOVE THAT FINDS ITS WAY BACK
             </span>
-            <div className="hero-pagination">
-              <b />
-              <span />
-              <span />
-            </div>
+            <Link className="hero-issue" href={`/dramas/${queen.id}`}>
+              THE SPOTLIGHT ↗
+            </Link>
           </div>
         </div>
         <Landscape />
@@ -137,10 +185,40 @@ export default function Home() {
         <p>Good stories linger. Let’s find one that feels like you.</p>
         <span className="strip-flower">✳</span>
       </div>
+      <section className="section wrap editorial-edition">
+        <SectionHeader
+          title="The stories around the stories."
+          kicker="THE JOURNAL · FIRST EDITION"
+          href="/journal"
+        />
+        <div className="edition-layout">
+          {journal && <ArticleCard article={journal} lead />}
+          <div className="news-desk">
+            <p className="eyebrow">FROM THE NEWS DESK</p>
+            {news.map((a, i) => (
+              <article key={a.slug}>
+                <span className="brief-number">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <p className="eyebrow">{a.category} · ARCHIVE BRIEF</p>
+                  <h3>
+                    <Link href={articlePath(a)}>{a.title}</Link>
+                  </h3>
+                  <p>{a.description}</p>
+                </div>
+              </article>
+            ))}
+            <Link className="text-link" href="/news">
+              All industry notes <Icon name="arrow" />
+            </Link>
+          </div>
+        </div>
+      </section>
       <section className="section wrap reveal" id="trending">
         <SectionTitle
           korean="지금, 우리가 사랑하는 이야기"
-          title="The stories everyone’s falling for."
+          title="The stories we keep coming back to."
           link="/explore"
         />
         <div className="poster-row">
@@ -184,6 +262,41 @@ export default function Home() {
           </div>
           <Link className="button" href="/dramas/129888">
             Discover the story <Icon name="arrow" />
+          </Link>
+        </div>
+      </section>
+      <section className="section wrap">
+        <SectionHeader
+          title="A closer look, without the spoilers."
+          kicker="REVIEWS & FIRST IMPRESSIONS"
+          href="/reviews"
+          label="Read the previews"
+        />
+        <div className="article-grid review-grid">
+          {reviews.map((a) => (
+            <ArticleCard key={a.slug} article={a} />
+          ))}
+        </div>
+      </section>
+      <section className="actor-spotlight wrap">
+        <ActorPortrait
+          src={spotlight.portrait}
+          alt={spotlight.name}
+          sizes="(max-width: 650px) 45vw, 25vw"
+        />
+        <div>
+          <p className="eyebrow">ACTOR SPOTLIGHT · FROM OUR COLLECTION</p>
+          <h2>{spotlight.name}</h2>
+          <p>
+            Meet the performer behind {spotlight.character} in Twenty Five
+            Twenty One. Explore the roles and stories recorded in our
+            collection.
+          </p>
+          <Link
+            className="text-link"
+            href={`/actors/${slugify(spotlight.name)}`}
+          >
+            Meet the actor <Icon name="arrow" />
           </Link>
         </div>
       </section>
@@ -339,6 +452,7 @@ export default function Home() {
           </div>
         )}
       </section>
+      <Newsletter />
       <section className="closing">
         <Cloud className="closing-cloud" />
         <span className="moon-disc" />

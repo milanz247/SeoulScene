@@ -1,7 +1,13 @@
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { getDramas } from "@/lib/database";
+import { slugify } from "@/lib/editorial";
 import { Photo } from "@/components/ui";
-export const metadata = { title: "The people behind the stories" };
+export const metadata = pageMetadata(
+  "The people behind the stories",
+  "Explore cast members and their roles in the SeoulScene collection.",
+  "/actors",
+);
 export default function Page() {
   const people = [
     ...new Map(
@@ -25,7 +31,7 @@ export default function Page() {
         {people.map((p) => (
           <Link
             className="actor-card"
-            href={`/dramas/${p.dramaId}`}
+            href={`/actors/${slugify(p.name)}`}
             key={p.name}
           >
             <div className="actor-image">

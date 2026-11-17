@@ -5,15 +5,17 @@ import { filterDramas, type Drama } from "@/lib/dramas";
 export function Explore({
   items,
   initialGenre = "",
+  initialSort = "curated",
 }: {
   items: Drama[];
   initialGenre?: string;
+  initialSort?: string;
 }) {
   const [query, setQuery] = useState("");
   const [genre, setGenre] = useState(initialGenre);
   const [year, setYear] = useState("");
   const [status, setStatus] = useState("");
-  const [sort, setSort] = useState("curated");
+  const [sort, setSort] = useState(initialSort);
   const [limit, setLimit] = useState(12);
   const filtered = filterDramas(items, query, genre, year, status, sort);
   return (
@@ -59,6 +61,7 @@ export function Explore({
               <option>Ended</option>
               <option>Returning Series</option>
               <option>In Production</option>
+              <option>Planned</option>
             </select>
           </label>
           <label>

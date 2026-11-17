@@ -1,7 +1,7 @@
 import { Watchlist } from "@/components/ui";
 import { getDramas } from "@/lib/database";
 const dramas = getDramas();
-export const metadata = { title: "My watchlist" };
+export const metadata = { title: "My watchlist", robots: {index:false,follow:true} };
 export default function Page() {
   return (
     <main id="main" className="wrap inner-page">
