@@ -11,7 +11,7 @@ export const metadata = pageMetadata(
 );
 import { getDramas } from "@/lib/database";
 const dramas = getDramas();
-import { Blossom, Cloud, Landscape } from "@/components/art";
+import { Cloud } from "@/components/art";
 import { DramaCard, Icon, Photo } from "@/components/ui";
 const moods = [
   ["Romance", "설레는 순간", "For the butterflies", "215720"],
@@ -63,122 +63,55 @@ export default async function Home() {
   );
   return (
     <main id="main">
-      <section className="hero u216">
-        <Blossom className="hero-blossom" />
-        <Cloud className="hero-cloud" />
+      <section className="hero">
+        <div className="hero-illustration" aria-hidden="true">
+          <Photo src="/images/korean-landscape.webp" alt="" sizes="100vw" />
+        </div>
         <div className="hero-grid wrap">
           <div className="hero-copy">
-            <p
-              className="eyebrow"
-              data-s
-              style={{ "--d": 180 } as React.CSSProperties}
-            >
-              <span className="tiny-flower">✳</span> A LITTLE SEOUL. A LOT OF
-              FEELING.
-            </p>
+            <p className="eyebrow">✳ &nbsp; A LITTLE SEOUL. A LOT OF FEELING.</p>
             <h1>
-              <span className="u216-w">
-                <span style={{ "--d": 300 } as React.CSSProperties}>Some</span>
-              </span>{" "}
-              <span className="u216-w">
-                <span style={{ "--d": 370 } as React.CSSProperties}>
-                  stories
-                </span>
-              </span>
+              Some stories
               <br />
-              <span className="u216-w">
-                <span style={{ "--d": 440 } as React.CSSProperties}>stay</span>
-              </span>{" "}
-              <em className="u216-w">
-                <span style={{ "--d": 510 } as React.CSSProperties}>
-                  with you.
-                </span>
-              </em>
+              stay <em>with you.</em>
             </h1>
-            <p
-              className="hero-korean"
-              lang="ko"
-              data-s
-              style={{ "--d": 550 } as React.CSSProperties}
-            >
+            <p className="hero-korean" lang="ko">
               당신의 마음에 머무는 이야기
             </p>
-            <p
-              className="hero-description"
-              data-s
-              style={{ "--d": 620 } as React.CSSProperties}
-            >
-              Fall in love with stories from Seoul.
-              <br />
-              Your beautiful little corner of the K-Drama universe.
+            <p className="hero-description">
+              Your beautiful little corner of the K-Drama universe. Find the
+              stories, people and places you&apos;ll carry with you.
             </p>
-            <div
-              className="hero-buttons"
-              data-s
-              style={{ "--d": 760 } as React.CSSProperties}
-            >
+            <div className="hero-buttons">
               <Link className="button" href="/explore">
                 Find your next drama <Icon name="arrow" />
               </Link>
-              <Link className="soft-link" href="#editors-pick">
-                <span className="play-small">▷</span> The editor’s pick
+              <Link className="hero-secondary" href="#editors-pick">
+                Explore the editor&apos;s pick ↗
               </Link>
             </div>
-            <div
-              className="hero-note"
-              data-s
-              style={{ "--d": 900 } as React.CSSProperties}
-            >
-              <span className="drawn-heart">♡</span>
-              <span>
-                For the late-night watchers.
-                <br />
-                The daydreamers. The just-one-more-episode people.
-              </span>
-            </div>
           </div>
-          <div className="hero-visual">
-            <div className="hero-image">
+          <Link className="hero-feature" href={`/dramas/${queen.id}`}>
+            <span className="hero-feature-image">
               <Photo
                 src={queen.backdrop}
                 alt="Kim Soo-hyun and Kim Ji-won in Queen of Tears"
                 priority
-                sizes="(max-width: 650px) calc(100vw - 70px), (max-width: 1150px) calc(52.4vw - 60px), (max-width: 1340px) calc(52.4vw - 90px), 612px"
+                sizes="(max-width: 760px) calc(100vw - 48px), 400px"
               />
-              <div className="hero-image-shade" />
-              <span className="vertical-note">오늘도, 드라마처럼</span>
-              <div className="hero-film-caption">
-                <span className="eyebrow">IN THE SPOTLIGHT</span>
-                <h2>Queen of Tears</h2>
-                <p>
-                  눈물의 여왕 <span>2024 · Romance</span>
-                </p>
-                <Link
-                  href={`/dramas/${queen.id}`}
-                  className="round-link"
-                  aria-label="Discover Queen of Tears"
-                >
-                  <Icon name="arrow" />
-                </Link>
-              </div>
-            </div>
-            <span className="editor-stamp">
-              A STORY
-              <br />
-              WORTH
-              <br />
-              <em>feeling.</em>
             </span>
-            <span className="hero-image-foot">
-              01 — A LOVE THAT FINDS ITS WAY BACK
+            <span className="hero-feature-copy">
+              <span className="eyebrow">THE STORY IN THE SPOTLIGHT · 01</span>
+              <strong>Queen of Tears</strong>
+              <span>눈물의 여왕 &nbsp;·&nbsp; 2024 &nbsp;·&nbsp; Romance</span>
+              <span className="hero-feature-arrow" aria-hidden="true">↗</span>
             </span>
-            <Link className="hero-issue" href={`/dramas/${queen.id}`}>
-              THE SPOTLIGHT ↗
-            </Link>
-          </div>
+          </Link>
         </div>
-        <Landscape />
-        <span className="hero-bottom-label">YOUR NEXT CHAPTER STARTS HERE</span>
+        <div className="hero-bottom wrap">
+          <span>SEOULSCENE &nbsp; / &nbsp; STORIES THAT STAY</span>
+          <span>SCROLL TO EXPLORE ↓</span>
+        </div>
       </section>
       <div className="editorial-strip wrap">
         <span>좋은 이야기는 오래 남으니까</span>
@@ -370,15 +303,11 @@ export default async function Home() {
           <div className="culture-grid">
             <Link className="culture-art" href="/culture#hanok">
               <div className="culture-landscape">
-                <Landscape />
-                <Cloud />
-                <span className="moon-disc" />
-                <div className="hanok">
-                  <span />
-                  <i />
-                  <i />
-                  <i />
-                </div>
+                <Photo
+                  src="/images/culture-hanok.webp"
+                  alt="Traditional Korean hanok courtyard and tiled rooftops"
+                  sizes="(max-width: 760px) 100vw, 40vw"
+                />
               </div>
               <span className="eyebrow">PLACES WITH A SOUL</span>
               <h3>Slow mornings. Hanok rooftops.</h3>
@@ -407,12 +336,14 @@ export default async function Home() {
               </Link>
             </div>
             <Link className="culture-food" href="/culture#food">
-              <span className="eyebrow">AT THE KOREAN TABLE</span>
-              <div className="tea-art">
-                <div className="tea-cup" />
-                <span className="tea-steam">~</span>
-                <div className="tea-leaf" />
+              <div className="culture-food-image">
+                <Photo
+                  src="/images/culture-tea.webp"
+                  alt="Korean tea served beside a hanok window"
+                  sizes="(max-width: 760px) 100vw, 25vw"
+                />
               </div>
+              <span className="eyebrow">AT THE KOREAN TABLE</span>
               <h3>
                 A little warmth,
                 <br />
@@ -454,8 +385,6 @@ export default async function Home() {
       </section>
       <Newsletter />
       <section className="closing">
-        <Cloud className="closing-cloud" />
-        <span className="moon-disc" />
         <p className="eyebrow">EVERY DRAMA HAS A STORY. FIND YOURS.</p>
         <h2>
           Your next favorite story
@@ -465,7 +394,6 @@ export default async function Home() {
         <Link href="/explore" className="button">
           Let’s find it <Icon name="arrow" />
         </Link>
-        <Landscape />
       </section>
     </main>
   );
