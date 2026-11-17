@@ -1,0 +1,64 @@
+@font-face {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/latin-0.ttf) format("truetype");
+}
+@font-face {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(/fonts/latin-1.ttf) format("truetype");
+}
+@font-face {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/fonts/latin-2.ttf) format("truetype");
+}
+@font-face {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/latin-3.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Playfair Display";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/latin-4.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/latin-5.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Playfair Display";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/fonts/latin-6.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Gowun Full";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("/fonts/gowun-batang.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Gowun Batang";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/gowun-subset.ttf") format("truetype");
+}
