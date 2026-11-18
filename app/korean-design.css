@@ -1,113 +1,1739 @@
-/* SeoulScene's original Korean scroll composition. */
-.illustrated-pages{position:relative;isolation:isolate;overflow:clip}
-.korean-ornaments{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
-.korean-ornaments svg{position:absolute}
-.ornament-branch{width:160px;height:350px;left:-80px;top:24%;opacity:.65}
-.ornament-cloud{width:190px;right:-70px;top:45%;color:#9a957a;opacity:.65}
-.ornament-moon{position:absolute;right:8%;top:15%;width:90px;height:90px;border-radius:50%;background:#d6a99a;opacity:.25}
-.ornaments-edges .ornament-branch{top:1000px}.ornaments-edges .ornament-cloud{top:1700px}.ornaments-edges .ornament-moon{display:none}
-.hero{isolation:isolate;background:var(--paper);padding:80px 0 24px;min-height:750px}
-.hero-grid{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:65px;min-height:570px}
-.hero-copy{padding:0 0 65px 20px}
-.hero h1{font-size:clamp(3.5rem,5.5vw,5.8rem);line-height:1.08;letter-spacing:-.055em}
-.hero h1 em{display:block}.hero h1 em:after{display:none}
-.hero-korean{font-size:17px;letter-spacing:.12em}
-.hero-feature{width:100%;max-width:490px;transform:none;padding:10px 10px 0;border:1px solid var(--line);border-radius:48% 48% 6px 6px;overflow:hidden;box-shadow:0 20px 50px #45352c22;align-self:start}
-.hero-feature-image{height:350px;border-radius:48% 48% 0 0}
-.hero-feature-copy{padding:22px 20px 25px}.hero-feature-copy strong{padding-right:30px}
-.hero-feature:hover,.hero-feature:focus-visible{transform:translateY(-4px)}
-.hero-illustration{height:210px;z-index:0}.hero-illustration:after{display:none}
-.hero-illustration img{object-fit:fill}
-.hero-bottom{color:#253d33;border-color:#45665355}
-.ornaments-hero .ornament-branch{top:8%;left:-60px;width:165px;opacity:.8}
-.ornaments-hero .ornament-cloud{top:30px;right:36%;width:160px;opacity:.65}
-.ornaments-hero .ornament-moon{top:65px;right:9%;width:140px;height:140px}
-.korean-footer{isolation:isolate;background:var(--paper);color:var(--ink);padding:110px 0 150px;border-top:0}
-.korean-footer:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(var(--paper) 0%,transparent 55%),url("/images/korean-landscape.webp") center bottom/cover no-repeat;opacity:.48}
-.korean-footer>.roof{display:none}
-.footer-intro{position:relative;z-index:1;padding:0 0 55px;border-bottom:1px solid #d9dec044;margin-bottom:50px}
-.footer-intro>p{font-family:var(--korean);letter-spacing:.2em;color:#d9c9a8}
-.footer-intro h2{font:clamp(2.7rem,4.3vw,4.5rem)/1.13 var(--serif);margin:18px 0}.footer-intro h2 em{color:#e9b7b4}
-.footer-intro>span{color:#c5d3c7}
-.korean-footer .footer-content,.korean-footer .footer-bottom{position:relative;z-index:1}
-.korean-footer .brand,.korean-footer .footer-content h3{color:var(--ink)}
-.korean-footer .footer-content p,.korean-footer .footer-content a,.korean-footer .footer-bottom{color:var(--muted)}
-.korean-footer .eyebrow{color:var(--wine)}
-.korean-footer .footer-bottom{border-color:var(--line);margin-top:45px}
-.korean-footer>.landscape{opacity:.3}.korean-footer>.footer-cloud,.korean-footer>.footer-blossom{display:none}
-.ornaments-footer .ornament-moon{width:120px;height:120px;right:15%;top:120px;background:#f4dcaa;opacity:.85;box-shadow:0 0 70px #ead6a522}
-.ornaments-footer .ornament-cloud{right:7%;top:190px;width:230px;color:#c7cba9;opacity:.55}
-.ornaments-footer .ornament-branch{left:auto;right:-40px;top:10px;transform:scaleX(-1);opacity:.45}
-/* Lucian #373 slide-through underline, preserving its curve and duration. */
-.footer-underline{position:relative;width:fit-content;padding-bottom:8px}
-.footer-underline:after{content:"";position:absolute;left:0;right:0;bottom:2px;height:3px;border-radius:2px;background:#e8a6b0;pointer-events:none;transform:scaleX(0);transform-origin:100% 50%;transition:transform .35s cubic-bezier(.6,0,.2,1)}
-.footer-underline:hover:after,.footer-underline:focus-visible:after{transform:scaleX(1);transform-origin:0 50%}
-.korean-footer a:focus-visible,.hero a:focus-visible{outline:2px solid #b95c79;outline-offset:5px}
-html[data-theme=dark] .hero{background:var(--paper)}
-html[data-theme=dark] .hero h1 em,html[data-theme=dark] .hero-secondary,html[data-theme=dark] .hero-copy>.eyebrow{color:#efb2c0}
-html[data-theme=dark] .hero-illustration{opacity:.4}html[data-theme=dark] .hero-bottom{color:#f6ecdf}
-@media(min-width:1300px){.ornaments-edges .ornament-branch{left:-45px}.ornaments-edges .ornament-cloud{right:-40px}}
-@media(max-width:1050px){.hero-grid{gap:35px}.hero-copy{padding-left:0}.hero-feature-image{height:300px}.hero h1{font-size:clamp(3.5rem,6vw,5rem)}.ornaments-hero .ornament-branch{left:-100px}.hero-feature-copy strong{font-size:28px}}
-@media(max-width:760px){.hero{padding-top:38px;min-height:0}.hero-grid{grid-template-columns:1fr;gap:32px;min-height:0}.hero-copy{padding:0;text-align:center}.hero-copy>.eyebrow,.hero-buttons{justify-content:center}.hero-description{margin-inline:auto}.hero h1{font-size:clamp(3rem,10.5vw,4.5rem)}.hero-feature{max-width:430px;align-self:auto}.hero-feature-image{height:280px}.hero-illustration{height:160px}.hero-bottom{margin-top:35px}.ornaments-hero .ornament-cloud{right:-55px;top:20px;width:120px}.ornaments-hero .ornament-branch{width:115px;left:-75px;top:0}.ornaments-edges{display:none}.korean-footer{padding-top:105px}.footer-intro{padding-bottom:35px}.ornaments-footer .ornament-moon{right:-30px;top:135px;width:90px;height:90px;opacity:.4}.ornaments-footer .ornament-cloud{right:-100px;top:220px}.hero-buttons{align-items:center}.hero-feature-copy strong{font-size:30px}}
-@media(prefers-reduced-motion:no-preference){.hero-copy{animation:ink-arrive .8s ease-out both}.hero-feature{animation:ink-arrive 1s ease-out both}.korean-ornaments .ornament-cloud{animation:ink-cloud 18s ease-in-out infinite alternate}.ornaments-hero .ornament-branch{transform-origin:bottom left;animation:ink-branch 16s ease-in-out infinite alternate}}
-@keyframes ink-arrive{from{opacity:0;translate:0 18px}to{opacity:1;translate:0 0}}
-@keyframes ink-cloud{to{translate:14px 0}}@keyframes ink-branch{to{rotate:3deg}}
-@media(prefers-reduced-motion:reduce){.hero *,.korean-footer *,.korean-ornaments *{animation:none!important;transition:none!important;translate:none!important}.footer-underline:after{transition:none}}
-/* A compact cultural cover and footer, without a featured drama promotion. */
-.hero{min-height:650px;padding-top:58px}
-.hero-grid{min-height:490px;gap:70px}
-.hero-feature{max-width:500px;border-radius:4px;padding:0;border:0;background:transparent;box-shadow:none;position:relative;margin:15px 0 45px}
-.hero-feature-image{height:330px;border-radius:130px 8px 8px 8px;box-shadow:0 22px 50px #45352c25;border:7px solid var(--paper)}
-.hero-feature-copy{background:var(--paper);margin:-25px 22px 0 40px;padding:23px 24px;box-shadow:0 12px 32px #45352c16;border:1px solid var(--line)}
-.hero-feature-copy strong{font-size:27px;color:var(--ink)}
-.hero-feature-copy>span:nth-last-child(2){color:var(--muted)}
-.hero-feature-copy .eyebrow{font-size:9px;letter-spacing:.11em;color:var(--wine)}
-.hero-feature-arrow{top:44px;right:14px}
-.korean-footer{padding:78px 0 30px}
+/* One editorial composition for the cover and shared site furniture. */
+.illustrated-pages {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+}
+.korean-ornaments {
+  display: none;
+}
+.site-header {
+  background: var(--paper);
+  backdrop-filter: none;
+}
+.nav-wrap {
+  height: 88px;
+}
+.brand {
+  letter-spacing: -1.5px;
+}
+.brand-stamp {
+  border-radius: 0;
+  transform: none;
+  padding: 5px;
+}
+.brand-sub {
+  letter-spacing: 1.6px;
+}
+.main-nav {
+  gap: 20px;
+}
+.nav-watch {
+  font-size: 12px;
+}
+.home-editorial {
+  --space-section: clamp(48px, 5vw, 76px);
+}
+.home-editorial .section-heading h2 {
+  font-size: clamp(26px, 3vw, 36px);
+  line-height: 1.25;
+  letter-spacing: -0.035em;
+}
+.home-editorial .section-heading .eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  margin-bottom: 12px;
+  color: var(--wine);
+}
+.home-editorial .section-heading {
+  margin-bottom: 30px;
+}
+.home-editorial .poster {
+  border-radius: 2px;
+}
+.home-editorial .poster-row {
+  gap: 24px;
+}
+.home-editorial .card-number {
+  font-size: 36px;
+}
+.home-editorial .drama-card h3 {
+  font: 400 21px/1.3 var(--serif);
+  letter-spacing: -0.025em;
+}
+.home-editorial .card-meta {
+  font-size: 10px;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.home-editorial .korean-title {
+  font-size: 12px;
+}
+.home-editorial .edition-layout {
+  gap: 48px;
+}
+.home-editorial .article-card h3 {
+  font-size: 28px;
+}
+.home-editorial .article-lead h3 {
+  font-size: 32px;
+}
+.home-editorial .news-desk {
+  border-top: 1px solid var(--wine);
+}
+.home-editorial .news-desk h3 {
+  font-size: 23px;
+}
+.home-reviews {
+  border-top: 1px solid var(--line);
+}
+.culture-cover {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  margin-bottom: 70px;
+  border: 1px solid var(--line);
+}
+.culture-cover-image {
+  position: relative;
+  min-height: 440px;
+  overflow: hidden;
+}
+.culture-cover-image img {
+  transition: transform 0.6s;
+}
+.culture-cover-image:hover img {
+  transform: scale(1.025);
+}
+.culture-cover-copy {
+  padding: clamp(30px, 4vw, 60px);
+  align-self: center;
+}
+.culture-cover-copy .eyebrow {
+  font-size: 10px;
+  color: var(--wine);
+  letter-spacing: 0.1em;
+}
+.culture-cover-korean {
+  display: block;
+  margin: 28px 0 12px;
+  font: 19px var(--korean);
+  color: var(--jade);
+}
+.culture-cover-copy h2 {
+  font-size: clamp(36px, 4vw, 54px);
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+}
+.culture-cover-copy > p:not(.eyebrow) {
+  margin: 22px 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+@media (min-width: 761px) and (max-width: 1100px) {
+  .main-nav {
+    gap: 14px;
+  }
+  .home-editorial .poster-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 760px) {
+  .home-editorial .wrap {
+    width: calc(100% - 40px);
+  }
+  .nav-wrap {
+    height: 76px;
+  }
+  .home-editorial .section-heading {
+    align-items: flex-start;
+    gap: 18px;
+  }
+  .home-editorial .section-heading .text-link {
+    font-size: 12px;
+  }
+  .home-editorial .poster-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 16px;
+  }
+  .home-editorial .poster-row > .drama-card {
+    display: block;
+  }
+  .home-editorial .poster-row > .drama-card:last-child {
+    display: none;
+  }
+  .home-editorial .drama-card h3 {
+    font-size: 19px;
+  }
+  .home-editorial .edition-layout {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+  .home-editorial .article-lead h3 {
+    font-size: 28px;
+  }
+  .culture-cover {
+    grid-template-columns: 1fr;
+    margin-bottom: 45px;
+  }
+  .culture-cover-image {
+    min-height: 280px;
+  }
+  .culture-cover-copy {
+    padding: 30px 24px;
+  }
+  .culture-cover-korean {
+    margin-top: 20px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .culture-cover-image img {
+    transition: none;
+  }
+}
 
-.korean-footer>.landscape{display:none}
-.korean-footer .footer-content{gap:35px;grid-template-columns:1.4fr 1fr 1fr 1fr}
-.korean-footer .footer-content h3{margin-bottom:14px}
-.korean-footer .footer-content a:not(.brand){min-height:36px;margin-bottom:0;font-size:15px;padding-bottom:5px}
-.korean-footer .footer-brand p{max-width:230px;margin:16px 0;font-size:16px;line-height:1.7}
-.korean-footer .footer-bottom{margin-top:28px;padding-top:18px;font-size:13px}
-.ornaments-footer .ornament-moon{width:65px;height:65px;right:2%;top:65px;opacity:.15}
-.ornaments-footer .ornament-cloud{width:140px;right:-60px;top:120px;opacity:.2}
-.ornaments-footer .ornament-branch{width:120px;right:-85px;opacity:.2}
-@media(max-width:760px){.hero{padding-top:36px}.hero-grid{gap:22px;min-height:0}.hero-feature{margin:0;max-width:430px}.hero-feature-image{height:270px;border-radius:95px 6px 6px 6px}.hero-feature-copy{margin:-22px 12px 0 24px;padding:20px 17px}.hero-feature-copy strong{font-size:24px}.hero-feature-copy .eyebrow{font-size:8px}.hero-feature-arrow{right:10px}.hero-bottom{margin-top:25px}.korean-footer{padding:65px 0 25px}.korean-footer .footer-content{grid-template-columns:repeat(2,minmax(0,1fr));gap:25px 20px}.korean-footer .footer-brand{grid-column:1/-1}.korean-footer .footer-content>div:last-child{grid-column:auto;display:block}.korean-footer .footer-bottom{margin-top:22px;gap:10px}}
+/* The same typography and rhythm continue through every collection and story. */
+.main-nav .u373-a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+.main-nav .u373-a > svg {
+  width: 14px;
+  height: 14px;
+  color: var(--wine);
+}
+.icon-button,
+.save {
+  min-width: 44px;
+  min-height: 44px;
+}
+.inner-page {
+  padding-top: 35px;
+  padding-bottom: 80px;
+}
+.page-heading {
+  padding: 32px 0 38px;
+  margin-bottom: 34px;
+  border-bottom: 1px solid var(--line);
+}
+.page-heading .eyebrow {
+  font: 600 10px/1.8 var(--sans);
+  letter-spacing: 0.14em;
+}
+.page-heading h1 {
+  font-size: clamp(40px, 5vw, 68px);
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+  margin: 20px 0;
+  max-width: 900px;
+}
+.page-heading > p:last-child {
+  max-width: 590px;
+  font-size: 15px;
+  line-height: 1.9;
+}
+.page-heading > .cloud {
+  right: 0;
+  top: 35px;
+  width: 180px;
+  color: var(--jade);
+  opacity: 0.25;
+}
+.collection-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 18px;
+  margin-bottom: 30px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.collection-label > span:last-child {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+}
+.filter-panel {
+  padding: 26px;
+  background: var(--paper-deep);
+  border: 1px solid var(--line);
+}
+.search-field {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 14px;
+}
+.search-field > svg {
+  color: var(--wine);
+}
+.search-field input {
+  font-size: 17px;
+}
+.search-field input::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+.filter-row {
+  margin-top: 22px;
+}
+.filter-row select {
+  border-radius: 0;
+  border-color: var(--line);
+  background: var(--paper);
+}
+.results-count {
+  padding-block: 24px;
+  font-size: 12px;
+}
+.drama-grid {
+  gap: 38px 26px;
+}
+.drama-card h3 {
+  font: 400 23px/1.3 var(--serif);
+  margin-top: 10px;
+}
+.card-meta {
+  font-size: 11px;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.poster,
+.actor-image {
+  border-radius: 2px;
+}
+.actor-card h2,
+.actor-card h3 {
+  font: 400 23px/1.3 var(--serif);
+  letter-spacing: -0.02em;
+}
+.actor-card p {
+  font-size: 12px;
+}
+.actor-card > span {
+  font-size: 11px;
+}
+.actors-page .actor-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 42px 26px;
+}
+.actors-page .actor-image {
+  aspect-ratio: 4/5;
+}
+.actor-image img,
+.people-edit-image img {
+  object-position: center 20%;
+}
+.actor-profile {
+  grid-template-columns: minmax(220px, 0.8fr) 1.4fr;
+  gap: 60px;
+  padding: 35px;
+  background: var(--paper-deep);
+  border: 1px solid var(--line);
+}
+.actor-profile .page-heading {
+  border: 0;
+  padding: 15px 0;
+}
+.actor-profile h1 {
+  font-size: clamp(38px, 5vw, 66px);
+}
+.actor-profile .profile-note {
+  font-size: 12px;
+  line-height: 1.8;
+  max-width: 460px;
+}
+.profile-credit {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+  color: var(--wine);
+  font-size: 12px;
+}
+.profile-credit svg {
+  width: 18px;
+}
+.people-edit {
+  border-top: 1px solid var(--line);
+}
+.people-edit-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 26px;
+}
+.people-edit-image {
+  position: relative;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  background: var(--paper-deep);
+}
+.people-edit-image img {
+  transition: transform 0.5s;
+}
+.people-edit-card:hover img {
+  transform: scale(1.04);
+}
+.people-edit-image > span {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--wine);
+}
+.people-edit-card .eyebrow {
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  margin-top: 18px;
+  color: var(--wine);
+}
+.people-edit-card h3 {
+  font: 27px/1.3 var(--serif);
+  letter-spacing: -0.025em;
+  margin: 7px 0;
+}
+.people-edit-card > p:last-child {
+  font-size: 11px;
+  color: var(--muted);
+}
+.detail-hero {
+  min-height: 630px;
+  height: auto;
+}
+.detail-shade {
+  background:
+    linear-gradient(0deg, #101e1af5, #101e1a15 90%),
+    linear-gradient(90deg, #101e1a99, transparent);
+}
+.detail-content {
+  min-height: 630px;
+  align-items: flex-end;
+  padding-top: 70px;
+  padding-bottom: 54px;
+  gap: 42px;
+}
+.detail-poster {
+  width: 210px;
+  border: 5px solid #f5eee2;
+  border-radius: 2px;
+  box-shadow: 0 15px 40px #0005;
+}
+.detail-content h1 {
+  font-size: clamp(40px, 4.5vw, 64px);
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+}
+.detail-content .eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.13em;
+}
+.detail-korean {
+  font-size: 23px;
+}
+.detail-content .tags a {
+  border-radius: 0;
+  font-size: 11px;
+}
+.detail-content .detail-buttons {
+  flex-wrap: wrap;
+}
+.detail-body {
+  padding-top: 28px;
+}
+.drama-chapters {
+  display: flex;
+  gap: 32px;
+  border-block: 1px solid var(--line);
+  padding: 10px 0;
+  margin-bottom: 28px;
+}
+.drama-chapters a {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 44px;
+  font-size: 12px;
+}
+.drama-chapters svg {
+  width: 16px;
+  color: var(--wine);
+}
+.drama-chapters a:hover {
+  color: var(--wine);
+}
+.drama-facts {
+  padding: 28px;
+  background: var(--paper-deep);
+  border: 1px solid var(--line);
+  gap: 22px;
+}
+.drama-facts dt {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.drama-facts dd {
+  font: 23px/1.4 var(--serif);
+  margin-top: 8px;
+}
+.overview {
+  position: relative;
+  margin-top: 55px;
+  max-width: 820px;
+  padding-right: 50px;
+}
+.overview h2 {
+  font-size: clamp(30px, 3vw, 42px);
+  letter-spacing: -0.03em;
+}
+.overview > p:not(.eyebrow) {
+  font-size: 17px;
+  line-height: 1.95;
+  color: var(--muted);
+}
+.overview .story-blossom {
+  right: -230px;
+  opacity: 0.35;
+}
+.cast-section {
+  padding-block: 35px 65px;
+  border-top: 1px solid var(--line);
+}
+.cast-section .actor-image {
+  aspect-ratio: 4/5;
+}
+.episode-section {
+  padding: 30px;
+  margin-bottom: 55px;
+  border: 1px solid var(--line);
+  background: var(--paper-deep);
+}
+.episode-section h2 {
+  font-size: clamp(24px, 3vw, 34px);
+}
+.episode-section details {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.gallery-image {
+  height: auto;
+  aspect-ratio: 16/8;
+}
+.story-frame {
+  margin-top: 20px;
+}
+.article-card .editorial-image-frame img {
+  transition: transform 0.6s;
+}
+.article-card:hover .editorial-image-frame img {
+  transform: scale(1.035);
+}
+.article-card h3 {
+  font-size: 29px;
+  letter-spacing: -0.025em;
+}
+.article-card .eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+}
+.article-card-copy {
+  padding-top: 24px;
+}
+.article-byline {
+  font-size: 11px;
+}
+.editorial-listing > .article-grid {
+  gap: 45px 32px;
+}
+.editorial-listing .article-lead .editorial-image-frame {
+  aspect-ratio: 16/8;
+}
+.editorial-listing .category-nav {
+  margin-top: -10px;
+}
+.category-nav {
+  gap: 10px;
+  padding-bottom: 25px;
+}
+.category-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 18px;
+  border: 1px solid var(--line);
+  background: var(--paper-deep);
+  font-size: 12px;
+}
+.category-nav a:hover {
+  color: var(--paper);
+  background: var(--wine);
+  border-color: var(--wine);
+}
+.article-heading {
+  text-align: center;
+  margin: 35px auto 45px;
+  max-width: 900px;
+}
+.article-heading h1 {
+  font-size: clamp(38px, 4.5vw, 64px);
+  letter-spacing: -0.04em;
+  line-height: 1.12;
+}
+.article-heading > .eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+}
+.article-heading .article-deck {
+  font-size: 20px;
+  max-width: 720px;
+  margin-inline: auto;
+}
+.article-heading .article-byline {
+  justify-content: center;
+  margin-top: 25px;
+}
+.article-page > .image-hero .editorial-image-frame {
+  aspect-ratio: 16/7;
+}
+.article-layout {
+  gap: 70px;
+  padding-top: 25px;
+}
+.article-content {
+  font-size: 17px;
+  line-height: 1.95;
+}
+.article-content h2 {
+  font-size: 34px;
+  letter-spacing: -0.025em;
+}
+.article-content blockquote {
+  font-size: 32px;
+  padding: 24px 30px;
+  background: var(--paper-deep);
+  border-left-width: 2px;
+}
+.article-sidebar {
+  padding: 25px;
+  border: 1px solid var(--line);
+  background: var(--paper-deep);
+}
+.editorial-disclosure {
+  border-left: 2px solid var(--wine);
+  padding: 18px 22px;
+  line-height: 1.8;
+}
+.culture-article {
+  gap: 70px;
+  padding-block: 40px 65px;
+  margin-bottom: 25px;
+}
+.culture-article h2 {
+  font-size: clamp(32px, 3.5vw, 46px);
+  letter-spacing: -0.035em;
+}
+.culture-article > div > p:not(.eyebrow) {
+  font-size: 15px;
+  color: var(--muted);
+}
+.culture-photo {
+  position: relative;
+  min-height: 430px;
+  background: var(--paper-deep);
+  overflow: hidden;
+}
+.culture-photo img {
+  object-position: center;
+}
+.culture-article:nth-of-type(2) > .culture-letter {
+  min-height: 400px;
+}
+.illustrated-letter {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  text-align: center;
+  padding: 75px 0 170px;
+  border-block: 1px solid var(--line);
+  background: var(--paper);
+}
+.illustrated-letter-art {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(var(--paper), transparent 70%),
+    url("/images/korean-landscape.webp") center bottom / cover;
+  opacity: 0.5;
+}
+.illustrated-letter .eyebrow {
+  color: var(--wine);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+}
+.illustrated-letter h2 {
+  font-size: clamp(36px, 4.5vw, 60px);
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+  margin: 24px 0 18px;
+}
+.illustrated-letter p:not(.eyebrow) {
+  color: var(--muted);
+  font-size: 14px;
+}
+.illustrated-letter .button {
+  margin-top: 28px;
+}
+.letter-blossom {
+  position: absolute;
+  left: -35px;
+  top: 20px;
+  width: 190px;
+  opacity: 0.7;
+}
+.letter-cloud {
+  position: absolute;
+  right: 7%;
+  top: 90px;
+  width: 150px;
+  color: var(--jade);
+  opacity: 0.5;
+}
+.about-cover {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 50px;
+  align-items: center;
+  padding-top: 35px;
+  padding-bottom: 40px;
+}
+.about-cover .page-heading {
+  border: 0;
+  margin: 0;
+}
+.about-cover h1 {
+  font-size: clamp(52px, 6.5vw, 88px);
+}
+.about-art {
+  position: relative;
+  min-height: 380px;
+  overflow: hidden;
+  background: url("/images/korean-landscape.webp") center / cover;
+  border-radius: 46% 46% 0 0;
+}
+.about-art > .blossom {
+  position: absolute;
+  left: -30px;
+  bottom: -15px;
+  width: 200px;
+}
+.about-art > .cloud {
+  position: absolute;
+  right: 25px;
+  top: 55px;
+  width: 130px;
+  color: #5e8579;
+}
+.about-art > span {
+  position: absolute;
+  top: 105px;
+  right: 80px;
+  font: 36px/1.5 var(--korean);
+  color: #373b30;
+}
+.about-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 70px;
+  padding-block: 55px 65px;
+  border-block: 1px solid var(--line);
+}
+.about-intro > .eyebrow {
+  grid-column: 1 / -1;
+  font-size: 10px;
+  color: var(--wine);
+}
+.about-intro h2 {
+  font-size: clamp(30px, 3.5vw, 44px);
+  line-height: 1.25;
+  letter-spacing: -0.035em;
+}
+.about-intro p:not(.eyebrow),
+.about-contact p:not(.eyebrow) {
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+.about-values {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding-block: 65px;
+  gap: 45px;
+}
+.about-value > svg {
+  color: var(--wine);
+  width: 30px;
+  height: 30px;
+  margin-bottom: 25px;
+}
+.about-value .eyebrow {
+  font-size: 9px;
+  color: var(--muted);
+}
+.about-value h2 {
+  font-size: 29px;
+  letter-spacing: -0.03em;
+  margin: 15px 0;
+}
+.about-value > p:not(.eyebrow) {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 22px;
+}
+.about-contact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+  border-top: 1px solid var(--line);
+  padding-block: 55px 75px;
+}
+.about-contact .eyebrow {
+  font-size: 10px;
+  color: var(--wine);
+  margin-bottom: 18px;
+}
+.about-contact h2 {
+  font-size: 35px;
+  letter-spacing: -0.03em;
+}
+.empty {
+  background: var(--paper-deep);
+  padding: 65px 30px;
+  border: 1px solid var(--line);
+}
+.empty h2 {
+  font-size: clamp(26px, 3vw, 36px);
+}
+.empty p {
+  max-width: 550px;
+  margin-inline: auto;
+}
+.prose h2 {
+  font-size: 30px;
+  letter-spacing: -0.025em;
+}
+.prose p {
+  font-size: 16px;
+}
+.newsletter {
+  gap: 28px;
+}
+.newsletter h2 {
+  font-size: 30px;
+  letter-spacing: -0.03em;
+}
+html[data-theme="dark"] .illustrated-letter-art {
+  opacity: 0.16;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .letter-cloud,
+  .about-art > .cloud {
+    animation: drift 18s ease-in-out infinite alternate;
+  }
+  .letter-blossom,
+  .about-art > .blossom {
+    transform-origin: bottom left;
+    animation: branch-breathe 20s ease-in-out infinite;
+  }
+}
+@media (min-width: 651px) and (max-width: 1100px) {
+  .main-nav .u373-a > svg {
+    display: none;
+  }
+  .actors-page .actor-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .actor-profile {
+    gap: 30px;
+    padding: 25px;
+  }
+  .people-edit-grid {
+    gap: 18px;
+  }
+  .people-edit-card h3 {
+    font-size: 23px;
+  }
+  .culture-article {
+    gap: 35px;
+  }
+  .culture-photo {
+    min-height: 350px;
+  }
+  .about-cover {
+    gap: 25px;
+  }
+  .about-art {
+    min-height: 330px;
+  }
+}
+@media (max-width: 760px) {
+  .people-edit-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px 16px;
+  }
+  .people-edit-card h3 {
+    font-size: 23px;
+  }
+  .people-edit-card > p:last-child {
+    font-size: 11px;
+  }
+  .people-edit-card .eyebrow {
+    font-size: 8px;
+  }
+  .illustrated-letter {
+    padding: 60px 0 130px;
+  }
+  .illustrated-letter .eyebrow {
+    font-size: 8px;
+  }
+  .letter-blossom {
+    width: 115px;
+    left: -60px;
+  }
+  .letter-cloud {
+    width: 95px;
+    right: -45px;
+  }
+  .detail-hero,
+  .detail-content {
+    min-height: 680px;
+  }
+  .detail-content {
+    gap: 25px;
+  }
+  .detail-poster {
+    width: 155px;
+  }
+  .detail-content h1 {
+    font-size: 42px;
+  }
+  .detail-content > div:last-child {
+    min-width: 0;
+  }
+  .drama-chapters {
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .drama-chapters a {
+    font-size: 11px;
+  }
+  .drama-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 22px;
+  }
+  .drama-facts dd {
+    font-size: 21px;
+  }
+  .overview {
+    margin-top: 40px;
+    padding-right: 0;
+  }
+  .overview > p:not(.eyebrow) {
+    font-size: 16px;
+  }
+  .episode-section {
+    padding: 24px;
+  }
+  .culture-article {
+    gap: 28px;
+    padding-block: 20px 40px;
+    grid-template-columns: 1fr;
+  }
+  .culture-photo {
+    min-height: 330px;
+  }
+  .culture-article:nth-of-type(2) > .culture-letter {
+    min-height: 300px;
+  }
+  .about-cover {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding-top: 15px;
+  }
+  .about-art {
+    min-height: 340px;
+    max-width: 450px;
+    width: 100%;
+    justify-self: center;
+  }
+  .about-intro,
+  .about-contact {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    padding-block: 40px;
+  }
+  .about-values {
+    grid-template-columns: 1fr;
+    gap: 35px;
+    padding-block: 40px;
+  }
+  .about-value + .about-value {
+    padding-top: 35px;
+    border-top: 1px solid var(--line);
+  }
+  .about-value > svg {
+    margin-bottom: 15px;
+  }
+  .article-heading {
+    text-align: left;
+  }
+  .article-heading .article-byline {
+    justify-content: flex-start;
+  }
+  .article-heading .article-deck {
+    font-size: 18px;
+  }
+  .article-page > .image-hero .editorial-image-frame {
+    aspect-ratio: 4/3;
+  }
+  .article-layout {
+    gap: 35px;
+  }
+  .article-content {
+    font-size: 16px;
+  }
+  .article-content blockquote {
+    font-size: 25px;
+    padding: 20px;
+  }
+  .collection-label > span:last-child {
+    display: none;
+  }
+}
+@media (max-width: 650px) {
+  .nav-wrap {
+    flex-wrap: nowrap;
+    padding-block: 0;
+    gap: 5px;
+  }
+  .main-nav .u373-a {
+    display: inline-flex;
+    gap: 15px;
+    font-size: 25px;
+  }
+  .main-nav .u373-a > svg {
+    display: block;
+    width: 19px;
+    height: 19px;
+  }
+  .main-nav a:nth-child(3),
+  .main-nav a:nth-child(4) {
+    display: inline-flex;
+  }
+  .inner-page {
+    padding-top: 20px;
+  }
+  .page-heading {
+    padding-top: 20px;
+    padding-bottom: 28px;
+  }
+  .page-heading > .cloud {
+    width: 85px;
+    top: 15px;
+  }
+  .page-heading > p:last-child {
+    font-size: 14px;
+  }
+  .filter-panel {
+    padding: 20px;
+  }
+  .search-field input {
+    font-size: 16px;
+  }
+  .filter-row {
+    gap: 18px 14px;
+  }
+  .drama-grid {
+    gap: 28px 18px;
+  }
+  .drama-card h3 {
+    font-size: 21px;
+  }
+  .actors-page .actor-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px 18px;
+  }
+  .actor-card h2,
+  .actor-card h3 {
+    font-size: 22px;
+  }
+  .actor-profile {
+    grid-template-columns: 1fr;
+    padding: 20px;
+    gap: 24px;
+  }
+  .actor-profile .image-portrait {
+    width: min(100%, 350px);
+    margin: auto;
+  }
+  .actor-profile .page-heading {
+    padding: 0;
+  }
+  .actor-profile h1 {
+    font-size: 40px;
+  }
+  .detail-content {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding-top: 35px;
+    padding-bottom: 35px;
+  }
+  .detail-poster {
+    width: 125px;
+  }
+  .detail-content h1 {
+    font-size: clamp(34px, 8vw, 44px);
+  }
+  .detail-korean {
+    margin-top: 15px;
+    font-size: 18px;
+  }
+  .detail-content .eyebrow {
+    font-size: 9px;
+  }
+  .detail-content .detail-buttons .button {
+    font-size: 12px;
+    gap: 10px;
+    padding: 12px 15px;
+  }
+  .detail-content > div > p:not(.detail-korean) {
+    font-size: 11px;
+  }
+  .drama-chapters {
+    justify-content: space-between;
+    gap: 5px;
+  }
+  .drama-chapters a {
+    gap: 5px;
+    font-size: 10px;
+  }
+  .drama-chapters svg {
+    width: 14px;
+  }
+  .cast-section .actor-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .article-card h3 {
+    font-size: 26px;
+  }
+  .editorial-listing > .article-grid {
+    grid-template-columns: 1fr;
+  }
+  .editorial-listing .article-grid > .article-lead {
+    grid-column: auto;
+  }
+  .newsletter {
+    padding-block: 36px;
+  }
+  .newsletter .editorial-art {
+    display: none;
+  }
+  .newsletter h2 {
+    font-size: 27px;
+  }
+  .newsletter p:not(.eyebrow) {
+    font-size: 13px;
+  }
+}
+.home-reviews .article-card {
+  display: block;
+}
+.home-reviews .article-card-copy {
+  padding-top: 22px;
+}
+.home-reviews .editorial-image-frame {
+  aspect-ratio: 16/9;
+}
+@media (max-width: 650px) {
+  .home-reviews .review-grid {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+}
+@media (max-width: 380px) {
+  .site-header .brand-stamp,
+  .site-header .brand-sub {
+    display: none;
+  }
+}
+.actor-credits {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.actor-credits .drama-card {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  column-gap: 24px;
+  align-content: start;
+}
+.actor-credits .poster {
+  grid-column: 1;
+  grid-row: 1 / 5;
+}
+.actor-credits .card-meta,
+.actor-credits h3,
+.actor-credits .korean-title {
+  grid-column: 2;
+}
+.actor-credits .card-meta {
+  margin-top: 5px;
+  align-self: start;
+}
+.actor-credits h3 {
+  margin-block: 10px;
+}
+.actor-credits .role-caption {
+  margin-left: 144px;
+  margin-top: 14px;
+}
+.actor-page .article-grid {
+  grid-template-columns: 1fr;
+}
+.actor-page .article-card {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 35px;
+  align-items: center;
+}
+.actor-page .article-card-copy {
+  padding-top: 0;
+}
+@media (max-width: 760px) {
+  .actor-credits {
+    grid-template-columns: 1fr;
+  }
+  .actor-page .article-card {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+}
 
-/* Final spacing: open editorial cover and a softly illustrated footer. */
-.hero{min-height:600px;padding-bottom:28px}
-.hero-grid{min-height:460px;align-items:center}
-.hero-copy{padding-bottom:25px}
-.hero-feature{margin:0 0 25px}
-.hero-feature-image{height:350px;border-radius:110px 8px 8px 8px}
-.hero-bottom{margin-top:22px;color:var(--muted);border-color:var(--line)}
-.korean-footer{border-top:1px solid var(--line);padding-top:48px;padding-bottom:28px}
-.korean-footer .footer-content{padding:12px 0;background:transparent;border:0;border-radius:0}
-.korean-footer .footer-bottom{background:transparent;padding:14px 0;border-radius:0;margin-top:18px}
-html[data-theme=dark] .korean-footer:before{opacity:.18}
-@media(max-width:760px){.hero{min-height:0;padding-bottom:22px}.hero-grid{min-height:0;gap:28px}.hero-copy{padding-bottom:0}.hero-feature{margin:0}.hero-feature-image{height:260px}.korean-footer{padding-top:28px}.korean-footer .footer-content{padding:10px 0;gap:22px 16px}.korean-footer:before{background-position:70% bottom}.korean-footer .footer-bottom{padding:14px 0}}
+/* A quieter Korean journal cover: paper, photographs and a handwritten seal. */
+.home-editorial {
+  --space-section: clamp(42px, 4vw, 62px);
+}
+.feeling-section {
+  padding-block: 45px 60px;
+  border-block: 1px solid var(--line);
+}
+.feeling-intro {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 35px;
+  margin-bottom: 30px;
+}
+.feeling-intro .eyebrow {
+  color: var(--wine);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  margin-bottom: 12px;
+}
+.feeling-intro h2 {
+  font-size: clamp(30px, 3vw, 40px);
+  letter-spacing: -0.035em;
+  line-height: 1.2;
+}
+.feeling-intro > p {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.8;
+  text-align: right;
+}
+.feeling-layout {
+  display: grid;
+  grid-template-columns: 0.9fr 1.3fr;
+  gap: 55px;
+}
+.feeling-illustration {
+  position: relative;
+  min-height: 475px;
+  padding: 30px;
+  background:
+    linear-gradient(95deg, #142820de, #14282033),
+    url("/images/culture-tea.webp") center / cover;
+  color: #fff8e9;
+  overflow: hidden;
+}
+.feeling-illustration > .eyebrow {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+}
+.feeling-calligraphy {
+  display: block;
+  font: 49px/1.4 var(--korean);
+  letter-spacing: 0.03em;
+  margin-top: 40px;
+}
+.feeling-illustration > .cloud {
+  position: absolute;
+  right: -20px;
+  top: 60px;
+  width: 160px;
+  color: #5c7867;
+  opacity: 0.5;
+}
+.feeling-list {
+  display: grid;
+  align-content: space-between;
+}
+.feeling-link {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  padding-block: 13px;
+  border-bottom: 1px solid var(--line);
+  min-width: 0;
+}
+.feeling-link:first-child {
+  padding-top: 0;
+}
+.feeling-link:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.feeling-image {
+  width: 108px;
+  height: 76px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  background: var(--paper-deep);
+}
+.feeling-image img {
+  transition: transform 0.5s;
+}
+.feeling-copy {
+  min-width: 0;
+  flex: 1;
+}
+.feeling-copy > div {
+  display: flex;
+  gap: 15px;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+.feeling-copy h3 {
+  font: 27px/1.3 var(--serif);
+  letter-spacing: -0.025em;
+}
+.feeling-copy span[lang] {
+  font: 11px var(--korean);
+  color: var(--muted);
+}
+.feeling-copy > p {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 6px;
+  line-height: 1.65;
+}
+.feeling-arrow {
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  color: var(--wine);
+  transition:
+    background 0.25s,
+    color 0.25s;
+}
+.feeling-arrow svg {
+  width: 16px;
+  height: 16px;
+}
+.feeling-link:hover .feeling-image img,
+.feeling-link:focus-visible .feeling-image img {
+  transform: scale(1.08);
+}
+.feeling-link:hover .feeling-arrow,
+.feeling-link:focus-visible .feeling-arrow {
+  background: var(--wine);
+  color: var(--paper);
+  border-color: var(--wine);
+}
+.feeling-link:hover h3 {
+  color: var(--wine);
+}
+.compact-footer {
+  padding: 28px 0 18px;
+  border-top: 1px solid var(--line);
+  background: var(--paper-deep);
+}
+.footer-signature {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 14px;
+}
+.footer-signature .brand {
+  font-size: 27px;
+  gap: 10px;
+}
+.footer-signature p {
+  font: italic 19px var(--serif);
+  color: var(--muted);
+}
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 25px;
+  padding-block: 6px 14px;
+}
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.footer-links a:hover {
+  color: var(--wine);
+}
+.footer-colophon {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  border-top: 1px solid var(--line);
+  padding-top: 15px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.7;
+}
+.home-editorial .newsletter {
+  padding-block: 25px;
+  gap: 20px;
+}
+.home-editorial .newsletter .editorial-art {
+  display: none;
+}
+.home-editorial .newsletter h2 {
+  font-size: 25px;
+}
+.home-editorial .newsletter p:not(.eyebrow) {
+  font-size: 12px;
+}
+.home-editorial .newsletter .eyebrow {
+  font-size: 9px;
+}
+.home-editorial .newsletter .button {
+  font-size: 11px;
+}
+.illustrated-letter {
+  padding-block: 50px 90px;
+}
+.illustrated-letter h2 {
+  font-size: clamp(32px, 4vw, 48px);
+  margin-block: 18px 15px;
+}
+.illustrated-letter .button {
+  margin-top: 20px;
+}
+@media (min-width: 761px) and (max-width: 1100px) {
+  .feeling-layout {
+    gap: 30px;
+    grid-template-columns: 0.8fr 1.2fr;
+  }
+  .feeling-illustration {
+    padding: 24px;
+  }
+  .feeling-calligraphy {
+    font-size: 39px;
+  }
+  .feeling-link {
+    gap: 15px;
+  }
+  .feeling-image {
+    width: 85px;
+  }
+  .feeling-copy h3 {
+    font-size: 24px;
+  }
+  .feeling-copy span[lang] {
+    font-size: 10px;
+  }
+}
+@media (max-width: 760px) {
+  .feeling-section {
+    padding-block: 35px 40px;
+  }
+  .feeling-intro {
+    align-items: start;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+  .feeling-intro > p {
+    display: none;
+  }
+  .feeling-layout {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .feeling-illustration {
+    min-height: 215px;
+    padding: 25px;
+    background-position: center 64%;
+  }
+  .feeling-calligraphy {
+    font-size: 35px;
+    margin-top: 17px;
+  }
+  .feeling-illustration > .cloud {
+    right: 0;
+    top: 15px;
+    width: 110px;
+  }
+  .feeling-link {
+    padding-block: 16px;
+    gap: 16px;
+  }
+  .feeling-image {
+    width: 84px;
+    height: 74px;
+  }
+  .feeling-copy > div {
+    display: block;
+  }
+  .feeling-copy h3 {
+    font-size: 25px;
+    margin-bottom: 3px;
+  }
+  .feeling-copy span[lang] {
+    font-size: 10px;
+  }
+  .feeling-copy > p {
+    font-size: 10px;
+    margin-top: 5px;
+  }
+  .feeling-arrow {
+    width: 30px;
+    height: 30px;
+  }
+  .compact-footer {
+    padding-block: 25px 18px;
+  }
+  .footer-signature {
+    display: block;
+    padding-bottom: 15px;
+  }
+  .footer-signature .brand {
+    font-size: 26px;
+  }
+  .footer-signature p {
+    margin-top: 8px;
+    font-size: 16px;
+  }
+  .footer-links {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0 15px;
+    padding-bottom: 15px;
+  }
+  .footer-links a {
+    font-size: 11px;
+  }
+  .footer-colophon {
+    display: block;
+    font-size: 9px;
+  }
+  .footer-colophon > span:last-child {
+    display: none;
+  }
+  .home-editorial .newsletter {
+    padding-block: 23px;
+  }
+  .home-editorial .newsletter .button {
+    margin-left: 0;
+  }
+  .illustrated-letter {
+    padding-block: 40px 80px;
+  }
+}
+@media (max-width: 380px) {
+  .feeling-link {
+    gap: 12px;
+  }
+  .feeling-image {
+    width: 68px;
+  }
+  .feeling-copy h3 {
+    font-size: 23px;
+  }
+  .feeling-copy > p {
+    font-size: 10px;
+  }
+  .footer-links {
+    column-gap: 8px;
+  }
+  .footer-links a {
+    font-size: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .feeling-image img,
+  .feeling-arrow {
+    transition: none;
+  }
+}
+.opening-spread {
+  padding-block: 30px 36px;
+  border-bottom: 1px solid var(--line);
+}
+.opening-masthead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 16px;
+  margin-bottom: 24px;
+}
+.opening-masthead h1 {
+  font: clamp(30px, 4vw, 58px)/1.12 var(--serif);
+  letter-spacing: -0.045em;
+}
 
-.hero{min-height:0;padding-bottom:30px}
-.hero-grid{min-height:440px}
-.hero+.editorial-edition{padding-top:30px}
-.korean-footer .footer-content h3{font-size:17px}
-.korean-footer .footer-content a:not(.brand){color:var(--ink)}
-.closing.closing-editorial{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;padding:0;margin:36px auto 54px;min-height:0;background:var(--paper-deep);color:var(--ink);border:1px solid var(--line);border-radius:8px;text-align:left;overflow:hidden}
-.closing-editorial .closing-copy{padding:clamp(28px,4vw,58px);align-self:center}
-.closing-editorial .eyebrow{color:var(--wine);font-size:11px;letter-spacing:.12em}
-.closing.closing-editorial h2{font-size:clamp(1.9rem,3vw,2.8rem);line-height:1.2;color:var(--ink);text-shadow:none;margin:17px 0 25px}
-.closing.closing-editorial h2 em{color:var(--wine)}
-.closing-scene{position:relative;min-height:330px;overflow:hidden}
-.closing-scene img{object-fit:cover;object-position:65% center}
-.closing-scene:after{content:"";position:absolute;inset:55% 0 0;background:linear-gradient(transparent,#211b3099);pointer-events:none}
-.closing-scene>span{position:absolute;z-index:1;bottom:24px;left:28px;color:#fff3e2;font-family:var(--korean);letter-spacing:.14em;font-size:14px}
-@media(max-width:760px){.hero-grid{min-height:0}.hero{padding-bottom:12px}.hero+.editorial-edition{padding-top:30px}.closing.closing-editorial{grid-template-columns:1fr;margin-top:25px;margin-bottom:32px}.closing-editorial .closing-copy{padding:30px 25px}.closing-scene{min-height:235px}.korean-footer .footer-content a:not(.brand){min-height:40px}.korean-footer .footer-bottom{font-size:12px}}
-
-/* Plum blossom and seal accents for the opening spread. */
-.hero-plum{width:25px;height:25px;flex-shrink:0;color:var(--wine)}
-.hero-seal{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;margin-left:16px;border:2px solid currentColor;border-radius:3px;color:#a84b43;font-family:var(--korean);font-size:14px;letter-spacing:.08em;vertical-align:middle;transform:rotate(-7deg);box-shadow:inset 0 0 0 2px var(--paper),inset 0 0 0 3px currentColor}
-.ornaments-hero .ornament-mountains{left:0;bottom:0;width:100%;height:150px;stroke:var(--ink);stroke-width:1;opacity:.13}
-html[data-theme=dark] .hero-seal{color:#e39a8e}
-@media(max-width:760px){.hero-seal{width:30px;height:30px;margin-left:8px;font-size:12px}.ornaments-hero .ornament-mountains{height:80px;opacity:.1}.hero-plum{width:21px;height:21px}}
+.opening-grid {
+  display: grid;
+  gap: 24px;
+}
+.opening-grid a {
+  display: grid;
+  align-items: center;
+}
+.opening-lead a {
+  grid-template-columns: 1.55fr 1fr;
+  background: var(--paper-deep);
+}
+.opening-art,
+.opening-thumb {
+  position: relative;
+  overflow: hidden;
+}
+.opening-art {
+  aspect-ratio: 1.85;
+  align-self: stretch;
+}
+.opening-caption {
+  padding: clamp(20px, 3vw, 48px);
+}
+.opening-grid .eyebrow {
+  color: var(--wine);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+.opening-grid h2 {
+  line-height: 1.13;
+  letter-spacing: -0.035em;
+}
+.opening-lead h2 {
+  font-size: clamp(29px, 3.6vw, 50px);
+}
+.opening-caption > p:not(.eyebrow) {
+  margin: 14px 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.opening-read {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--wine);
+  font-size: 13px;
+}
+.opening-side {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+}
+.opening-side a {
+  grid-template-columns: 35% 1fr;
+  column-gap: 20px;
+}
+.opening-thumb {
+  grid-row: 1/3;
+  aspect-ratio: 1.45;
+}
+.opening-side .eyebrow {
+  align-self: end;
+}
+.opening-side h2 {
+  align-self: start;
+  font-size: clamp(20px, 2vw, 30px);
+}
+.opening-grid a:is(:hover, :focus-visible) h2 {
+  color: var(--wine);
+}
+@media (max-width: 700px) {
+  .opening-lead a,
+  .opening-side {
+    grid-template-columns: 1fr;
+  }
+  .opening-art {
+    aspect-ratio: 1.5;
+  }
+  .opening-side {
+    gap: 16px;
+  }
+  .opening-side article + article {
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
+  .opening-masthead {
+    align-items: center;
+  }
+  .opening-masthead .text-link {
+    white-space: nowrap;
+    font-size: 12px;
+  }
+}
+.drama-tabs .drama-chapters {
+  gap: 24px;
+}
+.drama-tabs [role="tab"] {
+  min-height: 48px;
+  padding: 10px 4px;
+  border-bottom: 2px solid transparent;
+  font-size: 14px;
+}
+.drama-tabs [role="tab"][aria-selected="true"] {
+  color: var(--wine);
+  border-color: var(--wine);
+}
+.drama-tabs [role="tabpanel"][hidden] {
+  display: none;
+}
+.drama-tabs [role="tabpanel"] {
+  padding-top: 10px;
+}
+@media (max-width: 650px) {
+  .drama-tabs .drama-chapters {
+    gap: 10px;
+  }
+  .drama-tabs [role="tab"] {
+    font-size: 12px;
+  }
+}

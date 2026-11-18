@@ -1,65 +1,38 @@
-// Lucian UX/UI Prompt #373 · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#373
 import Link from "next/link";
 export function Footer() {
   return (
-    <footer className="korean-footer">
-      <div className="footer-content wrap">
-        <div className="footer-brand">
+    <footer className="compact-footer">
+      <div className="wrap">
+        <div className="footer-signature">
           <Link className="brand" href="/">
             SeoulScene <span className="stamp">서울씬</span>
           </Link>
-          <p>
-            Every drama has a story.
-            <br />
-            Find yours.
-          </p>
-          <span className="eyebrow">MADE WITH LOVE, INSPIRED BY KOREA</span>
+          <p>A little Seoul. A lot of feeling.</p>
         </div>
-        {[
-          {
-            title: "Explore",
-            links: [
-              ["All dramas", "/dramas"],
-              ["Recommendations", "/recommendations"],
-              ["Editor’s picks", "/explore?sort=curated"],
-              ["Upcoming", "/upcoming"],
-              ["Actors", "/actors"],
-            ],
-          },
-          {
-            title: "Discover",
-            links: [
-              ["K-Culture", "/culture"],
-              ["The journal", "/journal"],
-              ["Reviews", "/reviews"],
-              ["Industry news", "/news"],
-              ["Airing calendar", "/calendar"],
-              ["My watchlist", "/watchlist"],
-            ],
-          },
-          {
-            title: "The fine print",
-            links: [
-              ["About us", "/about"],
-              ["Contact", "/about#contact"],
-              ["Credits", "/credits"],
-              ["Privacy", "/privacy"],
-            ],
-          },
-        ].map((col) => (
-          <div key={col.title}>
-            <h3>{col.title}</h3>
-            {col.links.map(([t, h]) => (
-              <Link className="footer-underline" key={t} href={h}>
-                {t}
-              </Link>
-            ))}
-          </div>
-        ))}
-      </div>
-      <div className="footer-bottom wrap">
-        <span>© 2026 SeoulScene. A little closer to Korea.</span>
-        <span>서울에서 시작되는 이야기 · Stories begin in Seoul</span>
+        <nav className="footer-links" aria-label="Footer navigation">
+          {[
+            ["About", "/about"],
+            ["The journal", "/journal"],
+            ["K-Culture", "/culture"],
+            ["Calendar", "/calendar"],
+            ["Recommendations", "/recommendations"],
+            ["Upcoming", "/upcoming"],
+            ["Watchlist", "/watchlist"],
+            ["Credits", "/credits"],
+            ["Privacy", "/privacy"],
+            ["Contact", "/about#contact"],
+          ].map(([label, href]) => (
+            <Link key={href} href={href}>
+              {label}
+            </Link>
+          ))}
+        </nav>
+        <div className="footer-colophon">
+          <span>
+            © 2026 SeoulScene · An independent drama & culture journal.
+          </span>
+          <span lang="ko">이야기가 머무는 곳, 서울씬</span>
+        </div>
       </div>
     </footer>
   );

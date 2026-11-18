@@ -11,7 +11,7 @@ export type Article = {
   kind: ArticleKind;
   title: string;
   description: string;
-  image: { src: string; alt: string };
+  image: { src: string; alt: string; credit?: string };
   category: string;
   tags: string[];
   state: PublicationState;
@@ -32,7 +32,11 @@ export const editorialAuthor = {
 export const articles: Article[] = [
   {
     slug: "queen-of-tears-a-love-already-lived",
-    image: { src: "/images/article-love.jpg", alt: "A couple sharing a quiet moment" },
+    image: {
+      src: "/images/215720-backdrop.jpg",
+      alt: "Kim Soo-hyun and Kim Ji-won in Queen of Tears",
+      credit: "Drama artwork via TMDB · Rights belong to the respective owners",
+    },
     kind: "review",
     state: "published",
     title: "A love already lived in.",
@@ -84,7 +88,11 @@ export const articles: Article[] = [
   },
   {
     slug: "twenty-five-twenty-one-the-shape-of-a-dream",
-    image: { src: "/images/article-dream.jpg", alt: "Ocean waves stretching toward the horizon" },
+    image: {
+      src: "/images/129888-backdrop.jpg",
+      alt: "Kim Tae-ri and Nam Joo-hyuk in Twenty Five Twenty One",
+      credit: "Drama artwork via TMDB · Rights belong to the respective owners",
+    },
     kind: "review",
     state: "published",
     title: "The shape of a dream.",
@@ -130,7 +138,11 @@ export const articles: Article[] = [
   },
   {
     slug: "netflix-busan-2026-series-selection",
-    image: { src: "/images/article-cinema.jpg", alt: "Rows of seats in a cinema" },
+    image: {
+      src: "/images/busan-cinema.webp",
+      alt: "An illustrated cinema glowing beside a rain-soaked street overlooking Busan harbor",
+      credit: "AI-generated editorial illustration for SeoulScene",
+    },
     kind: "news",
     state: "published",
     title: "From the archive: Korean series in Netflix’s Busan selection.",
@@ -199,7 +211,11 @@ export const articles: Article[] = [
   },
   {
     slug: "a-little-space-between-episodes",
-    image: { src: "/images/journal-seoul.jpg", alt: "Seoul cityscape in South Korea" },
+    image: {
+      src: "/images/seoul-reading-window.webp",
+      alt: "A reader sits at a hanok bookshop window overlooking Seoul at dusk",
+      credit: "AI-generated editorial illustration for SeoulScene",
+    },
     kind: "feature",
     state: "published",
     title: "A little space between episodes.",
@@ -234,7 +250,11 @@ export const articles: Article[] = [
   },
   {
     slug: "listening-to-a-scene",
-    image: { src: "/images/article-music.jpg", alt: "A live music performance filled with colored light" },
+    image: {
+      src: "/images/seoul-soundtrack.webp",
+      alt: "A vinyl record spins beside an apartment window overlooking Seoul at sunset",
+      credit: "AI-generated editorial illustration for SeoulScene",
+    },
     kind: "soundtrack",
     state: "published",
     title: "Listening to a scene.",

@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import "./scene-motion.css";
 
-const targets = ".section-heading, .drama-card, .actor-card, .mood, .culture-article, .overview, .episode-section, .story-frame, .page-heading, .featured-photo, .featured-copy, .culture-grid > *, .footer-content > div, footer > .roof, .footer-bottom";
+const targets = ".section-heading, .drama-card, .actor-card, .mood, .culture-article, .overview, .episode-section, .story-frame, .page-heading, .featured-photo, .featured-copy, .culture-grid > *, .footer-content > div, footer > .roof, .footer-bottom, .people-edit-card, .culture-cover-copy, .feeling-link, .about-value";
 const ambient = ".cloud, .blossom, .moon-disc";
 
 export function SceneMotion() {

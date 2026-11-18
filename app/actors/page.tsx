@@ -19,13 +19,17 @@ export default function Page() {
     ).values(),
   ];
   return (
-    <main id="main" className="wrap inner-page">
+    <main id="main" className="wrap inner-page actors-page">
       <div className="page-heading">
         <p className="eyebrow">배우 · FAMILIAR FACES, UNFORGETTABLE STORIES</p>
         <h1>
           The people who make us <em>feel.</em>
         </h1>
         <p>Discover the faces behind your favorite moments.</p>
+      </div>
+      <div className="collection-label">
+        <span>{people.length} familiar faces</span>
+        <span>A SELECTED CAST COLLECTION · 배우</span>
       </div>
       <div className="actor-grid">
         {people.map((p) => (

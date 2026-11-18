@@ -1,6 +1,6 @@
 # Design system
 
-## Retained direction
+## Editorial redesign
 
 Korean paper and ink, burgundy editorial accents, sage mountains, plum blossoms, hanok eaves and cinematic photography. Keep the established warm ivory (`--paper: #faf7f2`), burgundy (`--wine: #842b47`) and charcoal palette rather than repainting working pages to nearly identical suggested colors. Dark mode remains token-driven.
 
@@ -8,14 +8,17 @@ DM Sans is the interface face; Playfair Display headlines and Gowun Batang Korea
 
 ## Composition and components
 
-- Existing `.wrap`, `.section-heading`, poster grids, tags, `.button`, `.text-link`, header and illustrated footer remain canonical patterns.
-- Editorial stories use an asymmetric lead story, numbered news briefs, a smaller review grid, reading columns and source notes. Do not repeat the poster grid for every content type.
-- Image roles use `Photo`/Next Image with reserved aspect ratios: posters 2:3, article/hero frames 16:9, portraits 3:4. Existing arched homepage composition is retained. Decorative SVGs remain hidden from assistive technology.
+- Existing `.wrap`, `.section-heading`, poster grids, tags, `.button`, `.text-link` and header remain canonical patterns. The footer uses a compact signature, wrapping navigation and one copyright line instead of tall link columns.
+- The homepage opens with an illustrated paper cover, editorial headline, drama photograph and a small culture photo note. Mood discovery pairs a Korean landscape illustration with five thumbnail-led genre rows. Journal and review cards use wide photography; industry notes use a numbered news desk. Actor spotlights show performers from different dramas.
+- Review images show the corresponding drama backdrop, with TMDB artwork credit carried through to the article. Keep image sources and credits aligned when changing article imagery.
+- Image roles use `Photo`/Next Image with reserved aspect ratios: posters 2:3, article frames 16:9, cast portraits 4:5, and wide drama backdrops. The About page uses the existing landscape illustration with blossom and cloud artwork. Decorative SVGs remain hidden from assistive technology.
 - One Lucide icon family is used for interface controls. Existing `Icon` callers keep their API. No emoji illustrations or generated official posters.
 
 ## Motion and accessibility
 
 Use existing CSS easing and observer. Reveal once per page visit; pause illustration loops offscreen. Keep the hero image visible immediately for LCP. Interactive transitions are 200–350ms; entrances approximately 500–750ms; atmospheric loops 12–20s. Reduced motion must leave all content visible. Preserve focus rings, labels, keyboard navigation, semantic headings, and route-level loading/error states.
+
+`app/korean-design.css` holds the shared editorial design layer, including the responsive collections, drama profiles, actor profiles, article reading layouts, culture and About pages. Maintain the same paper, ink and burgundy tokens in both themes. On narrow phones the header keeps its action controls and simplifies the decorative brand details. Escape closes the mobile menu from both the toggle and navigation links.
 
 ## Asset admission
 

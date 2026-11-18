@@ -10,7 +10,7 @@ import {
   SectionHeader,
 } from "@/components/editorial";
 import { ActorPortrait } from "@/components/editorial-image";
-import { DramaCard } from "@/components/ui";
+import { DramaCard, Icon } from "@/components/ui";
 const people = getPeople(getDramas());
 export function generateStaticParams() {
   return people.map((p) => ({ slug: p.slug }));
@@ -42,7 +42,7 @@ export default async function Page({
     person.appearances.some((d) => d.id === a.dramaId),
   );
   return (
-    <main id="main" className="wrap inner-page">
+    <main id="main" className="wrap inner-page actor-page">
       <Breadcrumbs
         items={[
           { label: "Actors", href: "/actors" },
@@ -58,14 +58,22 @@ export default async function Page({
         <div className="page-heading">
           <p className="eyebrow">THE PEOPLE BEHIND THE STORIES</p>
           <h1>{person.name}</h1>
+          <div className="profile-credit">
+            <Icon name="drama" />
+            <span>
+              {person.appearances.length}{" "}
+              {person.appearances.length === 1 ? "story" : "stories"} in our
+              collection
+            </span>
+          </div>
           <p>
             Meet {person.name} through their roles in the SeoulScene collection.
             These credits come from the catalog; this is a selected collection
             filmography, not a complete career record.
           </p>
           <p className="profile-note">
-            A verified biography and Korean name have not been added. We leave
-            those details open rather than guessing.
+            Selected roles from our catalog. Full biography and career credits
+            are not yet available.
           </p>
           <Link className="text-link" href="/credits">
             Metadata & image sources
@@ -77,7 +85,7 @@ export default async function Page({
           title="In our collection."
           kicker="SELECTED APPEARANCES"
         />
-        <div className="drama-grid">
+        <div className="drama-grid actor-credits">
           {person.appearances.map((d) => (
             <div key={d.id}>
               <DramaCard drama={d} />

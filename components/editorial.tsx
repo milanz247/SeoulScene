@@ -10,7 +10,11 @@ import { siteUrl, pageMetadata } from "@/lib/seo";
 import { getArticles } from "@/lib/content";
 import { getDramas } from "@/lib/database";
 import { Icon } from "./ui";
-import { ArticleThumbnail, HeroImage, IllustrationAsset } from "./editorial-image";
+import {
+  ArticleThumbnail,
+  HeroImage,
+  IllustrationAsset,
+} from "./editorial-image";
 import { StructuredData } from "./structured-data";
 import { ShareArticle } from "./share-article";
 export function dateLabel(value: string) {
@@ -129,7 +133,7 @@ export async function EditorialListing({
         : a.kind === "feature" || a.kind === "soundtrack",
   );
   return (
-    <main id="main" className="wrap inner-page">
+    <main id="main" className="wrap inner-page editorial-listing">
       <Breadcrumbs items={[{ label: kind, href: `/${kind}` }]} />
       <div className="page-heading">
         <p className="eyebrow">THE SEOULSCENE JOURNAL</p>
@@ -231,7 +235,9 @@ export async function ArticlePage({ article }: { article: Article }) {
       <HeroImage
         src={article.image.src}
         alt={article.image.alt}
-        credit="Photo: Unsplash · Editorial mood photography"
+        credit={
+          article.image.credit || "Photo: Unsplash · Editorial mood photography"
+        }
         sizes="(max-width: 900px) 100vw, 1100px"
       />
       <div className="article-layout">

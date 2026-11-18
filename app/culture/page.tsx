@@ -1,6 +1,11 @@
 import { pageMetadata } from "@/lib/seo";
-import { Blossom, Cloud, Landscape } from "@/components/art";
-export const metadata = pageMetadata('A little piece of Korea', 'Explore Korean words, traditional architecture and everyday cultural rituals.', "/culture");
+import { Blossom } from "@/components/art";
+import { Photo } from "@/components/ui";
+export const metadata = pageMetadata(
+  "A little piece of Korea",
+  "Explore Korean words, traditional architecture and everyday cultural rituals.",
+  "/culture",
+);
 export default function Page() {
   return (
     <main id="main" className="wrap inner-page">
@@ -15,16 +20,13 @@ export default function Page() {
         </p>
       </div>
       <section className="culture-article" id="hanok">
-        <div className="culture-landscape">
-          <Landscape />
-          <Cloud />
-          <span className="moon-disc" />
-          <div className="hanok">
-            <span />
-            <i />
-            <i />
-            <i />
-          </div>
+        <div className="culture-photo">
+          <Photo
+            src="/images/culture-hanok.webp"
+            alt="Traditional Korean hanok courtyard surrounded by tiled rooftops"
+            priority
+            sizes="(max-width: 760px) 100vw, 50vw"
+          />
         </div>
         <div>
           <p className="eyebrow">한옥 · PLACES WITH A SOUL</p>
@@ -76,12 +78,12 @@ export default function Page() {
         </div>
       </section>
       <section className="culture-article" id="food">
-        <div className="culture-food">
-          <div className="tea-art">
-            <div className="tea-cup" />
-            <span className="tea-steam">~</span>
-            <div className="tea-leaf" />
-          </div>
+        <div className="culture-photo">
+          <Photo
+            src="/images/culture-tea.webp"
+            alt="Korean tea beside a warm wooden hanok window"
+            sizes="(max-width: 760px) 100vw, 50vw"
+          />
         </div>
         <div>
           <p className="eyebrow">한 잔의 여유 · A MOMENT OF WARMTH</p>

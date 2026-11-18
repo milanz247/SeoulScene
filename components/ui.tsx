@@ -1,6 +1,20 @@
 "use client";
 import Image from "next/image";
-import { ArrowRight, Heart, Menu, Moon, Search, X } from "lucide-react";
+import {
+  ArrowRight,
+  BookOpen,
+  Clapperboard,
+  Flower2,
+  Heart,
+  Menu,
+  Moon,
+  Newspaper,
+  Play,
+  Search,
+  Sparkles,
+  Users,
+  X,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { EditorialLink } from "./editorial-link";
@@ -74,6 +88,13 @@ export function Icon({
     moon: Moon,
     menu: Menu,
     close: X,
+    drama: Clapperboard,
+    journal: BookOpen,
+    culture: Flower2,
+    news: Newspaper,
+    actors: Users,
+    play: Play,
+    sparkles: Sparkles,
   };
   const Glyph = icons[name as keyof typeof icons] || ArrowRight;
   return (
@@ -112,7 +133,15 @@ export function Nav() {
   const pathname = usePathname();
   const { ids } = useContext(Saved);
   return (
-    <header className="site-header">
+    <header
+      className="site-header"
+      onKeyDown={(event) => {
+        if (event.key === "Escape" && open) {
+          setOpen(false);
+          document.getElementById("menu-toggle")?.focus();
+        }
+      }}
+    >
       <div className="nav-wrap">
         <Link className="brand" href="/">
           <span className="brand-stamp">
@@ -127,28 +156,26 @@ export function Nav() {
           id="main-navigation"
           className={open ? "main-nav open" : "main-nav"}
           aria-label="Main navigation"
-          onKeyDown={(event) => {
-            if (event.key === "Escape") {
-              setOpen(false);
-              document.getElementById("menu-toggle")?.focus();
-            }
-          }}
         >
           {[
-            ["Home", "/"],
-            ["Dramas", "/dramas"],
-            ["Reviews", "/reviews"],
-            ["News", "/news"],
-            ["Actors", "/actors"],
-            ["Airing Calendar", "/calendar"],
-            ["K-Culture", "/culture"],
-          ].map(([t, h]) => (
+            ["Dramas", "/dramas", "drama"],
+            ["Reviews", "/reviews", "sparkles"],
+            ["News", "/news", "news"],
+            ["Journal", "/journal", "journal"],
+            ["Actors", "/actors", "actors"],
+            ["K-Culture", "/culture", "culture"],
+          ].map(([t, h, icon]) => (
             <EditorialLink
               key={h}
               href={h}
-              aria-current={pathname === h ? "page" : undefined}
+              aria-current={
+                pathname === h || pathname.startsWith(`${h}/`)
+                  ? "page"
+                  : undefined
+              }
               onClick={() => setOpen(false)}
             >
+              <Icon name={icon} />
               {t}
             </EditorialLink>
           ))}

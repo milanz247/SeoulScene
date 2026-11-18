@@ -71,6 +71,14 @@ assert.equal(
 for (const article of articles) {
   assert(article.blocks.length > 0);
   assert(readingMinutes(article) >= 1);
+  assert(existsSync(`public${article.image.src}`), article.image.src);
+  if (article.kind === "review" && article.dramaId) {
+    assert.equal(
+      article.image.src,
+      dramas.find((d) => d.id === article.dramaId)?.backdrop,
+    );
+    assert(article.image.credit?.includes("TMDB"));
+  }
   if (article.dramaId) assert(dramas.some((d) => d.id === article.dramaId));
   if (article.kind === "news")
     assert(article.sources?.every((s) => new URL(s.url).protocol === "https:"));
