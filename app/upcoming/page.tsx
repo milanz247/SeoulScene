@@ -29,7 +29,9 @@ export default function Page() {
             <div key={d.id}>
               <DramaCard drama={d} />
               <p className="role-caption">
-                Release date: not confirmed in this collection.
+                {d.premiereDate
+                  ? `Listed premiere · ${d.premiereDate}`
+                  : "Release date not announced"}
               </p>
             </div>
           ))}

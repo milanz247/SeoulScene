@@ -68,7 +68,11 @@ export default async function Page({
             </p>
             <h1>{d.title}</h1>
             <p>
-              {d.year} · {d.episodes} episodes · {d.status}
+              {d.year} ·{" "}
+              {d.episodes
+                ? `${d.episodes} ${isTmdb ? "episodes" : "listed episodes"}`
+                : "Episode count not announced"}{" "}
+              · {d.status}
               {typeof d.rating === "number" &&
                 (isTmdb || d.ratingSource) &&
                 ` · ${d.ratingSource || "TMDB"} ${d.rating.toFixed(1)}/10`}
@@ -112,14 +116,21 @@ export default async function Page({
               </div>
               <div>
                 <dt>The chapters</dt>
-                <dd>{d.episodes} episodes</dd>
+                <dd>
+                  {d.episodes
+                    ? `${d.episodes} ${isTmdb ? "episodes" : "listed episodes"}`
+                    : "Not announced"}
+                </dd>
               </div>
               <div>
                 <dt>Status</dt>
                 <dd>{d.status}</dd>
               </div>
               <div>
-                <dt>{d.ratingSource || "TMDB community"} rating</dt>
+                <dt>
+                  {d.ratingSource || (isTmdb ? "TMDB community" : "Community")}{" "}
+                  rating
+                </dt>
                 <dd>
                   {typeof d.rating === "number" && (isTmdb || d.ratingSource)
                     ? `${d.rating.toFixed(1)} / 10`
@@ -132,6 +143,24 @@ export default async function Page({
               <p className="eyebrow">THE STORY · 줄거리</p>
               <h2>What is {d.title} about?</h2>
               <p>{d.overview}</p>
+              {d.premiereDate && (
+                <p className="muted">
+                  First broadcast · {d.premiereDate}
+                  {d.checkedAt && ` · Source checked ${d.checkedAt}`}
+                </p>
+              )}
+              {d.officialSite && /^https:\/\//.test(d.officialSite) && (
+                <p>
+                  <a
+                    className="text-link"
+                    href={d.officialSite}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Official website <Icon name="arrow" />
+                  </a>
+                </p>
+              )}
               {(d.director || d.network || d.broadcast) && (
                 <p className="muted">
                   {[
@@ -151,7 +180,7 @@ export default async function Page({
                 >
                   {isTmdb
                     ? "Cast, trailers & episode guide on TMDB"
-                    : "Verified record source"}{" "}
+                    : "Metadata & artwork via TVmaze"}{" "}
                   <Icon name="arrow" />
                 </a>
               )}
@@ -165,12 +194,15 @@ export default async function Page({
                   <h2>Faces you’ll remember.</h2>
                 </div>
               </div>
+              {d.cast.length === 0 && (
+                <p>Cast credits have not been published by the source yet.</p>
+              )}
               <div className="actor-grid">
                 {d.cast.map((p) => (
                   <Link
                     className="actor-card"
                     href={`/actors/${slugify(p.name)}`}
-                    key={p.name}
+                    key={`${p.name}-${p.character}`}
                   >
                     <div className="actor-image">
                       <Photo src={p.portrait} alt={p.name} />
@@ -207,13 +239,57 @@ export default async function Page({
                 </details>
               </section>
             )}
+            {!isTmdb && (
+              <section className="episode-section">
+                <p className="eyebrow">EPISODE GUIDE · 에피소드</p>
+                <h2>
+                  {d.episodes
+                    ? `${d.episodes} listed chapters.`
+                    : "The chapters are on their way."}
+                </h2>
+                <p className="muted">
+                  Episode descriptions may contain spoilers. Open an episode to
+                  read its synopsis.
+                </p>
+                {d.episodeGuide?.map((episode) => (
+                  <details key={`${episode.season}-${episode.number}`}>
+                    <summary>
+                      Season {episode.season} · Episode {episode.number} —{" "}
+                      {episode.title}
+                      <span>＋</span>
+                    </summary>
+                    {episode.airdate && (
+                      <p>
+                        <time dateTime={episode.airdate}>
+                          {episode.airdate}
+                        </time>
+                      </p>
+                    )}
+                    <p>
+                      {episode.summary ||
+                        "An episode synopsis has not been added by the source."}
+                    </p>
+                  </details>
+                ))}
+                {source && (
+                  <a
+                    className="text-link"
+                    href={`${source}/episodes`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Full episode listing on TVmaze ↗
+                  </a>
+                )}
+              </section>
+            )}
             <section id="frames">
               <p className="eyebrow">A FRAME TO REMEMBER · 장면</p>
               <figure className="story-frame">
                 <div className="gallery-image">
                   <Photo
                     src={d.backdrop}
-                    alt={`A scene from ${d.title}`}
+                    alt={`${d.title} artwork`}
                     sizes="(max-width: 760px) 100vw, 80vw"
                   />
                 </div>
@@ -266,7 +342,7 @@ export default async function Page({
           description: d.overview,
           url: siteUrl + `/dramas/${dramaSlug(d)}`,
           genre: d.genres,
-          numberOfEpisodes: d.episodes,
+          numberOfEpisodes: d.episodes || undefined,
           sameAs: source,
         }}
       />

@@ -1,6 +1,10 @@
 import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
-export const metadata = pageMetadata('Credits & sources', 'Image provenance, metadata sources, licenses and credits for SeoulScene.', "/credits");
+export const metadata = pageMetadata(
+  "Credits & sources",
+  "Image provenance, metadata sources, licenses and credits for SeoulScene.",
+  "/credits",
+);
 export default function Page() {
   return (
     <main id="main" className="wrap inner-page prose">
@@ -31,6 +35,19 @@ export default function Page() {
         was retrieved on November 17, 2026; this curated collection is not a
         live popularity chart.
       </p>
+      <h2>2025–2026 catalog</h2>
+      <p>
+        The expanded catalog uses <a href="https://www.tvmaze.com/">TVmaze</a>{" "}
+        metadata under{" "}
+        <a href="https://creativecommons.org/licenses/by-sa/4.0/">
+          CC BY-SA 4.0
+        </a>
+        , retrieved 18 November 2026. Source links appear on every drama.
+        Descriptions are retained from TVmaze, and episode counts represent
+        listed episodes. Cached posters, backdrops and cast portraits belong to
+        their respective rights holders. Missing backdrops use the title’s own
+        poster.
+      </p>
       <h2>Original illustration & design</h2>
       <p>
         The cloud, plum blossom, mountain, and architectural vector
@@ -49,9 +66,13 @@ export default function Page() {
       </p>
       <p>
         Hero and viewport entrances adapt{" "}
-        <a href="https://lucianlabs.dev/uxui-prompt/#216">#216 Staggered hero entrance</a>{" "}
+        <a href="https://lucianlabs.dev/uxui-prompt/#216">
+          #216 Staggered hero entrance
+        </a>{" "}
         and{" "}
-        <a href="https://lucianlabs.dev/uxui-prompt/#251">#251 Staggered scroll-in feature cards</a>{" "}
+        <a href="https://lucianlabs.dev/uxui-prompt/#251">
+          #251 Staggered scroll-in feature cards
+        </a>{" "}
         by Seokwoooo under the MIT License. Existing layouts are retained;
         viewport entrances play once and respect reduced motion.
       </p>

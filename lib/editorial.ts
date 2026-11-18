@@ -17,6 +17,7 @@ export type Article = {
   state: PublicationState;
   publishedAt: string;
   featured?: boolean;
+  checkedAt?: string;
   dramaId?: number;
   disclosure?: string;
   sources?: { title: string; url: string; date?: string }[];
@@ -30,6 +31,129 @@ export const editorialAuthor = {
     "The SeoulScene desk: drama discovery, cultural context, and clearly sourced reading notes. Opinions are identified separately from catalog facts.",
 };
 export const articles: Article[] = [
+  {
+    slug: "tantara-december-2026-release-guide",
+    kind: "news",
+    state: "published",
+    title: "Tantara sets its sights on December.",
+    description:
+      "Song Hye-kyo and Gong Yoo lead Netflix’s forthcoming entertainment-industry drama. Here is the announced three-part release plan.",
+    category: "Release news",
+    tags: ["Tantara", "Netflix", "2026"],
+    publishedAt: "2026-11-18T08:00:00Z",
+    checkedAt: "2026-11-18T00:00:00Z",
+    image: {
+      src: "/images/news-tantara.webp",
+      alt: "Official Tantara teaser thumbnail from Netflix",
+      credit: "Netflix · Official teaser artwork",
+    },
+    sources: [
+      {
+        title: "Netflix — Tantara teaser trailer and release announcement",
+        url: "https://about.netflix.com/en/news/tantara-teaser-trailer",
+        date: "2026-11-13T00:00:00Z",
+      },
+    ],
+    blocks: [
+      {
+        type: "paragraph",
+        text: "Netflix has announced a December 11 premiere for Tantara. The period series follows people pursuing success in Korea’s entertainment business between the 1960s and 1980s.",
+      },
+      { type: "heading", text: "Three Fridays, one unfolding story" },
+      {
+        type: "list",
+        items: [
+          "December 11 — episodes 1–8.",
+          "December 18 — episodes 9–15.",
+          "December 25 — episodes 16–22.",
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "The cast includes Song Hye-kyo, Gong Yoo, Kim Seol-hyun and Cha Seung-won. Writer Noh Hee-gyoung and director Lee Yoon-jung are behind the production. Netflix’s November 13 announcement includes the teaser. Follow the source for the current schedule and regional availability.",
+      },
+    ],
+  },
+  {
+    slug: "november-2026-korean-drama-watchlist",
+    kind: "news",
+    state: "published",
+    title: "November’s next stories are taking shape.",
+    description:
+      "A source-linked look at November’s fantasy, comedy and historical drama premieres, with more releases still ahead.",
+    category: "Monthly guide",
+    tags: ["November 2026", "Upcoming", "Premieres"],
+    dramaId: -90035,
+    publishedAt: "2026-11-18T07:00:00Z",
+    checkedAt: "2026-11-18T00:00:00Z",
+    image: {
+      src: "/images/catalog/90035-backdrop.webp",
+      alt: "The Remarried Empress promotional artwork",
+      credit:
+        "Promotional artwork via TVmaze · Rights belong to the respective owners",
+    },
+    sources: [
+      {
+        title: "Soompi — November 2026 Korean drama premiere guide",
+        url: "https://www.soompi.com/article/1883792wpp/14-new-k-dramas-to-watch-in-november-2026",
+        date: "2026-11-03T00:00:00Z",
+      },
+    ],
+    blocks: [
+      {
+        type: "paragraph",
+        text: "Soompi’s November guide brings together a broad selection of Korean premieres. The Remarried Empress introduces a fantasy-romance setting, while Francesca Next Door brings vampire comedy to the lineup.",
+      },
+      { type: "heading", text: "Different moods for the month" },
+      {
+        type: "paragraph",
+        text: "Happy Anding follows struggling comedians. Sword & Silence turns toward the history of Silla. Later in the month, the guide lists The Blue Road and Good Partner 2 for November 20, followed by Nine to Six on November 25.",
+      },
+      {
+        type: "paragraph",
+        text: "These are dates reported in the November 3 guide. Check the linked publisher or broadcaster before planning a watch, as release timing and streaming access can vary.",
+      },
+    ],
+  },
+  {
+    slug: "netflix-korea-ten-years-creators-2026",
+    kind: "news",
+    state: "published",
+    title: "Ten years of Korean stories, and the creators behind them.",
+    description:
+      "Netflix’s October celebration in Seoul put Korean filmmakers, production teams and the next wave of stories in focus.",
+    category: "Industry",
+    tags: ["Korean creators", "Netflix", "2026"],
+    publishedAt: "2026-11-18T06:00:00Z",
+    checkedAt: "2026-11-18T00:00:00Z",
+    image: {
+      src: "/images/news-creators.webp",
+      alt: "Korean creators and Netflix representatives on stage at the October 2026 anniversary event",
+      credit: "Netflix · Official event photography",
+    },
+    sources: [
+      {
+        title: "Netflix — A decade built with Korean creators",
+        url: "https://about.netflix.com/en/news/netflix-korea-10th-anniversary",
+        date: "2026-10-24T00:00:00Z",
+      },
+    ],
+    blocks: [
+      {
+        type: "paragraph",
+        text: "Netflix marked ten years in Korea with a Seoul fan event held on October 24 and 25. Its official account highlighted the writers, directors and production specialists behind Korean series, alongside previews of forthcoming work.",
+      },
+      { type: "heading", text: "The work beyond the cast" },
+      {
+        type: "paragraph",
+        text: "The announcement discusses opportunities for first-time directors and writers, as well as the contribution of lighting, color, localization and accessibility teams. It also names Tantara and All of Us Are Dead Season 2 among projects previewed at the celebration.",
+      },
+      {
+        type: "paragraph",
+        text: "For viewers, the event offers a look at the people shaping what reaches the screen. The linked Netflix report contains the company’s figures and statements in their original context.",
+      },
+    ],
+  },
   {
     slug: "queen-of-tears-a-love-already-lived",
     image: {

@@ -44,8 +44,35 @@ const { normalizeTmdb, normalizeTvmaze } =
   await import("../lib/providers/normalize.ts");
 const { providerId, safeImage } =
   await import("../lib/providers/drama-provider.ts");
+const recentDramas = JSON.parse(readFileSync("lib/recent-dramas.json", "utf8"));
+assert.equal(recentDramas.length, 200);
+assert.equal(new Set(recentDramas.map((d: { id: number }) => d.id)).size, 200);
+for (const year of [2025, 2026])
+  assert.equal(
+    recentDramas.filter((d: { year: number }) => d.year === year).length,
+    100,
+  );
+for (const drama of recentDramas) {
+  assert(drama.id < 0 && drama.overview && drama.premiereDate);
+  assert(new URL(drama.sourceUrl).hostname === "www.tvmaze.com");
+  assert(drama.episodeGuide.length === drama.episodes);
+  for (const image of [
+    drama.poster,
+    drama.backdrop,
+    ...drama.cast.map((p: { portrait: string }) => p.portrait),
+  ])
+    assert(existsSync(`public${image}`), image);
+}
+const allRecent = [...dramas, ...recentDramas];
+assert.equal(filterDramas(allRecent, "", "", "2026").length, 100);
+const latest = filterDramas(allRecent, "", "", "", "", "latest");
+const dates = latest.map((d) => d.premiereDate || `${d.year}-01-01`);
+assert.deepEqual(dates, [...dates].sort().reverse());
+console.log(
+  "Recent catalog checks passed: 200 unique source-linked dramas, year filters, episode guides and local artwork.",
+);
 const now = new Date("2026-11-17T12:00:00Z");
-const sample = articles[0];
+const sample = { ...articles[0], publishedAt: "2026-11-17T00:00:00Z" };
 assert.deepEqual(
   visibleArticles(
     [
@@ -79,7 +106,8 @@ for (const article of articles) {
     );
     assert(article.image.credit?.includes("TMDB"));
   }
-  if (article.dramaId) assert(dramas.some((d) => d.id === article.dramaId));
+  if (article.dramaId)
+    assert([...dramas, ...recentDramas].some((d) => d.id === article.dramaId));
   if (article.kind === "news")
     assert(article.sources?.every((s) => new URL(s.url).protocol === "https:"));
 }
@@ -89,6 +117,15 @@ for (const drama of dramas) {
   assert.equal(findDrama(dramas, String(drama.id))?.id, drama.id);
 }
 assert.equal(findDrama(dramas, "not-a-drama"), undefined);
+const importedPeople = getPeople(allRecent);
+assert.equal(
+  new Set(importedPeople.map((p) => p.slug)).size,
+  importedPeople.length,
+);
+for (const drama of recentDramas) {
+  assert.equal(findDrama(allRecent, dramaSlug(drama))?.id, drama.id);
+  assert.equal(findDrama(allRecent, String(drama.id))?.id, drama.id);
+}
 const people = getPeople(dramas);
 assert.equal(new Set(people.map((p) => p.slug)).size, people.length);
 assert(people.every((p) => p.appearances.length > 0));

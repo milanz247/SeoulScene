@@ -47,10 +47,10 @@ export default function Page() {
             favorite story should feel as lovely as watching it.
           </p>
           <p>
-            We pair a small, thoughtfully selected drama collection with
-            editorial previews, source-linked industry notes, and glimpses of
-            Korean words, places, and everyday rituals. Save a title, explore a
-            new genre, or simply wander.
+            We pair a source-linked Korean drama collection with editorial
+            previews, source-linked industry notes, and glimpses of Korean
+            words, places, and everyday rituals. Save a title, explore a new
+            genre, or simply wander.
           </p>
         </div>
       </section>
@@ -99,10 +99,10 @@ export default function Page() {
         </div>
         <div>
           <p>
-            Drama metadata and cast credits come from TMDB. Community ratings
-            are labeled, and unverified details are left open. This is a curated
-            collection, with archive news clearly distinguished from current
-            coverage.
+            Drama metadata and cast credits come from TMDB and TVmaze. Community
+            ratings are labeled, and unverified details are left open. This is a
+            curated collection, with archive news clearly distinguished from
+            current coverage.
           </p>
           <p>
             Spotted something that needs a second look? Suggest metadata

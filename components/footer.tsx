@@ -11,6 +11,7 @@ export function Footer() {
         </div>
         <nav className="footer-links" aria-label="Footer navigation">
           {[
+            ["Latest dramas", "/latest"],
             ["About", "/about"],
             ["The journal", "/journal"],
             ["K-Culture", "/culture"],

@@ -73,11 +73,11 @@ export default function Page() {
       <section className="section" id="top-rated">
         <SectionHeader
           title="Loved by the community."
-          kicker="TMDB COMMUNITY RATINGS"
+          kicker="SOURCE COMMUNITY RATINGS"
         />
         <p className="section-intro">
-          Highest TMDB scores in this collection, not an all-time chart or
-          SeoulScene editorial rating.
+          Community scores from the labeled data providers. Each drama
+          identifies its rating source.
         </p>
         <div className="drama-grid">
           {dramas

@@ -5,12 +5,12 @@ export function getPeople(dramas: Drama[]) {
     ...new Map(
       dramas
         .flatMap((d) => d.cast)
-        .map((p) => [p.name, { ...p, slug: slugify(p.name) }]),
+        .map((p) => [slugify(p.name), { ...p, slug: slugify(p.name) }]),
     ).values(),
   ].map((person) => ({
     ...person,
     appearances: dramas.filter((d) =>
-      d.cast.some((p) => p.name === person.name),
+      d.cast.some((p) => slugify(p.name) === person.slug),
     ),
   }));
 }

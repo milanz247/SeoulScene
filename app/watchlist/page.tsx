@@ -1,7 +1,10 @@
 import { Watchlist } from "@/components/ui";
 import { getDramas } from "@/lib/database";
 const dramas = getDramas();
-export const metadata = { title: "My watchlist", robots: {index:false,follow:true} };
+export const metadata = {
+  title: "My watchlist",
+  robots: { index: false, follow: true },
+};
 export default function Page() {
   return (
     <main id="main" className="wrap inner-page">
@@ -12,7 +15,9 @@ export default function Page() {
         </h1>
         <p>A little collection of your next late-night obsessions.</p>
       </div>
-      <Watchlist dramas={dramas} />
+      <Watchlist
+        dramas={dramas.map((drama) => ({ ...drama, episodeGuide: undefined }))}
+      />
     </main>
   );
 }

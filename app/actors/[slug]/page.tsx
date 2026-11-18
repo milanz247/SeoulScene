@@ -1,3 +1,4 @@
+import { slugify } from "@/lib/slug";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getDramas } from "@/lib/database";
@@ -90,7 +91,8 @@ export default async function Page({
             <div key={d.id}>
               <DramaCard drama={d} />
               <p className="role-caption">
-                As {d.cast.find((p) => p.name === person.name)?.character}
+                As{" "}
+                {d.cast.find((p) => slugify(p.name) === person.slug)?.character}
               </p>
             </div>
           ))}

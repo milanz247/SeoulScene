@@ -1,3 +1,4 @@
+import { getPeople } from "@/lib/people";
 import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { getDramas } from "@/lib/database";
@@ -9,15 +10,10 @@ export const metadata = pageMetadata(
   "/actors",
 );
 export default function Page() {
-  const people = [
-    ...new Map(
-      getDramas()
-        .flatMap((d) =>
-          d.cast.map((p) => ({ ...p, drama: d.title, dramaId: d.id })),
-        )
-        .map((p) => [p.name, p]),
-    ).values(),
-  ];
+  const people = getPeople(getDramas()).map((person) => ({
+    ...person,
+    drama: person.appearances[0].title,
+  }));
   return (
     <main id="main" className="wrap inner-page actors-page">
       <div className="page-heading">

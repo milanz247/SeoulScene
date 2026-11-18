@@ -6,14 +6,16 @@ export function Explore({
   items,
   initialGenre = "",
   initialSort = "curated",
+  initialYear = "",
 }: {
   items: Drama[];
   initialGenre?: string;
   initialSort?: string;
+  initialYear?: string;
 }) {
   const [query, setQuery] = useState("");
   const [genre, setGenre] = useState(initialGenre);
-  const [year, setYear] = useState("");
+  const [year, setYear] = useState(initialYear);
   const [status, setStatus] = useState("");
   const [sort, setSort] = useState(initialSort);
   const [limit, setLimit] = useState(12);
@@ -68,7 +70,8 @@ export function Explore({
             Sort by
             <select value={sort} onChange={(e) => setSort(e.target.value)}>
               <option value="curated">The curated edit</option>
-              <option value="year">Newest first</option>
+              <option value="latest">Latest premiere</option>
+              <option value="year">Newest year</option>
               <option value="title">Title A–Z</option>
             </select>
           </label>

@@ -33,11 +33,18 @@ export default async function Home() {
   const news = editorial.filter((a) => a.kind === "news");
   const reviews = editorial.filter((a) => a.kind === "review");
   const journal = editorial.find((a) => a.kind === "feature");
+  const heroStory = editorial.find((a) => a.kind === "soundtrack") || journal;
   const allPeople = getPeople(dramas);
   const people = [215720, 129888, 135157, 94796].flatMap((id) => {
     const name = dramas.find((drama) => drama.id === id)?.cast[0]?.name;
     return allPeople.filter((person) => person.name === name);
   });
+  const latest = dramas
+    .filter(
+      (d) => d.premiereDate && d.checkedAt && d.premiereDate <= d.checkedAt,
+    )
+    .sort((a, b) => b.premiereDate!.localeCompare(a.premiereDate!))
+    .slice(0, 5);
   const picks = [215720, 129888, 94796, 67915, 154825].flatMap((id) =>
     dramas.filter((drama) => drama.id === id),
   );
@@ -53,19 +60,22 @@ export default async function Home() {
         </div>
         <div className="opening-grid">
           <article className="opening-lead">
-            <Link href={journal ? articlePath(journal) : "/journal"}>
+            <Link href={heroStory ? articlePath(heroStory) : "/journal"}>
               <div className="opening-art">
                 <Photo
-                  src="/images/seoul-reading-window.webp"
-                  alt="Illustration of a reader at an open hanok bookshop window above Seoul at dusk"
+                  src={heroStory?.image.src || "/images/seoul-soundtrack.webp"}
+                  alt={
+                    heroStory?.image.alt ||
+                    "A vinyl record beside a Seoul apartment window"
+                  }
                   priority
                   sizes="(max-width: 700px) 100vw, 60vw"
                 />
               </div>
               <div className="opening-caption">
-                <p className="eyebrow">Journal · 에세이</p>
-                <h2>{journal?.title || "The SeoulScene journal"}</h2>
-                {journal && <p>{journal.description}</p>}
+                <p className="eyebrow">Music & culture · 음악</p>
+                <h2>{heroStory?.title || "The SeoulScene journal"}</h2>
+                {heroStory && <p>{heroStory.description}</p>}
                 <span className="opening-read">
                   Read the essay <Icon name="arrow" />
                 </span>
@@ -96,7 +106,7 @@ export default async function Home() {
                       sizes="(max-width: 700px) 35vw, 18vw"
                     />
                   </div>
-                  <p className="eyebrow">Industry news · Archive</p>
+                  <p className="eyebrow">Industry news · 2026</p>
                   <h2>{news[0].title}</h2>
                 </Link>
               </article>
@@ -105,6 +115,32 @@ export default async function Home() {
         </div>
       </section>
 
+      <section className="section wrap">
+        <SectionHeader
+          title="Fresh stories. New obsessions."
+          kicker="LATEST DRAMAS · 2025–2026"
+          href="/latest"
+          label="See the latest dramas"
+        />
+        <div className="poster-row">
+          {latest.map((d) => (
+            <DramaCard key={d.id} drama={d} />
+          ))}
+        </div>
+      </section>
+      <section className="section wrap">
+        <SectionHeader
+          title="From the news desk."
+          kicker="LATEST POSTS · 2026"
+          href="/news"
+          label="All news"
+        />
+        <div className="article-grid">
+          {news.slice(0, 3).map((article) => (
+            <ArticleCard key={article.slug} article={article} />
+          ))}
+        </div>
+      </section>
       <section
         className="section wrap home-picks"
         aria-labelledby="picks-title"
@@ -186,14 +222,14 @@ export default async function Home() {
         <div className="edition-layout">
           {journal && <ArticleCard article={journal} lead />}
           <div className="news-desk">
-            <p className="eyebrow">INDUSTRY NOTES · FROM THE ARCHIVE</p>
-            {news.map((article, index) => (
+            <p className="eyebrow">LATEST INDUSTRY NOTES</p>
+            {news.slice(0, 2).map((article, index) => (
               <article key={article.slug}>
                 <span className="brief-number">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <div>
-                  <p className="eyebrow">{article.category} · ARCHIVE BRIEF</p>
+                  <p className="eyebrow">{article.category}</p>
                   <h3>
                     <Link href={articlePath(article)}>{article.title}</Link>
                   </h3>
@@ -201,9 +237,6 @@ export default async function Home() {
                 </div>
               </article>
             ))}
-            <Link href="/news" className="text-link">
-              All industry notes <Icon name="arrow" />
-            </Link>
           </div>
         </div>
       </section>

@@ -159,6 +159,7 @@ export function Nav() {
         >
           {[
             ["Dramas", "/dramas", "drama"],
+            ["Latest", "/latest", "sparkles"],
             ["Reviews", "/reviews", "sparkles"],
             ["News", "/news", "news"],
             ["Journal", "/journal", "journal"],

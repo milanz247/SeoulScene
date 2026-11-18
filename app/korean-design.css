@@ -1737,3 +1737,38 @@ html[data-theme="dark"] .illustrated-letter-art {
     font-size: 12px;
   }
 }
+.news-listing > .article-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 44px 28px;
+}
+.news-listing .article-card {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 24px;
+}
+.news-listing .editorial-image-frame {
+  aspect-ratio: 16/10;
+}
+.news-listing .article-card-copy {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.news-listing .article-card h3 {
+  font-size: 27px;
+}
+.news-listing .article-byline {
+  margin-top: auto;
+  padding-top: 20px;
+}
+@media (min-width: 651px) and (max-width: 1000px) {
+  .news-listing > .article-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 650px) {
+  .news-listing > .article-grid {
+    grid-template-columns: 1fr;
+  }
+}

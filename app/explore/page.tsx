@@ -4,19 +4,35 @@ import { Cloud } from "@/components/art";
 import { getDramas } from "@/lib/database";
 const dramas = getDramas();
 import { pageMetadata } from "@/lib/seo";
-export const metadata = pageMetadata("Explore dramas", "Search the SeoulScene drama collection by title, genre, year and status.", "/dramas");
+export const metadata = pageMetadata(
+  "Explore dramas",
+  "Search the SeoulScene drama collection by title, genre, year and status.",
+  "/dramas",
+);
 async function Results({
   searchParams,
 }: {
-  searchParams: Promise<{ genre?: string; sort?: string }>;
+  searchParams: Promise<{ genre?: string; sort?: string; year?: string }>;
 }) {
   const params = await searchParams;
-  return <Explore key={`${params.genre}-${params.sort}`} items={dramas} initialGenre={typeof params.genre === "string" ? params.genre : ""} initialSort={["title", "year"].includes(params.sort || "") ? params.sort : "curated"} />;
+  return (
+    <Explore
+      key={`${params.genre}-${params.sort}-${params.year}`}
+      initialYear={typeof params.year === "string" ? params.year : ""}
+      items={dramas.map((drama) => ({ ...drama, episodeGuide: undefined }))}
+      initialGenre={typeof params.genre === "string" ? params.genre : ""}
+      initialSort={
+        ["title", "year", "latest"].includes(params.sort || "")
+          ? params.sort
+          : "curated"
+      }
+    />
+  );
 }
 export default function Page({
   searchParams,
 }: {
-  searchParams: Promise<{ genre?: string; sort?: string }>;
+  searchParams: Promise<{ genre?: string; sort?: string; year?: string }>;
 }) {
   return (
     <main id="main" className="wrap inner-page">

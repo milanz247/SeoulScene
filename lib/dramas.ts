@@ -1,7 +1,17 @@
 import { slugify } from "./slug.ts";
 import catalog from "./catalog.json" with { type: "json" };
-export type Drama = (typeof catalog)[number] & {
+export type Drama = Omit<(typeof catalog)[number], "rating"> & {
   rating?: number;
+  premiereDate?: string;
+  checkedAt?: string;
+  officialSite?: string | null;
+  episodeGuide?: {
+    season: number;
+    number: number;
+    title: string;
+    airdate?: string;
+    summary?: string;
+  }[];
   nextEpisode?: string;
   network?: string;
   director?: string;
@@ -27,9 +37,16 @@ export function filterDramas(
   );
   return sort === "title"
     ? results.sort((a, b) => a.title.localeCompare(b.title))
-    : sort === "year"
-      ? results.sort((a, b) => b.year - a.year)
-      : results;
+    : sort === "latest"
+      ? results.sort(
+          (a, b) =>
+            (b.premiereDate || `${b.year}-01-01`).localeCompare(
+              a.premiereDate || `${a.year}-01-01`,
+            ) || a.title.localeCompare(b.title),
+        )
+      : sort === "year"
+        ? results.sort((a, b) => b.year - a.year)
+        : results;
 }
 
 export function dramaSlug(drama: Drama) {

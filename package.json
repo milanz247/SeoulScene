@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "test": "node --experimental-strip-types scripts/check.ts && node scripts/check-sync.mjs",
-    "sync": "node scripts/sync-tmdb.mjs"
+    "sync": "node scripts/sync-tmdb.mjs",
+    "import:recent": "node scripts/import-tvmaze.mjs"
   },
   "dependencies": {
     "@prisma/adapter-better-sqlite3": "^7.10.1",

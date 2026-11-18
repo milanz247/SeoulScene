@@ -133,51 +133,25 @@ export async function EditorialListing({
         : a.kind === "feature" || a.kind === "soundtrack",
   );
   return (
-    <main id="main" className="wrap inner-page editorial-listing">
+    <main
+      id="main"
+      className={`wrap inner-page editorial-listing ${kind === "news" ? "news-listing" : ""}`}
+    >
       <Breadcrumbs items={[{ label: kind, href: `/${kind}` }]} />
       <div className="page-heading">
         <p className="eyebrow">THE SEOULSCENE JOURNAL</p>
         <h1>{title}</h1>
         <p>{description}</p>
       </div>
-      {kind === "news" ? (
-        <>
-          <nav className="category-nav" aria-label="News categories">
-            {Array.from(new Set(items.map((a) => a.category))).map(
-              (category) => (
-                <a
-                  key={category}
-                  href={`#category-${category.toLowerCase().replaceAll(" ", "-")}`}
-                >
-                  {category}
-                </a>
-              ),
-            )}
-          </nav>
-          {Array.from(new Set(items.map((a) => a.category))).map((category) => (
-            <section
-              className="section"
-              id={`category-${category.toLowerCase().replaceAll(" ", "-")}`}
-              key={category}
-            >
-              <SectionHeader title={category} kicker="FROM THE NEWS DESK" />
-              <div className="article-grid">
-                {items
-                  .filter((a) => a.category === category)
-                  .map((a) => (
-                    <ArticleCard key={a.slug} article={a} lead />
-                  ))}
-              </div>
-            </section>
-          ))}
-        </>
-      ) : (
-        <div className="article-grid">
-          {items.map((a, i) => (
-            <ArticleCard key={a.slug} article={a} lead={i === 0} />
-          ))}
-        </div>
-      )}
+      <div className="article-grid">
+        {items.map((article, index) => (
+          <ArticleCard
+            key={article.slug}
+            article={article}
+            lead={kind !== "news" && index === 0}
+          />
+        ))}
+      </div>
     </main>
   );
 }
@@ -314,8 +288,9 @@ export async function ArticlePage({ article }: { article: Article }) {
                 ))}
               </ul>
               <p>
-                Source-linked archive summary, checked 17 November 2026.
-                Promotional artwork has not been reproduced.
+                Sources checked{" "}
+                {dateLabel(article.checkedAt || article.publishedAt)}. Original
+                publication dates are listed above.
               </p>
             </section>
           )}

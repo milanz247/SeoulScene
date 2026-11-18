@@ -10,7 +10,7 @@ export default function Page() {
     <EditorialListing
       kind="news"
       title="From the industry, with context."
-      description="A considered news desk. Our first edition revisits verified announcements, with source dates made clear. This is an archive selection, not a live breaking-news feed."
+      description="Korean drama announcements, release guides and industry stories, with original source dates and links. Updated with our November 2026 selection."
     />
   );
 }
