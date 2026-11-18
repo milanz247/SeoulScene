@@ -67,7 +67,13 @@ export default async function Home() {
         <KoreanOrnaments variant="hero" />
         <div className="hero-grid wrap">
           <div className="hero-copy">
-            <p className="eyebrow">✳ &nbsp; A LITTLE SEOUL. A LOT OF FEELING.</p>
+            <p className="eyebrow">
+              <svg className="hero-plum" viewBox="0 0 40 40" aria-hidden="true">
+                <path d="M20 18C5 10 13 0 20 8C27 0 35 10 24 18C39 12 43 25 30 27C36 39 22 43 20 30C13 43 1 34 10 26C-3 23 3 10 16 18Z" fill="currentColor" />
+                <circle cx="20" cy="22" r="3" fill="var(--paper)" />
+              </svg>
+              A LITTLE SEOUL. A LOT OF FEELING.
+            </p>
             <h1>
               Every story
               <br />
@@ -75,6 +81,7 @@ export default async function Home() {
             </h1>
             <p className="hero-korean" lang="ko">
               당신의 다음 이야기를 만나보세요
+              <span className="hero-seal" aria-hidden="true">서울</span>
             </p>
             <p className="hero-description">
               Your beautiful little corner of the K-Drama universe. Find the
