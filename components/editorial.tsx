@@ -10,7 +10,7 @@ import { siteUrl, pageMetadata } from "@/lib/seo";
 import { getArticles } from "@/lib/content";
 import { getDramas } from "@/lib/database";
 import { Icon } from "./ui";
-import { HeroImage, IllustrationAsset } from "./editorial-image";
+import { ArticleThumbnail, HeroImage, IllustrationAsset } from "./editorial-image";
 import { StructuredData } from "./structured-data";
 import { ShareArticle } from "./share-article";
 export function dateLabel(value: string) {
@@ -92,14 +92,10 @@ export function ArticleCard({
   return (
     <article className={`article-card ${lead ? "article-lead" : ""}`}>
       <Link href={articlePath(article)} aria-label={article.title}>
-        <IllustrationAsset
-          name={
-            article.kind === "news"
-              ? "cloud"
-              : article.kind === "review"
-                ? "blossom"
-                : "landscape"
-          }
+        <ArticleThumbnail
+          src={article.image.src}
+          alt={article.image.alt}
+          sizes="(max-width: 760px) 100vw, 50vw"
         />
       </Link>
       <div className="article-card-copy">
@@ -232,6 +228,12 @@ export async function ArticlePage({ article }: { article: Article }) {
           <span>{readingMinutes(article)} min read</span>
         </div>
       </header>
+      <HeroImage
+        src={article.image.src}
+        alt={article.image.alt}
+        credit="Photo: Unsplash · Editorial mood photography"
+        sizes="(max-width: 900px) 100vw, 1100px"
+      />
       <div className="article-layout">
         <article className="article-content">
           {article.disclosure && (
@@ -377,7 +379,7 @@ export async function ArticlePage({ article }: { article: Article }) {
             url: siteUrl,
           },
           mainEntityOfPage: siteUrl + articlePath(article),
-          image: siteUrl + editorialAssets.landscape.src,
+          image: siteUrl + article.image.src,
         }}
       />
     </main>
